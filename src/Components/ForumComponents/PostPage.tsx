@@ -16,7 +16,7 @@ interface PostPage {
 
 const PostPage: React.FC<PostPage> = (props) => {
 
-    const {data:postData, isFetching, error} = useGetPost(props.id);
+    const { isFetching, error} = useGetPost(props.id);
 
     const data = {data: {data: {
                 postId: "post-001",
@@ -53,7 +53,7 @@ const PostPage: React.FC<PostPage> = (props) => {
                             isPostPage={true}
                         />
                         <CommentsSection
-                            id={props.id}
+                            // id={props.id}
                         />
                     </>
                     }
@@ -62,8 +62,8 @@ const PostPage: React.FC<PostPage> = (props) => {
                         <SettingsLoader/>
                     }
                     {
-                        (!error && !isFetching) &&
-                        <div className='post-error-message'>{error.message}</div>
+                        (error && !isFetching) &&
+                        <div className='post-error-message'>{error.message ?? ''}</div>
                     }
                 </Col>
             </Row>

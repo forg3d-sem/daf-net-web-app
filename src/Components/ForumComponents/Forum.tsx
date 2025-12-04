@@ -1,23 +1,23 @@
-import React, {useState} from 'react';
-import {Col, Container, Row, Spinner} from "react-bootstrap";
+import React from 'react';
+import {Col, Container, Row} from "react-bootstrap";
 import CategorySelector from "./CategorySelector.tsx";
 import CreatePostBanner from "./CreatePostBanner.tsx";
 import "./forumStyles.scss";
 import ForumPostsList from "./ForumPostsList.tsx";
 import type {PostResponse} from "../../../API_backup";
-import {useQueryClient} from "@tanstack/react-query";
+// import {useQueryClient} from "@tanstack/react-query";
 
 interface Forum {
     posts: PostResponse[];
     postsLoading: boolean;
-    postsError: any;
+    postsError: string;
     categoryId: string | null
 
 }
 
-const Forum: React.FC<Forum>= (props) => {
+const Forum: React.FC<Forum>= () => {
 
-    const [page, setPage] = useState(1);
+    // const [page, setPage] = useState(1);
     // const {data: postsData, isLoading: loadingPosts, error: postsError} = useFetchPost(page, props.category ?? '');
     // const {data: cats, isLoading: loadingCats, error: catsError} = useFetchCategories('00000000-0000-0000-0000-000000000001', '', 1);
 
@@ -34,7 +34,7 @@ const Forum: React.FC<Forum>= (props) => {
         { id: "9", name: "Sustainable Timber Production" },
         { id: "10", name: "Perennial Crop Integration" }
     ];
-    const queryClient = useQueryClient();
+    // const queryClient = useQueryClient();
 
     const posts = [
         {

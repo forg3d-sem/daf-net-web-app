@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WriteCommentSection = () => {
+const WriteCommentSection:React.FC = () => {
     return (
         <div>
             

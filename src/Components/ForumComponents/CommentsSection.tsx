@@ -1,21 +1,21 @@
 import ProfileIconComponent from "../SettingsComponents/ProfileComponents/ProfileIconComponent.tsx";
 import React, {useMemo, useState} from "react";
 import SingleComment from "./ForumPostPage/SingleComment.tsx";
-import useFetchComments from "../../Hooks/Cooments/useFetchComments.ts";
+// import useFetchComments from "../../Hooks/Cooments/useFetchComments.ts";
 import useFetchProfile from "../../Hooks/Profile/useFetchProfile.ts";
-import SettingsLoader from "../SettingsComponents/SettingsLoader.tsx";
+// import SettingsLoader from "../SettingsComponents/SettingsLoader.tsx";
 
-interface CommentsSection {
-    id: string;
-}
+// interface CommentsSection {
+//     id: string;
+// }
 
-const CommentsSection:React.FC<CommentsSection> = (props) => {
+const CommentsSection:React.FC = () => {
 
     const [comment, setComment] = useState('');
 
-    const {data: commentsData, isFetching: isFethingComments, error: commentsError} = useFetchComments(props.id);
+    // const {data: commentsData, isFetching: isFethingComments, error: commentsError} = useFetchComments(props.id);
     const id = useMemo(() => localStorage.getItem('id') ?? '', []);
-    const {isFetching, data, error, refetch} = useFetchProfile(id);
+    const {data} = useFetchProfile(id);
 
     const mockComments = [
         {

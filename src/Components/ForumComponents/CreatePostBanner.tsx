@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Emoji from '../../assets/create-post-emoji.png';
-import {Dropdown, Modal} from "react-bootstrap";
+import {Dropdown, Modal, Spinner} from "react-bootstrap";
 import type {CategoryResponse} from "../../../API_backup";
 import useCreatePost from "../../Hooks/Posts/useCreatePost.ts";
 import {useQueryClient} from "@tanstack/react-query";
@@ -59,7 +59,13 @@ const CreatePostBanner:React.FC<CreatePostBanner> = (props) => {
                     <button
                         onClick={handleCreatePost}
                     >
-                        Publish
+                        {
+                            isPending
+                                ?
+                                <Spinner animation='border'/>
+                                :
+                                'Publish'
+                        }
                     </button>
                 </Modal.Header>
                 <Modal.Body>
