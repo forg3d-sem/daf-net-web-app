@@ -4,8 +4,8 @@ import ContentCol from "../../../Components/SettingsComponents/ContentCol.tsx";
 import '../../../Components/SettingsComponents/settingsStyles.scss';
 import logoutIcon from '../../../assets/logout.svg';
 import ProfileIcon from "../../../Components/IconComponents/ProfileIcon.tsx";
-import GroupIcon from "../../../Components/IconComponents/GroupIcon.tsx";
-import OrganisationIcon from "../../../Components/IconComponents/OrganisationIcon.tsx";
+// import GroupIcon from "../../../Components/IconComponents/GroupIcon.tsx";
+// import OrganisationIcon from "../../../Components/IconComponents/OrganisationIcon.tsx";
 import PasswordIcon from "../../../Components/IconComponents/PasswordIcon.tsx";
 
 export const Route = createFileRoute('/(protected)/settings')({
@@ -38,30 +38,30 @@ function RouteComponent() {
                             <span>Profile</span>
                         </Link>
                     </li>
-                    <li>
-                        <Link
-                            to='/settings/organisations'
-                            activeProps={{className:'setting-selected'}}
-                        >
-                            <OrganisationIcon
-                                width={'20'}
-                                height={'20'}
-                            />
-                            <span>Organisations</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to='/settings/groups'
-                            activeProps={{className:'setting-selected'}}
-                        >
-                            <GroupIcon
-                                height={'20'}
-                                width={'20'}
-                            />
-                            <span>Groups</span>
-                        </Link>
-                    </li>
+                    {/*<li>*/}
+                    {/*    <Link*/}
+                    {/*        to='/settings/organisations'*/}
+                    {/*        activeProps={{className:'setting-selected'}}*/}
+                    {/*    >*/}
+                    {/*        <OrganisationIcon*/}
+                    {/*            width={'20'}*/}
+                    {/*            height={'20'}*/}
+                    {/*        />*/}
+                    {/*        <span>Organisations</span>*/}
+                    {/*    </Link>*/}
+                    {/*</li>*/}
+                    {/*<li>*/}
+                    {/*    <Link*/}
+                    {/*        to='/settings/groups'*/}
+                    {/*        activeProps={{className:'setting-selected'}}*/}
+                    {/*    >*/}
+                    {/*        <GroupIcon*/}
+                    {/*            height={'20'}*/}
+                    {/*            width={'20'}*/}
+                    {/*        />*/}
+                    {/*        <span>Groups</span>*/}
+                    {/*    </Link>*/}
+                    {/*</li>*/}
                     <li>
                         <Link
                             to='/settings/password-reset'

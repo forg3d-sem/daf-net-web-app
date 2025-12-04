@@ -17,7 +17,11 @@ const AuthBase:React.FC<AuthBase> = (props) => {
                         <div className="auth-base d-flex">
                             <div className="auth-logo-side d-none d-lg-flex">
                                 <div className="top-logo">
-                                    Some random text to test positioning
+                                    <div className="top-logo-text">
+                                        Welcome to the Dynamic
+                                        <br/>
+                                        Agroforestry Network
+                                    </div>
                                 </div>
                                 <img src={authImg} alt=""/>
                             </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {nanoid} from "nanoid/non-secure";
 import {Link} from "@tanstack/react-router";
 import type {CategoryResponse} from "../../../APIs";
@@ -9,10 +9,12 @@ interface CategorySelector {
 
 const CategorySelector:React.FC<CategorySelector> = ({categories}) => {
 
+    const catsToShow = useMemo(() => [{id: '0', name: "All categories"}, ...categories], [categories]);
+
     return (
         <ul className='category-selector'>
             {
-                categories.map(cat =>
+                catsToShow.map(cat =>
                     <li key={nanoid()}>
                         <Link
                             to={cat.id === '0' ? "/" : "/forum/$categoryId"}

@@ -362,6 +362,63 @@ export interface CategoryResponseApiResponse {
 /**
  * 
  * @export
+ * @interface ChangePasswordRequest
+ */
+export interface ChangePasswordRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChangePasswordRequest
+     */
+    'oldPassword'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChangePasswordRequest
+     */
+    'newPassword'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface ChangePasswordResponse
+ */
+export interface ChangePasswordResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof ChangePasswordResponse
+     */
+    'message'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface ChangePasswordResponseApiResponse
+ */
+export interface ChangePasswordResponseApiResponse {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ChangePasswordResponseApiResponse
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {ChangePasswordResponse}
+     * @memberof ChangePasswordResponseApiResponse
+     */
+    'data'?: ChangePasswordResponse;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChangePasswordResponseApiResponse
+     */
+    'error'?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface CommentProfileResponse
  */
 export interface CommentProfileResponse {
@@ -1524,6 +1581,12 @@ export interface PostResponse {
      * @type {string}
      * @memberof PostResponse
      */
+    'categoryId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PostResponse
+     */
     'title'?: string | null;
     /**
      * 
@@ -2228,6 +2291,43 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
     return {
         /**
          * 
+         * @param {ChangePasswordRequest} [changePasswordRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        changePasswordPost: async (changePasswordRequest?: ChangePasswordRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/change-password`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(changePasswordRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {MailConfirmationRequest} [mailConfirmationRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2382,6 +2482,18 @@ export const AuthApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {ChangePasswordRequest} [changePasswordRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async changePasswordPost(changePasswordRequest?: ChangePasswordRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChangePasswordResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.changePasswordPost(changePasswordRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.changePasswordPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {MailConfirmationRequest} [mailConfirmationRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2439,6 +2551,15 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
     return {
         /**
          * 
+         * @param {ChangePasswordRequest} [changePasswordRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        changePasswordPost(changePasswordRequest?: ChangePasswordRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChangePasswordResponseApiResponse> {
+            return localVarFp.changePasswordPost(changePasswordRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {MailConfirmationRequest} [mailConfirmationRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2482,6 +2603,17 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
  * @extends {BaseAPI}
  */
 export class AuthApi extends BaseAPI {
+    /**
+     * 
+     * @param {ChangePasswordRequest} [changePasswordRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public changePasswordPost(changePasswordRequest?: ChangePasswordRequest, options?: RawAxiosRequestConfig) {
+        return AuthApiFp(this.configuration).changePasswordPost(changePasswordRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {MailConfirmationRequest} [mailConfirmationRequest] 

@@ -42,6 +42,12 @@
         justify-content: end;
         align-items: flex-end;
         margin-bottom: 28px;
+
+        .top-logo-text {
+          text-align: end;
+          color: #08394A;
+          font-weight: 500;
+        }
       }
 
       img {

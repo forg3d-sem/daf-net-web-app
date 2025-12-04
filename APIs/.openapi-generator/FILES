@@ -19,6 +19,9 @@ docs/CategoryListResponse.md
 docs/CategoryListResponseApiResponse.md
 docs/CategoryResponse.md
 docs/CategoryResponseApiResponse.md
+docs/ChangePasswordRequest.md
+docs/ChangePasswordResponse.md
+docs/ChangePasswordResponseApiResponse.md
 docs/CommentApi.md
 docs/CommentProfileResponse.md
 docs/CommentResponse.md

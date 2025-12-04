@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **postId** | **string** |  | [optional] [default to undefined]
 **profile** | [**PostProfileResponse**](PostProfileResponse.md) |  | [optional] [default to undefined]
+**categoryId** | **string** |  | [optional] [default to undefined]
 **title** | **string** |  | [optional] [default to undefined]
 **content** | **string** |  | [optional] [default to undefined]
 **createdAt** | **string** |  | [optional] [default to undefined]
@@ -19,6 +20,7 @@ import { PostResponse } from './api';
 const instance: PostResponse = {
     postId,
     profile,
+    categoryId,
     title,
     content,
     createdAt,

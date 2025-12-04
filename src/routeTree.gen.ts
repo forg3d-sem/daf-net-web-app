@@ -26,6 +26,7 @@ import { Route as protectedSettingsPasswordResetRouteImport } from './routes/(pr
 import { Route as protectedSettingsOrganisationsRouteImport } from './routes/(protected)/settings/organisations'
 import { Route as protectedSettingsGroupsRouteImport } from './routes/(protected)/settings/groups'
 import { Route as protectedPostPostIdRouteImport } from './routes/(protected)/post/$postId'
+import { Route as protectedNewsPostNewsIdRouteImport } from './routes/(protected)/news-post/$newsId'
 import { Route as protectedForumCategoryIdRouteImport } from './routes/(protected)/forum/$categoryId'
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
@@ -116,6 +117,11 @@ const protectedPostPostIdRoute = protectedPostPostIdRouteImport.update({
   path: '/post/$postId',
   getParentRoute: () => protectedRouteRoute,
 } as any)
+const protectedNewsPostNewsIdRoute = protectedNewsPostNewsIdRouteImport.update({
+  id: '/news-post/$newsId',
+  path: '/news-post/$newsId',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
 const protectedForumCategoryIdRoute =
   protectedForumCategoryIdRouteImport.update({
     id: '/forum/$categoryId',
@@ -134,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/resources': typeof protectedResourcesRoute
   '/': typeof protectedIndexRoute
   '/forum/$categoryId': typeof protectedForumCategoryIdRoute
+  '/news-post/$newsId': typeof protectedNewsPostNewsIdRoute
   '/post/$postId': typeof protectedPostPostIdRoute
   '/settings/groups': typeof protectedSettingsGroupsRoute
   '/settings/organisations': typeof protectedSettingsOrganisationsRoute
@@ -153,6 +160,7 @@ export interface FileRoutesByTo {
   '/resources': typeof protectedResourcesRoute
   '/': typeof protectedIndexRoute
   '/forum/$categoryId': typeof protectedForumCategoryIdRoute
+  '/news-post/$newsId': typeof protectedNewsPostNewsIdRoute
   '/post/$postId': typeof protectedPostPostIdRoute
   '/settings/groups': typeof protectedSettingsGroupsRoute
   '/settings/organisations': typeof protectedSettingsOrganisationsRoute
@@ -174,6 +182,7 @@ export interface FileRoutesById {
   '/(protected)/resources': typeof protectedResourcesRoute
   '/(protected)/': typeof protectedIndexRoute
   '/(protected)/forum/$categoryId': typeof protectedForumCategoryIdRoute
+  '/(protected)/news-post/$newsId': typeof protectedNewsPostNewsIdRoute
   '/(protected)/post/$postId': typeof protectedPostPostIdRoute
   '/(protected)/settings/groups': typeof protectedSettingsGroupsRoute
   '/(protected)/settings/organisations': typeof protectedSettingsOrganisationsRoute
@@ -195,6 +204,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/'
     | '/forum/$categoryId'
+    | '/news-post/$newsId'
     | '/post/$postId'
     | '/settings/groups'
     | '/settings/organisations'
@@ -214,6 +224,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/'
     | '/forum/$categoryId'
+    | '/news-post/$newsId'
     | '/post/$postId'
     | '/settings/groups'
     | '/settings/organisations'
@@ -234,6 +245,7 @@ export interface FileRouteTypes {
     | '/(protected)/resources'
     | '/(protected)/'
     | '/(protected)/forum/$categoryId'
+    | '/(protected)/news-post/$newsId'
     | '/(protected)/post/$postId'
     | '/(protected)/settings/groups'
     | '/(protected)/settings/organisations'
@@ -372,6 +384,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof protectedPostPostIdRouteImport
       parentRoute: typeof protectedRouteRoute
     }
+    '/(protected)/news-post/$newsId': {
+      id: '/(protected)/news-post/$newsId'
+      path: '/news-post/$newsId'
+      fullPath: '/news-post/$newsId'
+      preLoaderRoute: typeof protectedNewsPostNewsIdRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
     '/(protected)/forum/$categoryId': {
       id: '/(protected)/forum/$categoryId'
       path: '/forum/$categoryId'
@@ -411,6 +430,7 @@ interface protectedRouteRouteChildren {
   protectedResourcesRoute: typeof protectedResourcesRoute
   protectedIndexRoute: typeof protectedIndexRoute
   protectedForumCategoryIdRoute: typeof protectedForumCategoryIdRoute
+  protectedNewsPostNewsIdRoute: typeof protectedNewsPostNewsIdRoute
   protectedPostPostIdRoute: typeof protectedPostPostIdRoute
   protectedUserUserIdRoute: typeof protectedUserUserIdRoute
 }
@@ -422,6 +442,7 @@ const protectedRouteRouteChildren: protectedRouteRouteChildren = {
   protectedResourcesRoute: protectedResourcesRoute,
   protectedIndexRoute: protectedIndexRoute,
   protectedForumCategoryIdRoute: protectedForumCategoryIdRoute,
+  protectedNewsPostNewsIdRoute: protectedNewsPostNewsIdRoute,
   protectedPostPostIdRoute: protectedPostPostIdRoute,
   protectedUserUserIdRoute: protectedUserUserIdRoute,
 }

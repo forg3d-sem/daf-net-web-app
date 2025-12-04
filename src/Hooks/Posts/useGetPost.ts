@@ -2,7 +2,7 @@ import {PostApi} from "../../../APIs";
 import {useMemo} from "react";
 import {useQuery} from "@tanstack/react-query";
 
-const useFetchPosts = (id:string) => {
+const useGetPost = (id:string) => {
 
     const postApi = useMemo(() => new PostApi(), []);
 
@@ -23,4 +23,4 @@ const useFetchPosts = (id:string) => {
     })
 }
 
-export default useFetchPosts;
+export default useGetPost;

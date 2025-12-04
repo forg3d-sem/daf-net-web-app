@@ -12,17 +12,7 @@ export const Route = createFileRoute('/(protected)/')({
 
 function RouteComponent() {
 
-    // const {data, isFetching} = useFetchGroups();
-
     const {data, isLoading, error} = useFetchAllPosts();
 
-    // const id = useMemo(() => localStorage.getItem('id') ?? '', []);
-
-    // const {data:profileData, isFetching:isFetchingProfile, error:profileError} = useFetchProfile(id);
-
-    // const {postId} = Route.useParams();
-
-    console.log(data)
-
-  return <Forum posts={data?.data?.data ?? []} postsLoading={isLoading} categoryId={''} postsError={error?.message ?? ''}/>
+  return <Forum posts={data?.data?.data ?? []} postsLoading={isLoading} postsError={error?.message ?? ''}/>
 }

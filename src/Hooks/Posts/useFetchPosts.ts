@@ -1,26 +1,24 @@
+import {PostApi} from "../../../APIs";
 import {useMemo} from "react";
 import {useQuery} from "@tanstack/react-query";
-import {CommentApi} from "../../../APIs";
 
-const useFetchComments = (id:string) => {
+const useFetchPosts = (page: number, category:string) => {
 
-    const postApi = useMemo(() => new CommentApi(), []);
+    const postApi = useMemo(() => new PostApi(), []);
 
     const token = localStorage.getItem('token');
 
     return useQuery({
-        queryKey: ['comments', id],
+        queryKey: ['posts', category],
         queryFn: async () => {
-            const response = await postApi.commentGet(id, {headers: {"Authorization": `Bearer ${token}`}} );
+            const response = await postApi.postGet(page, 10, category, {headers: {"Authorization": `Bearer ${token}`}} );
             if (!response.data.success) {
                 console.log(response.data.error);
                 throw new Error(response.data.error || 'Request failed');
             }
             return response
-        },
-        refetchOnMount: 'always',
-        gcTime: 0
+        }
     })
 }
 
-export default useFetchComments;
+export default useFetchPosts;

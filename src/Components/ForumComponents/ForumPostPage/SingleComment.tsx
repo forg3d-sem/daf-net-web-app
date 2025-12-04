@@ -9,7 +9,15 @@ interface SingleComment {
 
 const SingleComment:React.FC<SingleComment> = (props) => {
 
-    const {content, profile, createdAt} = props.data
+    const {content, profile, createdAt} = props.data;
+    const date = new Date(createdAt ?? '');
+    const formattedDate = date.toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
 
     return (
         <li className='forum-comment'>
@@ -23,7 +31,7 @@ const SingleComment:React.FC<SingleComment> = (props) => {
                     />
                     <div className="author-details">
                         <div className="author-name">{`${profile?.firstName} ${profile?.lastName}`}</div>
-                        <div className="comment-time">{createdAt}</div>
+                        <div className="comment-time">{formattedDate}</div>
                     </div>
                 </div>
                 {/*likes will be here*/}

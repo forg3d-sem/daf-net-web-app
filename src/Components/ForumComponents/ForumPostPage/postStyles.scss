@@ -44,6 +44,10 @@
     border-bottom: 1px solid $gray-color;
     width: 100%;
     margin-bottom: 15px;
+
+    &:focus-visible {
+      outline: none;
+    }
   }
 
   .write-bottom {

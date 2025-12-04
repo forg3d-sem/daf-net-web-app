@@ -1,41 +1,36 @@
 import React, {useState} from 'react';
-import Emoji from '../../assets/create-post-emoji.png';
 import {Dropdown, Modal, Spinner} from "react-bootstrap";
-import type {CategoryResponse} from "../../../API_backup";
 import useCreatePost from "../../Hooks/Posts/useCreatePost.ts";
+import type {CategoryResponse} from "../../../API_backup";
+import {notificationActions} from "../../store/slices/NotificationSlice.ts";
 import {useQueryClient} from "@tanstack/react-query";
 import {useAppDispatch} from "../../store/storeHooks.ts";
-import {notificationActions} from "../../store/slices/NotificationSlice.ts";
 
-interface CreatePostBanner {
+interface CreateNews {
+    showModal: boolean;
+    handleHideModal: () => void;
     categories: CategoryResponse[];
 }
 
-const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
+const CreateNews:React.FC<CreateNews> = (props) => {
+
+    const {showModal, handleHideModal, categories} = props;
 
     const queryClient = useQueryClient();
     const dispatch = useAppDispatch();
 
-    const [showModal, setShowModal] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState<CategoryResponse | null>(null);
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState<CategoryResponse | null>(null);
 
-    const {mutate, isPending} = useCreatePost()
-
-    const handleShowModal = () => {
-        setShowModal(true)
-    }
-    const handleHideModal = () => {
-        setShowModal(false)
-    }
+    const {mutate, isPending} = useCreatePost();
 
     const handleCreatePost = () => {
         mutate({content: text, title: title, categoryId: selectedCategory?.id}, {
             onSuccess: () => {
                 handleHideModal();
-                queryClient.invalidateQueries({queryKey: ['posts']})
-                dispatch(notificationActions.setNotification({text: "Post submitted successfully!", type: 'success'}));
+                queryClient.invalidateQueries({queryKey: ['posts', selectedCategory]})
+                dispatch(notificationActions.setNotification({text: "News post submitted successfully!", type: 'success'}));
             },
             onError: (error) => {
                 dispatch(notificationActions.setNotification({text: error.message, type: 'error'}));
@@ -44,25 +39,9 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
     }
 
     return (
-        <>
-            <div className='create-post-banner'>
-                <div className="banner-left">
-                    <div className="emoji-wrap">
-                        <img src={Emoji} alt="create post emoji"/>
-                    </div>
-                    <span>
-                    Let’s share what’s going on your mind...
-                </span>
-                </div>
-                <button
-                    onClick={handleShowModal}
-                >
-                    Create Post
-                </button>
-            </div>
             <Modal show={showModal} onHide={handleHideModal} className='create-content-modal'>
                 <Modal.Header>
-                    <h4>Create Forum Post</h4>
+                    <h4>Create News</h4>
                     <button
                         onClick={handleCreatePost}
                     >
@@ -102,7 +81,7 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
 
                                 <Dropdown.Menu>
                                     {
-                                        props.categories.map(c =>
+                                        categories.map(c =>
                                             <Dropdown.Item key={c.id}
                                                            onClick={() => setSelectedCategory(c)}>{c.name}</Dropdown.Item>
                                         )
@@ -126,8 +105,7 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
                     </div>
                 </Modal.Body>
             </Modal>
-        </>
     );
 };
 
-export default CreatePostBanner;
+export default CreateNews;
