@@ -61,10 +61,10 @@ const PostPage: React.FC<PostPage> = (props) => {
                         isFetching &&
                         <SettingsLoader/>
                     }
-                    {
-                        (error && !isFetching) &&
-                        <div className='post-error-message'>{error.message ?? ''}</div>
-                    }
+                    {/*{*/}
+                    {/*    (error && !isFetching) &&*/}
+                    {/*    <div className='post-error-message'>{error.message ?? ''}</div>*/}
+                    {/*}*/}
                 </Col>
             </Row>
         </Container>

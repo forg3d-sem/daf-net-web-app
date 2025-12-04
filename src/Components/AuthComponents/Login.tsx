@@ -2,19 +2,23 @@ import React, {useState} from 'react';
 import AuthTypeDisplay from "./AuthTypeDisplay";
 import {Link, useNavigate} from "@tanstack/react-router";
 import useLogin from "../../Hooks/useLogin.ts";
+import {useAppDispatch} from "../../store/storeHooks.ts";
+import {notificationActions} from "../../store/slices/NotificationSlice.ts";
+import {Spinner} from "react-bootstrap";
 
 
 const Login = () => {
 
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
-    const navigate = useNavigate()
     const {isPending, mutate} = useLogin();
 
     const handleSubmit = (e:React.FormEvent) => {
         e.preventDefault();
-        console.log('submitted data')
         mutate({email: login, password: password}, {
             onSuccess: (data) => {
                 console.log(data)
@@ -23,7 +27,11 @@ const Login = () => {
                 navigate({to: '/'})
             },
             onError: (error) => {
-                console.log(error);
+                console.log(error.message)
+                dispatch(notificationActions.setNotification({
+                    type: 'error',
+                    text: error.message,
+                }))
             }
         })
     }
@@ -63,7 +71,13 @@ const Login = () => {
                     type='submit'
                     disabled={isPending}
                 >
-                    Sign In
+                    {
+                        isPending
+                        ?
+                            <Spinner animation='border'/>
+                            :
+                            "Sign in"
+                    }
                 </button>
             </form>
         </>

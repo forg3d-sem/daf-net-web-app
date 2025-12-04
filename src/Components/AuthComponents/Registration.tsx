@@ -2,8 +2,14 @@ import React, {useState} from 'react';
 import useRegister from "../../Hooks/useRegister.ts";
 import AuthTypeDisplay from "./AuthTypeDisplay.tsx";
 import {useNavigate} from "@tanstack/react-router";
+import {notificationActions} from "../../store/slices/NotificationSlice.ts";
+import {useAppDispatch} from "../../store/storeHooks.ts";
+import {Spinner} from "react-bootstrap";
 
 const Registration:React.FC = () => {
+
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch();
 
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -11,7 +17,6 @@ const Registration:React.FC = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('')
 
-    const navigate = useNavigate()
     const {isPending, mutate} = useRegister();
 
     const handleSubmit = (e:React.FormEvent) => {
@@ -27,6 +32,12 @@ const Registration:React.FC = () => {
         mutate(data, {
             onSuccess: () => {
                 navigate({to: '/verify-email', search: {email: email}})
+            },
+            onError: (error) => {
+                dispatch(notificationActions.setNotification({
+                    type: 'error',
+                    text: error.message,
+                }))
             }
         })
     }
@@ -98,7 +109,13 @@ const Registration:React.FC = () => {
                     type='submit'
                     disabled={isPending}
                 >
-                    Create account
+                    {
+                        isPending
+                        ?
+                            <Spinner animation='border'/>
+                            :
+                            "Create account"
+                    }
                 </button>
             </form>
         </>

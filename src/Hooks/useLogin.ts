@@ -14,7 +14,7 @@ const useLogin = () => {
     return useMutation({
         mutationFn: async (credentials:Credentials) => {
             const response = await api.loginPost(credentials);
-            if (!response.data.success) {
+            if (response.data.success === false) {
                 console.log(response.data.error);
                 throw new Error(response.data.error || 'Request failed');
             }

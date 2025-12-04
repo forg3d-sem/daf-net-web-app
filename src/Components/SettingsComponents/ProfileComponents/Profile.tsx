@@ -78,7 +78,7 @@ const Profile: React.FC<Profile> = (props) => {
             <div className="profile-section">
                 <div className="forums-top">
                     <h3>Forums</h3>
-                    <Link to={'/settings/profile-edit'}>View more</Link>
+                    <Link to={'/'}>View more</Link>
                 </div>
                 <div className="content-bordered">
                     <ProfileForums/>

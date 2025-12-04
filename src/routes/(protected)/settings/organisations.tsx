@@ -5,5 +5,5 @@ export const Route = createFileRoute('/(protected)/settings/organisations')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/(protected)/settings/organisations"!</div>
+  return <div className='d-flex justify-content-center align-items-center fw-bold'>Work in progress. Stay tuned for updates!</div>
 }
