@@ -1,0 +1,25 @@
+@use '../../styles/variables' as *;
+
+.toast-base {
+  margin-top: 60px;
+  margin-right: 20px;
+  padding: 16px;
+  border-radius: 8px;
+  border-width: 1px;
+  border-style: solid;
+  color: #000;
+}
+
+.toast-success {
+  border-color: $green-primary;
+  background-color: $light-green;
+}
+
+.toast-error {
+  background-color: #FFDDDD;
+  border-color: #E21B1B;
+}
+.toast-warning {
+  background-color: #FFE7CC;
+  border-color: $orange-color;
+}

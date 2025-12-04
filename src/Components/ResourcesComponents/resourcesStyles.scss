@@ -1,0 +1,39 @@
+@use '../../styles/variables' as *;
+
+.empty-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 76px;
+
+  img {
+    margin-bottom: 28px;
+  }
+
+  h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: $blue-green;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 18px;
+    color: $blue-green-40;
+    line-height: 120%;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  button {
+    background-color: $blue-green;
+    border: none;
+    padding: 8px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #fff;
+    width: 188px;
+    max-width: 188px;
+  }
+}

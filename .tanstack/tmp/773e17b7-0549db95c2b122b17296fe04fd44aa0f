@@ -1,0 +1,14 @@
+import { createFileRoute, Outlet } from '@tanstack/react-router'
+import {Col, Row} from "react-bootstrap";
+
+export const Route = createFileRoute('/(protected)/profile/__route')({
+  component: RouteComponent,
+})
+
+function RouteComponent() {
+  return <Row>
+      <Col>
+          <Outlet/>
+      </Col>
+  </Row>
+}

@@ -1,0 +1,30 @@
+import {createFileRoute, Outlet} from '@tanstack/react-router'
+
+export const Route = createFileRoute('/(protected)/__layout')({
+    beforeLoad: () => {
+
+    },
+    component: RouteComponent,
+})
+
+function RouteComponent() {
+    return (
+        <>
+            <header>
+                {/*extend with link if needed*/}
+                <img src="" alt="DafNet logo"/>
+                <nav>
+                    <ul>
+                        <li></li>
+                    </ul>
+                </nav>
+                <button aria-label='Navigate to profile'>
+                    <img src="" alt=""/>
+                </button>
+            </header>
+            <main>
+                <Outlet></Outlet>
+            </main>
+        </>
+    );
+}

@@ -1,0 +1,126 @@
+@use '../../../styles/variables' as *;
+
+.post-error-message {
+  margin-top: 30px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.comments-section-title {
+  margin-top: 24px;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.write-comment {
+  border: 1px solid $blue-green-40;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 $blue-green-40;
+  margin-bottom: 40px;
+
+  .write-top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    .profile-pic-placeholder {
+      font-size: 16px;
+    }
+
+    .write-author-name {
+      margin-left: 8px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+
+  input {
+    padding: 15px 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid $gray-color;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .write-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+
+    button {
+      background-color: $orange-color;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 20px;
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.comments-list {
+  padding: 0;
+  margin: 0;
+  .forum-comment {
+    list-style: none;
+
+    .comment-top {
+      display: flex;
+      margin-bottom: 15px;
+
+      .comment-author {
+        display: flex;
+        align-items: center;
+
+        .profile-pic-placeholder {
+          font-size: 16px;
+        }
+
+        .author-details {
+          margin-left: 8px;
+
+          .author-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+          }
+
+          .comment-time {
+            color: rgba(0, 0, 0, 0.4);
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    .comment-text {
+      color: rgba(0, 0, 0, 0.6);
+      line-height: 28px;
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.post-back-btn {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #989898;
+  font-size: 18px;
+  margin-top: 24px;
+  margin-bottom: 20px;
+
+  img {
+    margin-right: 8px;
+  }
+
+}
+
+

@@ -1,0 +1,166 @@
+@use './variables' as *;
+
+body {
+  font-family: "Inter";
+}
+
+header {
+  padding: 12px 0;
+  border-bottom: 1px solid #08394A;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    list-style: none;
+    font-size: 18px;
+    margin-right: 30px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    a {
+      font-weight: 500;
+      color: #000;
+      text-decoration: none;
+
+      &.active {
+        color: #51B864
+      }
+    }
+  }
+
+  .header-profile-link {
+    text-decoration: none;
+  }
+}
+
+.burger {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-icon {
+  margin: 20px auto;
+  width: 20px;
+  height: 14px;
+  cursor: pointer;
+  position: relative;
+
+  span {
+    background-color: black;
+    height: 2px;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+
+    &:first-child {
+      top: 0;
+    }
+
+    &:nth-child(2) {
+      top: 6px;
+    }
+
+    &:last-child {
+      top: 12px;
+    }
+  }
+
+  &.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  &.active span:first-child,
+  &.active span:last-child {
+    top: 6px;
+    background-color: #000
+  }
+
+  &.active span:first-child {
+    transform: rotate(45deg);
+  }
+
+  &.active span:last-child {
+    transform: rotate(-45deg);
+  }
+}
+
+.offcanvas {
+  background-color: $light-green;
+
+  .offcanvas-header {
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $blue-green;
+
+    button {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .offcanvas-body {
+
+    nav {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid $gray-color;
+
+      ul {
+        padding: 0;
+        margin: 42px 0 0 0;
+
+        li {
+          list-style: none;
+          margin-bottom: 30px;
+          display: flex;
+            justify-content: center;
+
+          a {
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 500;
+            color: #000;
+          }
+        }
+      }
+    }
+
+    .logout-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      background: none;
+      border: none;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      color: #970000;
+      font-size: 22px;
+      line-height: 120%;
+
+
+      img {
+        margin-right: 8px;
+        height: 26px;
+        width: 26px;
+      }
+    }
+  }
+}
+

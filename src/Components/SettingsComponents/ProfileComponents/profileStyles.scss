@@ -1,0 +1,223 @@
+@use '../../../styles/variables' as *;
+
+
+h3 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 120%;
+  margin-bottom: 8px;
+}
+
+.content-bordered {
+  border: 1px solid $blue-green-40;
+  padding: 18px;
+  border-radius: 8px;
+}
+
+.profile-section {
+  margin-bottom: 30px;
+  color: $blue-green;
+
+  .forums-top {
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      color: $blue-green-70;
+      font-size: 18px;
+      text-decoration: none;
+    }
+  }
+
+  .empty-bio {
+    padding: 30px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+    color: $blue-green-70;
+  }
+
+  .profile-forums-empty {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h4 {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 120%;
+      color: $blue-green-70;
+      margin-bottom: 8px;
+
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 120%;
+      color: $blue-green-70;
+    }
+  }
+}
+
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .profile-general {
+    display: flex;
+    align-items: center;
+
+    .general-text-group {
+      margin-left: 18px;
+
+      .name-line {
+        font-size: 20px;
+        font-weight: 500;
+        color: $blue-green;
+      }
+
+      .mail-line {
+        font-size: 16px;
+        color: $blue-green-70;
+      }
+
+      .login-line {
+        font-size: 16px;
+        color: $blue-green-40;
+      }
+    }
+  }
+
+  .profile-edit-btn {
+    width: 100%;
+    max-width: 130px;
+    padding: 8px;
+    background-color: $orange-color;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+  }
+}
+
+.stats-section {
+  display: flex;
+  justify-content: space-evenly;
+
+  .counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 500;
+    color: $blue-green;
+
+    &__title {
+      color: $blue-green-70;
+      font-size: 18px;
+      font-weight: 400;
+    }
+  }
+
+  .divider {
+    width: 1px;
+    background-color: $blue-green-40;
+  }
+}
+
+.edit-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+
+  .photo-editing {
+    display: flex;
+    align-items: center;
+
+    .change-photo-btn {
+      background-color: #fff;
+      border: 2px solid $blue-green;
+      color: $blue-green;
+      padding: 8px 28px;
+      border-radius: 8px;
+      margin-left: 18px;
+    }
+  }
+
+  .saveBtn {
+    width: 100%;
+    max-width: 130px;
+    max-height: 34px;
+    padding: 8px;
+    text-align: center;
+    color: #fff;
+    background-color: $orange-color;
+    font-size: 16px;
+    border-radius: 8px;
+    justify-content: center;
+  }
+
+  .delete-photo-btn {
+    margin-left: 14px;
+    
+    img {
+      margin: 0;
+    }
+  }
+}
+
+.edit-profile-double {
+  display: flex;
+  margin-bottom: 30px;
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &:first-child {
+      margin-right: 30px;
+    }
+
+    label {
+      color: $blue-green;
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    input {
+      border: 1px solid $blue-green-40;
+      padding: 16px;
+      font-size: 14px;
+      color: $blue-green;
+      border-radius: 8px !important;
+    }
+  }
+}
+
+.edit-profile-about {
+  width: 100%;
+
+  label {
+    color: $blue-green;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  textarea {
+    width: 100%;
+    border: 1px solid $blue-green-40;
+    border-radius: 8px;
+    resize: none;
+    padding: 16px;
+    color: $blue-green;
+    font-size: 18px;
+  }
+}
