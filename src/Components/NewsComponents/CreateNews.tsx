@@ -11,6 +11,7 @@ interface CreateNews {
     showModal: boolean;
     handleHideModal: () => void;
     categories: CategoryResponse[];
+    refetch: () => void;
 }
 
 const CreateNews:React.FC<CreateNews> = (props) => {

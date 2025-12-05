@@ -12,7 +12,11 @@ export const Route = createFileRoute('/(protected)/')({
 
 function RouteComponent() {
 
-    const {data, isLoading, error} = useFetchAllPosts();
+    const {data, isLoading, error, refetch} = useFetchAllPosts();
 
-  return <Forum posts={data?.data?.data ?? []} postsLoading={isLoading} postsError={error?.message ?? ''}/>
+    const refetchData = () => {
+        refetch();
+    }
+
+  return <Forum posts={data?.data?.data ?? []} postsLoading={isLoading} postsError={error?.message ?? ''} refetch={refetchData}/>
 }

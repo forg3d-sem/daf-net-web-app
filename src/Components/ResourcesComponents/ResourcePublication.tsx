@@ -10,6 +10,7 @@ import Cross from "../../assets/close-modal-cross.svg";
 
 interface CreateResource {
     categories: CategoryResponse[];
+    refetch: () => void;
 }
 
 const ResourcePublication:React.FC<CreateResource> = (props) => {
@@ -22,6 +23,12 @@ const ResourcePublication:React.FC<CreateResource> = (props) => {
     const [text, setText] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<CategoryResponse | null>(null);
 
+    const resetValues = () => {
+        setTitle('');
+        setText('');
+        setSelectedCategory(null);
+    }
+
     const {mutate, isPending} = useCreatePost();
 
     const handleCreatePost = () => {
@@ -29,11 +36,13 @@ const ResourcePublication:React.FC<CreateResource> = (props) => {
             onSuccess: () => {
                 setShowModal(false);
                 queryClient.invalidateQueries({queryKey: ['posts', selectedCategory?.id]});
-                queryClient.refetchQueries({queryKey: ['posts', selectedCategory?.id]});
+                props.refetch();
                 dispatch(notificationActions.setNotification({text: "Resource submitted successfully!", type: 'success'}));
+                resetValues();
             },
             onError: (error) => {
                 dispatch(notificationActions.setNotification({text: error.message, type: 'error'}));
+                resetValues();
             }
         })
     }

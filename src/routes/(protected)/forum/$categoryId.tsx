@@ -10,7 +10,11 @@ function RouteComponent() {
 
     const {categoryId} = Route.useParams();
 
-    const {data, isLoading, error} = useFetchPosts(1, categoryId);
+    const {data, isLoading, error, refetch} = useFetchPosts(1, categoryId);
 
-  return <Forum posts={data?.data?.data?.posts ?? []} postsError={error?.message ?? ''} postsLoading={isLoading}/>
+    const refetchData = () => {
+        refetch();
+    }
+
+  return <Forum posts={data?.data?.data?.posts ?? []} postsError={error?.message ?? ''} postsLoading={isLoading} refetch={refetchData}/>
 }

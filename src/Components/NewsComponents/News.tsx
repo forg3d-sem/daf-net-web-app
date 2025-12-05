@@ -10,11 +10,11 @@ interface News {
     data: PostResponse[];
     isLoading: boolean;
     error: string;
+    refetch: () => void;
 }
 
 const News: React.FC<News> = (props) => {
 
-    console.log(props)
     const {data: cats, isPending, error:catsError} = useFetchCategories('00000000-0000-0000-0000-000000000001', '', 1);
     const [showModal, setShowModal] = useState(false);
 
@@ -50,6 +50,7 @@ const News: React.FC<News> = (props) => {
                         showModal={showModal}
                         handleHideModal={() => setShowModal(false)}
                         categories={cats?.data?.data?.categories ?? []}
+                        refetch={props.refetch}
                     />
                 </div>
                 {

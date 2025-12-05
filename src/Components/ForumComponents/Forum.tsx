@@ -11,6 +11,7 @@ interface Forum {
     posts: PostResponse[];
     postsLoading: boolean;
     postsError: string;
+    refetch: () => void;
 
 }
 
@@ -45,6 +46,7 @@ const Forum: React.FC<Forum>= (props) => {
 
                             <CreatePostBanner
                                 categories={cats?.data?.data?.categories ?? []}
+                                refetch={props.refetch}
                             />
                     {
                         (!props.postsLoading && props.posts) &&
@@ -55,7 +57,7 @@ const Forum: React.FC<Forum>= (props) => {
                     {
                         (props.postsLoading || loadingCats) &&
                         <div className='error-wrapper d-flex justify-content-center align-items-center'>
-                            <Spinner animation='border' role='status'/>
+                            <Spinner animation='border'/>
                         </div>
                     }
                     {

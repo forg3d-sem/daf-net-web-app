@@ -10,6 +10,7 @@ import Cross from "../../assets/close-modal-cross.svg";
 
 interface CreatePostBanner {
     categories: CategoryResponse[];
+    refetch: () => void;
 }
 
 const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
@@ -21,6 +22,12 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
     const [selectedCategory, setSelectedCategory] = useState<CategoryResponse | null>(null);
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
+
+    const resetValues = () => {
+        setTitle('');
+        setText('');
+        setSelectedCategory(null);
+    }
 
     const {mutate, isPending} = useCreatePost()
 
@@ -36,11 +43,13 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
             onSuccess: () => {
                 handleHideModal();
                 queryClient.invalidateQueries({queryKey: ['posts', selectedCategory?.id]});
-                queryClient.refetchQueries({queryKey: ['posts', selectedCategory?.id]})
+                props.refetch();
                 dispatch(notificationActions.setNotification({text: "Post submitted successfully!", type: 'success'}));
+                resetValues();
             },
             onError: (error) => {
                 dispatch(notificationActions.setNotification({text: error.message, type: 'error'}));
+                resetValues();
             }
         })
     }

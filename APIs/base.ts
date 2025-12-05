@@ -19,6 +19,7 @@ import type { Configuration } from './configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 
+//custom interceptor for 401 error if user gets unauthorized
 globalAxios.interceptors.response.use(
     (r) => r,
     (error) => {

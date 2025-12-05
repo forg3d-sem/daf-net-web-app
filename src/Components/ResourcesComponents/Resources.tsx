@@ -12,11 +12,12 @@ interface Resources {
     data: PostResponse[];
     isLoading: boolean;
     error: string | null | undefined;
+    refetch: () => void;
 }
 
 const Resources: React.FC<Resources> = (props) => {
 
-    const {data, isLoading, error} = props;
+    const {data, isLoading, error, refetch} = props;
 
     const {data: cats} = useFetchCategories('00000000-0000-0000-0000-000000000001', '', 1);
 
@@ -52,6 +53,7 @@ const Resources: React.FC<Resources> = (props) => {
                 <Col className='order-1 order-lg-2' lg={4}>
                     <ResourcePublication
                         categories={cats?.data?.data?.categories ?? []}
+                        refetch={refetch}
                     />
                 </Col>
             </Row>
