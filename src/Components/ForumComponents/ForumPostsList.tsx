@@ -1,7 +1,7 @@
 import React from 'react';
 import SinglePost from "./SinglePost.tsx";
 import NoContent from '../../assets/no_groups.png';
-import type {PostResponse} from "../../../API_backup";
+import type {PostResponse} from "../../../APIs";
 
 interface ForumPostList {
     posts: PostResponse[];

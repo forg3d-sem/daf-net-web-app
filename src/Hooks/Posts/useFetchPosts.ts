@@ -11,7 +11,7 @@ const useFetchPosts = (page: number, category:string) => {
     return useQuery({
         queryKey: ['posts', category],
         queryFn: async () => {
-            const response = await postApi.postGet(page, 10, category, {headers: {"Authorization": `Bearer ${token}`}} );
+            const response = await postApi.postGet(page, 99, category, {headers: {"Authorization": `Bearer ${token}`}} );
             if (!response.data.success) {
                 console.log(response.data.error);
                 throw new Error(response.data.error || 'Request failed');

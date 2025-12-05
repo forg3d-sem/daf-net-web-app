@@ -25,6 +25,7 @@ import { Route as protectedSettingsProfileRouteImport } from './routes/(protecte
 import { Route as protectedSettingsPasswordResetRouteImport } from './routes/(protected)/settings/password-reset'
 import { Route as protectedSettingsOrganisationsRouteImport } from './routes/(protected)/settings/organisations'
 import { Route as protectedSettingsGroupsRouteImport } from './routes/(protected)/settings/groups'
+import { Route as protectedResourcePostResourceIdRouteImport } from './routes/(protected)/resource-post/$resourceId'
 import { Route as protectedPostPostIdRouteImport } from './routes/(protected)/post/$postId'
 import { Route as protectedNewsPostNewsIdRouteImport } from './routes/(protected)/news-post/$newsId'
 import { Route as protectedForumCategoryIdRouteImport } from './routes/(protected)/forum/$categoryId'
@@ -112,6 +113,12 @@ const protectedSettingsGroupsRoute = protectedSettingsGroupsRouteImport.update({
   path: '/groups',
   getParentRoute: () => protectedSettingsRouteRoute,
 } as any)
+const protectedResourcePostResourceIdRoute =
+  protectedResourcePostResourceIdRouteImport.update({
+    id: '/resource-post/$resourceId',
+    path: '/resource-post/$resourceId',
+    getParentRoute: () => protectedRouteRoute,
+  } as any)
 const protectedPostPostIdRoute = protectedPostPostIdRouteImport.update({
   id: '/post/$postId',
   path: '/post/$postId',
@@ -142,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/forum/$categoryId': typeof protectedForumCategoryIdRoute
   '/news-post/$newsId': typeof protectedNewsPostNewsIdRoute
   '/post/$postId': typeof protectedPostPostIdRoute
+  '/resource-post/$resourceId': typeof protectedResourcePostResourceIdRoute
   '/settings/groups': typeof protectedSettingsGroupsRoute
   '/settings/organisations': typeof protectedSettingsOrganisationsRoute
   '/settings/password-reset': typeof protectedSettingsPasswordResetRoute
@@ -162,6 +170,7 @@ export interface FileRoutesByTo {
   '/forum/$categoryId': typeof protectedForumCategoryIdRoute
   '/news-post/$newsId': typeof protectedNewsPostNewsIdRoute
   '/post/$postId': typeof protectedPostPostIdRoute
+  '/resource-post/$resourceId': typeof protectedResourcePostResourceIdRoute
   '/settings/groups': typeof protectedSettingsGroupsRoute
   '/settings/organisations': typeof protectedSettingsOrganisationsRoute
   '/settings/password-reset': typeof protectedSettingsPasswordResetRoute
@@ -184,6 +193,7 @@ export interface FileRoutesById {
   '/(protected)/forum/$categoryId': typeof protectedForumCategoryIdRoute
   '/(protected)/news-post/$newsId': typeof protectedNewsPostNewsIdRoute
   '/(protected)/post/$postId': typeof protectedPostPostIdRoute
+  '/(protected)/resource-post/$resourceId': typeof protectedResourcePostResourceIdRoute
   '/(protected)/settings/groups': typeof protectedSettingsGroupsRoute
   '/(protected)/settings/organisations': typeof protectedSettingsOrganisationsRoute
   '/(protected)/settings/password-reset': typeof protectedSettingsPasswordResetRoute
@@ -206,6 +216,7 @@ export interface FileRouteTypes {
     | '/forum/$categoryId'
     | '/news-post/$newsId'
     | '/post/$postId'
+    | '/resource-post/$resourceId'
     | '/settings/groups'
     | '/settings/organisations'
     | '/settings/password-reset'
@@ -226,6 +237,7 @@ export interface FileRouteTypes {
     | '/forum/$categoryId'
     | '/news-post/$newsId'
     | '/post/$postId'
+    | '/resource-post/$resourceId'
     | '/settings/groups'
     | '/settings/organisations'
     | '/settings/password-reset'
@@ -247,6 +259,7 @@ export interface FileRouteTypes {
     | '/(protected)/forum/$categoryId'
     | '/(protected)/news-post/$newsId'
     | '/(protected)/post/$postId'
+    | '/(protected)/resource-post/$resourceId'
     | '/(protected)/settings/groups'
     | '/(protected)/settings/organisations'
     | '/(protected)/settings/password-reset'
@@ -377,6 +390,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof protectedSettingsGroupsRouteImport
       parentRoute: typeof protectedSettingsRouteRoute
     }
+    '/(protected)/resource-post/$resourceId': {
+      id: '/(protected)/resource-post/$resourceId'
+      path: '/resource-post/$resourceId'
+      fullPath: '/resource-post/$resourceId'
+      preLoaderRoute: typeof protectedResourcePostResourceIdRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
     '/(protected)/post/$postId': {
       id: '/(protected)/post/$postId'
       path: '/post/$postId'
@@ -432,6 +452,7 @@ interface protectedRouteRouteChildren {
   protectedForumCategoryIdRoute: typeof protectedForumCategoryIdRoute
   protectedNewsPostNewsIdRoute: typeof protectedNewsPostNewsIdRoute
   protectedPostPostIdRoute: typeof protectedPostPostIdRoute
+  protectedResourcePostResourceIdRoute: typeof protectedResourcePostResourceIdRoute
   protectedUserUserIdRoute: typeof protectedUserUserIdRoute
 }
 
@@ -444,6 +465,7 @@ const protectedRouteRouteChildren: protectedRouteRouteChildren = {
   protectedForumCategoryIdRoute: protectedForumCategoryIdRoute,
   protectedNewsPostNewsIdRoute: protectedNewsPostNewsIdRoute,
   protectedPostPostIdRoute: protectedPostPostIdRoute,
+  protectedResourcePostResourceIdRoute: protectedResourcePostResourceIdRoute,
   protectedUserUserIdRoute: protectedUserUserIdRoute,
 }
 

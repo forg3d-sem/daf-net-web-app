@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import useRegister from "../../Hooks/useRegister.ts";
+import useRegister from "../../Hooks/Auth/useRegister.ts";
 import AuthTypeDisplay from "./AuthTypeDisplay.tsx";
 import {useNavigate} from "@tanstack/react-router";
 import {notificationActions} from "../../store/slices/NotificationSlice.ts";

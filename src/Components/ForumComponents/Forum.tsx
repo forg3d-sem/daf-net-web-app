@@ -4,7 +4,7 @@ import CategorySelector from "./CategorySelector.tsx";
 import CreatePostBanner from "./CreatePostBanner.tsx";
 import "./forumStyles.scss";
 import ForumPostsList from "./ForumPostsList.tsx";
-import type {PostResponse} from "../../../API_backup";
+import type {PostResponse} from "../../../APIs";
 import useFetchCategories from "../../Hooks/Categories/useFetchCategories.ts";
 
 interface Forum {

@@ -38,7 +38,13 @@ const ProfileEdit: React.FC<ProfileEdit> = ({data}) => {
 
                 dispatch(notificationActions.setNotification({text: 'Profile updated successfully!', type: 'success'}))
         },
-            onError: (e => console.log(e))
+            onError: (error => {
+                if (error.message === 'Request failed with status code 401') {
+                    localStorage.clear();
+                    location.reload();
+                }
+                dispatch(notificationActions.setNotification({text: error.message, type: 'error'}))
+            })
         })
     }
 

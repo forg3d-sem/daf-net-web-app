@@ -1,43 +1,36 @@
 import React, {useState} from 'react';
-import Emoji from '../../assets/create-post-emoji.png';
-import {Dropdown, Modal, Spinner} from "react-bootstrap";
-import type {CategoryResponse} from "../../../APIs";
-import useCreatePost from "../../Hooks/Posts/useCreatePost.ts";
 import {useQueryClient} from "@tanstack/react-query";
 import {useAppDispatch} from "../../store/storeHooks.ts";
+import type {CategoryResponse} from "../../../APIs";
+import {Dropdown, Modal, Spinner} from "react-bootstrap";
 import {notificationActions} from "../../store/slices/NotificationSlice.ts";
+import useCreatePost from "../../Hooks/Posts/useCreatePost.ts";
+import '../ForumComponents/forumStyles.scss';
 import Cross from "../../assets/close-modal-cross.svg";
 
-interface CreatePostBanner {
+interface CreateResource {
     categories: CategoryResponse[];
 }
 
-const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
+const ResourcePublication:React.FC<CreateResource> = (props) => {
 
     const queryClient = useQueryClient();
     const dispatch = useAppDispatch();
 
-    const [showModal, setShowModal] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState<CategoryResponse | null>(null);
+    const [showModal, setShowModal] = useState(false)
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState<CategoryResponse | null>(null);
 
-    const {mutate, isPending} = useCreatePost()
-
-    const handleShowModal = () => {
-        setShowModal(true)
-    }
-    const handleHideModal = () => {
-        setShowModal(false)
-    }
+    const {mutate, isPending} = useCreatePost();
 
     const handleCreatePost = () => {
         mutate({content: text, title: title, categoryId: selectedCategory?.id}, {
             onSuccess: () => {
-                handleHideModal();
+                setShowModal(false);
                 queryClient.invalidateQueries({queryKey: ['posts', selectedCategory?.id]});
-                queryClient.refetchQueries({queryKey: ['posts', selectedCategory?.id]})
-                dispatch(notificationActions.setNotification({text: "Post submitted successfully!", type: 'success'}));
+                queryClient.refetchQueries({queryKey: ['posts', selectedCategory?.id]});
+                dispatch(notificationActions.setNotification({text: "Resource submitted successfully!", type: 'success'}));
             },
             onError: (error) => {
                 dispatch(notificationActions.setNotification({text: error.message, type: 'error'}));
@@ -47,25 +40,20 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
 
     return (
         <>
-            <div className='create-post-banner'>
-                <div className="banner-left">
-                    <div className="emoji-wrap">
-                        <img src={Emoji} alt="create post emoji"/>
-                    </div>
-                    <span>
-                    Let’s share what’s going on your mind...
-                </span>
-                </div>
-                <button
-                    onClick={handleShowModal}
-                >
-                    Create Post
+            <div className="resource-publication-section">
+                <h4>Publication of a resource</h4>
+                <p>
+                    You can submit a request to create a personal learning resource, and our administrator will review and publish it.
+                </p>
+                <button onClick={() => setShowModal(true)}>
+                    Create Resource
                 </button>
             </div>
-            <Modal show={showModal} onHide={handleHideModal} className='create-content-modal'>
+
+            <Modal show={showModal} onHide={() => setShowModal(false)} className='create-content-modal'>
                 <Modal.Header>
-                    <h4>Create Forum Post</h4>
-                    <button className='close-btn d-block d-md-none' onClick={handleHideModal}>
+                    <h4>Create Resource</h4>
+                    <button className='close-btn d-block d-md-none' onClick={() => setShowModal(false)}>
                         <img src={Cross} alt=""/>
                     </button>
                     <button
@@ -119,6 +107,9 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
                         </div>
                     </div>
                     <div className="modal-input-group">
+                        <button className='resource-type selected'>Text</button>
+                    </div>
+                    <div className="modal-input-group">
                         <label htmlFor="post-content">Text</label>
                         <textarea
                             name="content"
@@ -148,4 +139,4 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
     );
 };
 
-export default CreatePostBanner;
+export default ResourcePublication;

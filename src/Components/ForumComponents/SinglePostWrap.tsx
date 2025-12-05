@@ -9,8 +9,6 @@ interface SinglePostWrap {
 
 const SinglePostWrap:React.FC<SinglePostWrap> = (props) => {
 
-    console.log(props.isPostPage)
-
     if (!props.isPostPage) return (
         <li>
             <Link to={'/post/$postId'} params={{postId: props.linkId}} className='single-post single-post-link'>

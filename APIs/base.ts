@@ -19,6 +19,17 @@ import type { Configuration } from './configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 
+globalAxios.interceptors.response.use(
+    (r) => r,
+    (error) => {
+        if (error?.response?.status === 401) {
+            localStorage.clear();
+            location.reload();
+        }
+        return Promise.reject(error);
+    }
+)
+
 export const BASE_PATH = "https://dafnet.tes.gd".replace(/\/+$/, "");
 
 /**
@@ -50,7 +61,7 @@ export interface RequestArgs {
 export class BaseAPI {
     protected configuration: Configuration | undefined;
 
-    // @ts-ignore
+    //@ts-ignore
     constructor(configuration?: Configuration, protected basePath: string = BASE_PATH, protected axios: AxiosInstance = globalAxios) {
         if (configuration) {
             this.configuration = configuration;
@@ -66,7 +77,7 @@ export class BaseAPI {
  * @extends {Error}
  */
 export class RequiredError extends Error {
-    // @ts-ignore
+    //@ts-ignore
     constructor(public field: string, msg?: string) {
         super(msg);
         this.name = "RequiredError"

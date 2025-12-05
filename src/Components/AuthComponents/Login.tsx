@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import AuthTypeDisplay from "./AuthTypeDisplay";
 import {Link, useNavigate} from "@tanstack/react-router";
-import useLogin from "../../Hooks/useLogin.ts";
+import useLogin from "../../Hooks/Auth/useLogin.ts";
 import {useAppDispatch} from "../../store/storeHooks.ts";
 import {notificationActions} from "../../store/slices/NotificationSlice.ts";
 import {Spinner} from "react-bootstrap";

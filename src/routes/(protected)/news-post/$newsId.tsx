@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import useGetPost from "../../../Hooks/Posts/useGetPost.ts";
 import NewsPage from "../../../Components/NewsComponents/NewsPage.tsx";
-import type {PostResponse} from "../../../../API_backup";
+import type {PostResponse} from "../../../../APIs";
 
 export const Route = createFileRoute('/(protected)/news-post/$newsId')({
   component: RouteComponent,

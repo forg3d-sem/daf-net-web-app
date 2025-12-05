@@ -1,6 +1,6 @@
 import {Col, Container, Row} from "react-bootstrap";
 import NoContent from "../../assets/no_groups.png";
-import type {PostResponse} from "../../../API_backup";
+import type {PostResponse} from "../../../APIs";
 import React, {useState} from "react";
 import NewsList from "./NewsList.tsx";
 import useFetchCategories from "../../Hooks/Categories/useFetchCategories.ts";

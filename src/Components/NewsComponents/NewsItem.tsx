@@ -2,7 +2,7 @@ import React, {useMemo} from 'react';
 import {Link} from "@tanstack/react-router";
 import type {PostResponse} from "../../../APIs";
 import NewsIcon from '../../assets/newspaper-folded.svg';
-import type {CategoryResponse} from "../../../API_backup";
+import type {CategoryResponse} from "../../../APIs";
 import Clock from '../../assets/clock_icon.svg'
 
 interface NewsItem {
@@ -39,8 +39,8 @@ const NewsItem: React.FC<NewsItem> = (props) => {
                             <div className="news-category">
                                 <div className="cat-ball"></div>
                                 <span>
-                            {categoryName}
-                        </span>
+                                    {categoryName}
+                                </span>
                             </div>
                             <h6 className="news-title">
                                 {title}

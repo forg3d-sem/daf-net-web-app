@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {Dropdown, Modal, Spinner} from "react-bootstrap";
 import useCreatePost from "../../Hooks/Posts/useCreatePost.ts";
-import type {CategoryResponse} from "../../../API_backup";
+import type {CategoryResponse} from "../../../APIs";
 import {notificationActions} from "../../store/slices/NotificationSlice.ts";
 import {useQueryClient} from "@tanstack/react-query";
 import {useAppDispatch} from "../../store/storeHooks.ts";
+import Cross from '../../assets/close-modal-cross.svg';
 
 interface CreateNews {
     showModal: boolean;
@@ -29,7 +30,8 @@ const CreateNews:React.FC<CreateNews> = (props) => {
         mutate({content: text, title: title, categoryId: selectedCategory?.id}, {
             onSuccess: () => {
                 handleHideModal();
-                queryClient.invalidateQueries({queryKey: ['posts', selectedCategory]})
+                queryClient.invalidateQueries({queryKey: ['posts', selectedCategory?.id]});
+                queryClient.refetchQueries({queryKey: ['posts', selectedCategory?.id]});
                 dispatch(notificationActions.setNotification({text: "News post submitted successfully!", type: 'success'}));
             },
             onError: (error) => {
@@ -42,7 +44,11 @@ const CreateNews:React.FC<CreateNews> = (props) => {
             <Modal show={showModal} onHide={handleHideModal} className='create-content-modal'>
                 <Modal.Header>
                     <h4>Create News</h4>
+                    <button className='close-btn d-block d-md-none' onClick={handleHideModal}>
+                        <img src={Cross} alt=""/>
+                    </button>
                     <button
+                        className='d-none d-md-block'
                         onClick={handleCreatePost}
                     >
                         {
@@ -103,6 +109,18 @@ const CreateNews:React.FC<CreateNews> = (props) => {
                             onChange={(e) => setText(e.target.value)}
                         ></textarea>
                     </div>
+                    <button
+                        className='d-block d-md-none publish-btn'
+                        onClick={handleCreatePost}
+                    >
+                        {
+                            isPending
+                                ?
+                                <Spinner animation='border'/>
+                                :
+                                'Publish'
+                        }
+                    </button>
                 </Modal.Body>
             </Modal>
     );

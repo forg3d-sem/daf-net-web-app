@@ -1,5 +1,5 @@
 import {useMutation} from "@tanstack/react-query";
-import {AuthApi} from "../../APIs";
+import {AuthApi} from "../../../APIs";
 import {useMemo} from "react";
 
 type RegistrationData = {

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import useVerifyEmail from "../../Hooks/useVerifyEmail.ts";
+import useVerifyEmail from "../../Hooks/Auth/useVerifyEmail.ts";
 import {Spinner} from "react-bootstrap";
 import {useNavigate} from "@tanstack/react-router";
 import {useAppDispatch} from "../../store/storeHooks.ts";

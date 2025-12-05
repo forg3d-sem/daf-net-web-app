@@ -2,7 +2,7 @@ import React from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import SinglePost from "./SinglePost.tsx";
 import CommentsSection from "./CommentsSection.tsx";
-import type {PostResponse} from "../../../API_backup";
+import type {PostResponse} from "../../../APIs";
 import SettingsLoader from "../SettingsComponents/SettingsLoader.tsx";
 import './ForumPostPage/postStyles.scss';
 import './forumStyles.scss';

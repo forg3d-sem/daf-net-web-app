@@ -1,20 +1,19 @@
 import React from 'react';
-import type {PostResponse} from "../../../APIs";
 import {Col, Container, Row} from "react-bootstrap";
 import BackArrow from "../../assets/back-arrow.svg";
+import Clock from "../../assets/clock_icon.svg";
+import SettingsLoader from "../SettingsComponents/SettingsLoader.tsx";
 import '../ForumComponents/forumStyles.scss'
 import '../ForumComponents/ForumPostPage/postStyles.scss';
-import SettingsLoader from "../SettingsComponents/SettingsLoader.tsx";
-import Clock from "../../assets/clock_icon.svg";
+import type {PostResponse} from "../../../APIs";
 
-interface NewsPage {
+interface ResourcePage {
     data: PostResponse;
     isLoading: boolean;
     error: string;
 }
 
-const NewsPage:React.FC<NewsPage> = (props) => {
-
+const ResourcePage:React.FC<ResourcePage> = (props) => {
     return (
         <Container>
             <Row>
@@ -63,4 +62,4 @@ const NewsPage:React.FC<NewsPage> = (props) => {
     );
 };
 
-export default NewsPage;
+export default ResourcePage;

@@ -168,10 +168,19 @@
   .modal-dialog {
     width: 100%;
     max-width: 882px;
+    padding: 20px;
+
+    @media (max-width: 575px) {
+      margin: 0;
+    }
   }
 
   .modal-content {
     padding: 32px;
+
+    @media (max-width: 575px) {
+      padding: 32px 15px;
+    }
 
     .modal-header {
       padding: 0;
@@ -187,9 +196,9 @@
         color: #000;
         margin: 0;
 
-        @media (max-width: 575px) {
-          font-size: 16px;
-        }
+        //@media (max-width: 575px) {
+        //  font-size: 16px;
+        //}
       }
 
       button {
@@ -203,9 +212,19 @@
         padding: 8px;
         border: none;
       }
+
+      .close-btn {
+        background: transparent;
+        border: none;
+        padding: 0;
+        margin: 0;
+        width: fit-content;
+      }
     }
 
     .modal-body {
+      padding: 0;
+
       .modal-input-group {
         display: flex;
         flex-direction: column;
@@ -284,6 +303,28 @@
             max-width: none;
           }
         }
+
+        .resource-type {
+          font-size: 18px;
+          font-weight: 500;
+          color: $blue-green;
+          background-color: transparent;
+          border: none;
+          width: fit-content;
+
+          &.selected {
+            border-bottom: 2px solid $orange-color;
+          }
+        }
+      }
+
+      .publish-btn {
+        width: 100%;
+        background-color: $orange-color;
+        border: none;
+        border-radius: 8px;
+        color: #fff;
+        padding: 15px;
       }
     }
   }

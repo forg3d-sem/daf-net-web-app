@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import PostPage from "../../../Components/ForumComponents/PostPage.tsx";
 import useGetPost from "../../../Hooks/Posts/useGetPost.ts";
-import type {PostResponse} from "../../../../API_backup";
+import type {PostResponse} from "../../../../APIs";
 
 
 export const Route = createFileRoute('/(protected)/post/$postId')({

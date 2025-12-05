@@ -1,5 +1,5 @@
 import React from 'react';
-import type {CategoryResponse, PostResponse} from "../../../API_backup";
+import type {CategoryResponse, PostResponse} from "../../../APIs";
 import NewsItem from "./NewsItem.tsx";
 
 interface NewsList {

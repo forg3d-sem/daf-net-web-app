@@ -3,6 +3,7 @@ import {Col, Container, Row} from "react-bootstrap";
 import logo from '../../assets/daf_header_logo.png';
 import ProfileIconComponent from "../../Components/SettingsComponents/ProfileComponents/ProfileIconComponent.tsx";
 import BurgerMenu from "../../Components/BurgerMenu.tsx";
+import useFetchProfile from "../../Hooks/Profile/useFetchProfile.ts";
 
 export const Route = createFileRoute('/(protected)')({
     beforeLoad: () => {
@@ -21,6 +22,10 @@ export const Route = createFileRoute('/(protected)')({
 })
 
 function RouteComponent() {
+
+    const id = localStorage.getItem('id');
+
+    const {data} = useFetchProfile(id ?? '');
 
     return (
         <>
@@ -54,9 +59,9 @@ function RouteComponent() {
                             </nav>
                             <Link className='header-profile-link d-lg-block d-none' to={'/settings/profile'}>
                                 <ProfileIconComponent
-                                    url={''}
-                                    name='Roman'
-                                    lastName='Semeniuk'
+                                    url={data?.data?.data?.imageUrl ?? ''}
+                                    name={data?.data?.data?.firstName ?? ''}
+                                    lastName={data?.data?.data?.lastName ?? ''}
                                     maxSize={65}
                                 />
                             </Link>
