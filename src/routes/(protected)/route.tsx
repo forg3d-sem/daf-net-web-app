@@ -9,6 +9,8 @@ export const Route = createFileRoute('/(protected)')({
     beforeLoad: () => {
         const token = localStorage.getItem('token');
         if (!token) {
+
+            console.log(token);
             throw redirect({
                 to: '/login',
                 replace: true,

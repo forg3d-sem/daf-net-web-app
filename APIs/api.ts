@@ -565,6 +565,31 @@ export interface CreatePostRequest {
      * @memberof CreatePostRequest
      */
     'content'?: string | null;
+    /**
+     * 
+     * @type {CreateSurveyRequest}
+     * @memberof CreatePostRequest
+     */
+    'survey'?: CreateSurveyRequest;
+}
+/**
+ * 
+ * @export
+ * @interface CreateSurveyRequest
+ */
+export interface CreateSurveyRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateSurveyRequest
+     */
+    'question'?: string | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateSurveyRequest
+     */
+    'options'?: Array<string> | null;
 }
 /**
  * 
@@ -1587,6 +1612,12 @@ export interface PostResponse {
      * @type {string}
      * @memberof PostResponse
      */
+    'categoryName'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PostResponse
+     */
     'title'?: string | null;
     /**
      * 
@@ -1600,6 +1631,24 @@ export interface PostResponse {
      * @memberof PostResponse
      */
     'createdAt'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PostResponse
+     */
+    'commentsCount'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PostResponse
+     */
+    'likesCount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PostResponse
+     */
+    'surveyId'?: string | null;
 }
 /**
  * 
@@ -1623,31 +1672,6 @@ export interface PostResponseApiResponse {
      * 
      * @type {string}
      * @memberof PostResponseApiResponse
-     */
-    'error'?: string | null;
-}
-/**
- * 
- * @export
- * @interface PostResponseListApiResponse
- */
-export interface PostResponseListApiResponse {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PostResponseListApiResponse
-     */
-    'success'?: boolean;
-    /**
-     * 
-     * @type {Array<PostResponse>}
-     * @memberof PostResponseListApiResponse
-     */
-    'data'?: Array<PostResponse> | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof PostResponseListApiResponse
      */
     'error'?: string | null;
 }
@@ -1939,6 +1963,180 @@ export interface StringApiResponse {
 /**
  * 
  * @export
+ * @interface SurveyOptionResponse
+ */
+export interface SurveyOptionResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof SurveyOptionResponse
+     */
+    'optionId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SurveyOptionResponse
+     */
+    'text'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof SurveyOptionResponse
+     */
+    'displayOrder'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface SurveyOptionResultResponse
+ */
+export interface SurveyOptionResultResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof SurveyOptionResultResponse
+     */
+    'optionId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SurveyOptionResultResponse
+     */
+    'text'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof SurveyOptionResultResponse
+     */
+    'voteCount'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SurveyOptionResultResponse
+     */
+    'percentage'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface SurveyResultsResponse
+ */
+export interface SurveyResultsResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof SurveyResultsResponse
+     */
+    'surveyId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SurveyResultsResponse
+     */
+    'question'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof SurveyResultsResponse
+     */
+    'totalVotes'?: number;
+    /**
+     * 
+     * @type {Array<SurveyOptionResultResponse>}
+     * @memberof SurveyResultsResponse
+     */
+    'options'?: Array<SurveyOptionResultResponse> | null;
+}
+/**
+ * 
+ * @export
+ * @interface SurveyResultsResponseApiResponse
+ */
+export interface SurveyResultsResponseApiResponse {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SurveyResultsResponseApiResponse
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {SurveyResultsResponse}
+     * @memberof SurveyResultsResponseApiResponse
+     */
+    'data'?: SurveyResultsResponse;
+    /**
+     * 
+     * @type {string}
+     * @memberof SurveyResultsResponseApiResponse
+     */
+    'error'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface SurveyStatusResponse
+ */
+export interface SurveyStatusResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof SurveyStatusResponse
+     */
+    'surveyId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SurveyStatusResponse
+     */
+    'question'?: string | null;
+    /**
+     * 
+     * @type {Array<SurveyOptionResponse>}
+     * @memberof SurveyStatusResponse
+     */
+    'options'?: Array<SurveyOptionResponse> | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SurveyStatusResponse
+     */
+    'hasVoted'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof SurveyStatusResponse
+     */
+    'votedOptionId'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface SurveyStatusResponseApiResponse
+ */
+export interface SurveyStatusResponseApiResponse {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SurveyStatusResponseApiResponse
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {SurveyStatusResponse}
+     * @memberof SurveyStatusResponseApiResponse
+     */
+    'data'?: SurveyStatusResponse;
+    /**
+     * 
+     * @type {string}
+     * @memberof SurveyStatusResponseApiResponse
+     */
+    'error'?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface TestResponse
  */
 export interface TestResponse {
@@ -1983,6 +2181,69 @@ export interface TestResponseApiResponse {
 /**
  * 
  * @export
+ * @interface ToggleLikeRequest
+ */
+export interface ToggleLikeRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof ToggleLikeRequest
+     */
+    'postId'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ToggleLikeResponse
+ */
+export interface ToggleLikeResponse {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ToggleLikeResponse
+     */
+    'liked'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ToggleLikeResponse
+     */
+    'postId'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ToggleLikeResponse
+     */
+    'totalLikes'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface ToggleLikeResponseApiResponse
+ */
+export interface ToggleLikeResponseApiResponse {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ToggleLikeResponseApiResponse
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {ToggleLikeResponse}
+     * @memberof ToggleLikeResponseApiResponse
+     */
+    'data'?: ToggleLikeResponse;
+    /**
+     * 
+     * @type {string}
+     * @memberof ToggleLikeResponseApiResponse
+     */
+    'error'?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface UpdatePostRequest
  */
 export interface UpdatePostRequest {
@@ -2004,6 +2265,75 @@ export interface UpdatePostRequest {
      * @memberof UpdatePostRequest
      */
     'content'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface VoteSurveyRequest
+ */
+export interface VoteSurveyRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof VoteSurveyRequest
+     */
+    'surveyId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VoteSurveyRequest
+     */
+    'surveyOptionId'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface VoteSurveyResponse
+ */
+export interface VoteSurveyResponse {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof VoteSurveyResponse
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof VoteSurveyResponse
+     */
+    'votedOptionId'?: string;
+    /**
+     * 
+     * @type {SurveyResultsResponse}
+     * @memberof VoteSurveyResponse
+     */
+    'results'?: SurveyResultsResponse;
+}
+/**
+ * 
+ * @export
+ * @interface VoteSurveyResponseApiResponse
+ */
+export interface VoteSurveyResponseApiResponse {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof VoteSurveyResponseApiResponse
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {VoteSurveyResponse}
+     * @memberof VoteSurveyResponseApiResponse
+     */
+    'data'?: VoteSurveyResponse;
+    /**
+     * 
+     * @type {string}
+     * @memberof VoteSurveyResponseApiResponse
+     */
+    'error'?: string | null;
 }
 
 /**
@@ -3675,6 +4005,114 @@ export class GroupApi extends BaseAPI {
 
 
 /**
+ * LikeApi - axios parameter creator
+ * @export
+ */
+export const LikeApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {ToggleLikeRequest} [toggleLikeRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        likeTogglePost: async (toggleLikeRequest?: ToggleLikeRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/Like/toggle`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(toggleLikeRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * LikeApi - functional programming interface
+ * @export
+ */
+export const LikeApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = LikeApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {ToggleLikeRequest} [toggleLikeRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async likeTogglePost(toggleLikeRequest?: ToggleLikeRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ToggleLikeResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.likeTogglePost(toggleLikeRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['LikeApi.likeTogglePost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * LikeApi - factory interface
+ * @export
+ */
+export const LikeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = LikeApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {ToggleLikeRequest} [toggleLikeRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        likeTogglePost(toggleLikeRequest?: ToggleLikeRequest, options?: RawAxiosRequestConfig): AxiosPromise<ToggleLikeResponseApiResponse> {
+            return localVarFp.likeTogglePost(toggleLikeRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * LikeApi - object-oriented interface
+ * @export
+ * @class LikeApi
+ * @extends {BaseAPI}
+ */
+export class LikeApi extends BaseAPI {
+    /**
+     * 
+     * @param {ToggleLikeRequest} [toggleLikeRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LikeApi
+     */
+    public likeTogglePost(toggleLikeRequest?: ToggleLikeRequest, options?: RawAxiosRequestConfig) {
+        return LikeApiFp(this.configuration).likeTogglePost(toggleLikeRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * OrganizationApi - axios parameter creator
  * @export
  */
@@ -4053,10 +4491,12 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @param {number} [page] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postAllGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postAllGet: async (page?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/Post/all`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4072,6 +4512,14 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication Bearer required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['Page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['PageSize'] = pageSize;
+            }
 
 
     
@@ -4267,11 +4715,13 @@ export const PostApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} [page] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postAllGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostResponseListApiResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postAllGet(options);
+        async postAllGet(page?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostListResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postAllGet(page, pageSize, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PostApi.postAllGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4347,11 +4797,13 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @param {number} [page] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postAllGet(options?: RawAxiosRequestConfig): AxiosPromise<PostResponseListApiResponse> {
-            return localVarFp.postAllGet(options).then((request) => request(axios, basePath));
+        postAllGet(page?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<PostListResponseApiResponse> {
+            return localVarFp.postAllGet(page, pageSize, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4414,12 +4866,14 @@ export class PostApi extends BaseAPI {
 
     /**
      * 
+     * @param {number} [page] 
+     * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PostApi
      */
-    public postAllGet(options?: RawAxiosRequestConfig) {
-        return PostApiFp(this.configuration).postAllGet(options).then((request) => request(this.axios, this.basePath));
+    public postAllGet(page?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+        return PostApiFp(this.configuration).postAllGet(page, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4712,6 +5166,254 @@ export class ProfileApi extends BaseAPI {
      */
     public profileUserIdGet(userId: string, options?: RawAxiosRequestConfig) {
         return ProfileApiFp(this.configuration).profileUserIdGet(userId, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * SurveyApi - axios parameter creator
+ * @export
+ */
+export const SurveyApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} [surveyId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        surveyResultsGet: async (surveyId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/Survey/results`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (surveyId !== undefined) {
+                localVarQueryParameter['SurveyId'] = surveyId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} [surveyId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        surveyStatusGet: async (surveyId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/Survey/status`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (surveyId !== undefined) {
+                localVarQueryParameter['SurveyId'] = surveyId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {VoteSurveyRequest} [voteSurveyRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        surveyVotePost: async (voteSurveyRequest?: VoteSurveyRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/Survey/vote`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(voteSurveyRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * SurveyApi - functional programming interface
+ * @export
+ */
+export const SurveyApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SurveyApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} [surveyId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async surveyResultsGet(surveyId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SurveyResultsResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.surveyResultsGet(surveyId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SurveyApi.surveyResultsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} [surveyId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async surveyStatusGet(surveyId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SurveyStatusResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.surveyStatusGet(surveyId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SurveyApi.surveyStatusGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {VoteSurveyRequest} [voteSurveyRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async surveyVotePost(voteSurveyRequest?: VoteSurveyRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VoteSurveyResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.surveyVotePost(voteSurveyRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SurveyApi.surveyVotePost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * SurveyApi - factory interface
+ * @export
+ */
+export const SurveyApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SurveyApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} [surveyId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        surveyResultsGet(surveyId?: string, options?: RawAxiosRequestConfig): AxiosPromise<SurveyResultsResponseApiResponse> {
+            return localVarFp.surveyResultsGet(surveyId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} [surveyId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        surveyStatusGet(surveyId?: string, options?: RawAxiosRequestConfig): AxiosPromise<SurveyStatusResponseApiResponse> {
+            return localVarFp.surveyStatusGet(surveyId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {VoteSurveyRequest} [voteSurveyRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        surveyVotePost(voteSurveyRequest?: VoteSurveyRequest, options?: RawAxiosRequestConfig): AxiosPromise<VoteSurveyResponseApiResponse> {
+            return localVarFp.surveyVotePost(voteSurveyRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * SurveyApi - object-oriented interface
+ * @export
+ * @class SurveyApi
+ * @extends {BaseAPI}
+ */
+export class SurveyApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} [surveyId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SurveyApi
+     */
+    public surveyResultsGet(surveyId?: string, options?: RawAxiosRequestConfig) {
+        return SurveyApiFp(this.configuration).surveyResultsGet(surveyId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} [surveyId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SurveyApi
+     */
+    public surveyStatusGet(surveyId?: string, options?: RawAxiosRequestConfig) {
+        return SurveyApiFp(this.configuration).surveyStatusGet(surveyId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {VoteSurveyRequest} [voteSurveyRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SurveyApi
+     */
+    public surveyVotePost(voteSurveyRequest?: VoteSurveyRequest, options?: RawAxiosRequestConfig) {
+        return SurveyApiFp(this.configuration).surveyVotePost(voteSurveyRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

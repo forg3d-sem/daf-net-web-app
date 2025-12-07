@@ -5,16 +5,17 @@ import type {PostResponse} from "../../../APIs";
 
 interface ForumPostList {
     posts: PostResponse[];
+    refetch: () => void;
 }
 
-const ForumPostsList:React.FC<ForumPostList> = ({posts}) => {
+const ForumPostsList:React.FC<ForumPostList> = ({posts, refetch}) => {
 
     if (posts?.length > 0)
     return (
         <ul className='forums-list'>
             {
                 posts.map((post) =>
-                    <SinglePost key={post.postId} data={post} isPostPage={false}/>
+                    <SinglePost key={post.postId} data={post} isPostPage={false} refetch={refetch}/>
                 )
             }
         </ul>

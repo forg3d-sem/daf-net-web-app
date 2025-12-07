@@ -17,6 +17,8 @@
     "@tanstack/react-router-devtools": "^1.134.12",
     "axios": "^1.13.2",
     "bootstrap": "^5.3.8",
+    "dompurify": "^3.3.0",
+    "jodit-react": "^5.2.38",
     "nanoid": "^5.1.6",
     "react": "^19.1.1",
     "react-bootstrap": "^2.10.10",

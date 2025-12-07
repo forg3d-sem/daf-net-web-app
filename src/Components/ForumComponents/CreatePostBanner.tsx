@@ -7,6 +7,8 @@ import {useQueryClient} from "@tanstack/react-query";
 import {useAppDispatch} from "../../store/storeHooks.ts";
 import {notificationActions} from "../../store/slices/NotificationSlice.ts";
 import Cross from "../../assets/close-modal-cross.svg";
+import JoditEditor from "jodit-react";
+import DOMPurify from 'dompurify';
 
 interface CreatePostBanner {
     categories: CategoryResponse[];
@@ -39,16 +41,20 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
     }
 
     const handleCreatePost = () => {
-        mutate({content: text, title: title, categoryId: selectedCategory?.id}, {
+
+        const purified = DOMPurify.sanitize(text);
+
+        mutate({content: purified, title: title, categoryId: selectedCategory?.id}, {
             onSuccess: () => {
                 handleHideModal();
                 queryClient.invalidateQueries({queryKey: ['posts', selectedCategory?.id]});
                 props.refetch();
                 dispatch(notificationActions.setNotification({text: "Post submitted successfully!", type: 'success'}));
-                resetValues();
             },
             onError: (error) => {
                 dispatch(notificationActions.setNotification({text: error.message, type: 'error'}));
+            },
+            onSettled: () => {
                 resetValues();
             }
         })
@@ -129,15 +135,27 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
                     </div>
                     <div className="modal-input-group">
                         <label htmlFor="post-content">Text</label>
-                        <textarea
-                            name="content"
-                            cols={30}
-                            rows={10}
-                            id='post-content'
-                            className='input-border'
+                        <JoditEditor
                             value={text}
-                            onChange={(e) => setText(e.target.value)}
-                        ></textarea>
+                            tabIndex={1}
+                            onBlur={content => setText(content)}
+                            config={{
+                                placeholder: "Write something",
+                                height: 300,
+                                buttons:['bold', 'italic', 'underline', 'strikethrough', 'ul', 'ol', 'link', 'unlink'],
+                                toolbarAdaptive: false,
+                                readonly: false
+                            }}
+                        />
+                        {/*<textarea*/}
+                        {/*    name="content"*/}
+                        {/*    cols={30}*/}
+                        {/*    rows={10}*/}
+                        {/*    id='post-content'*/}
+                        {/*    className='input-border'*/}
+                        {/*    value={text}*/}
+                        {/*    onChange={(e) => setText(e.target.value)}*/}
+                        {/*></textarea>*/}
                     </div>
                     <button
                         className='d-block d-md-none publish-btn'

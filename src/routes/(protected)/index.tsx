@@ -14,9 +14,11 @@ function RouteComponent() {
 
     const {data, isLoading, error, refetch} = useFetchAllPosts();
 
+    console.log(data);
+
     const refetchData = () => {
         refetch();
     }
 
-  return <Forum posts={data?.data?.data ?? []} postsLoading={isLoading} postsError={error?.message ?? ''} refetch={refetchData}/>
+  return <Forum posts={data?.data?.data?.posts?? []} postsLoading={isLoading} postsError={error?.message ?? ''} refetch={refetchData}/>
 }

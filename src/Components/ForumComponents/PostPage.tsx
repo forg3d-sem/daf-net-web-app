@@ -12,6 +12,7 @@ interface PostPage {
     data: PostResponse;
     isLoading: boolean;
     error: string;
+    refetch: () => void;
 }
 
 const PostPage: React.FC<PostPage> = (props) => {
@@ -34,6 +35,7 @@ const PostPage: React.FC<PostPage> = (props) => {
                         <SinglePost
                             data={props.data}
                             isPostPage={true}
+                            refetch={props.refetch}
                         />
                         <CommentsSection
                             id={props.data.postId ?? ''}

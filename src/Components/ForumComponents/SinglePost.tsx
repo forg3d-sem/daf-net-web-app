@@ -1,16 +1,46 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import ProfileIconComponent from "../SettingsComponents/ProfileComponents/ProfileIconComponent.tsx";
 import type {PostResponse} from "../../../APIs";
 import SinglePostWrap from "./SinglePostWrap.tsx";
+import LikeBtn from '../../assets/post-like-btn.svg';
+import {getDateString} from "../../functions/functions.ts";
+import useToggleLike from "../../Hooks/useToggleLike.ts";
+import {useQueryClient} from "@tanstack/react-query";
+import {useAppDispatch} from "../../store/storeHooks.ts";
+import {notificationActions} from "../../store/slices/NotificationSlice.ts";
+import DOMPurify from "dompurify";
 
 interface SinglePost {
     data: PostResponse;
     isPostPage: boolean;
+    refetch: () => void;
 }
 
 const SinglePost: React.FC<SinglePost> = (props) => {
 
-    const data = props.data
+    const dispatch = useAppDispatch();
+
+    const data = props.data;
+
+    const sanitazedContent = useMemo(() => DOMPurify.sanitize(props.data.content ?? ''), [props.data.content])
+
+    const {mutate, isPending} = useToggleLike();
+
+    const queryClient = useQueryClient();
+
+    const toggleLike = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        mutate(data.postId ?? '', {
+            onSuccess: () => {
+                queryClient.invalidateQueries({queryKey: ['allPosts', 'post', data.postId]});
+                props.refetch();
+            },
+            onError: (error) => {
+                dispatch(notificationActions.setNotification({text: error.message, type: 'error'}));
+            }
+        });
+    }
 
     return (
         <SinglePostWrap
@@ -20,17 +50,23 @@ const SinglePost: React.FC<SinglePost> = (props) => {
             <div className="post-heading">
                 <h5>{data.title}</h5>
                 {/*place for button*/}
+                <button
+                    className='post-like-btn'
+                    disabled={isPending}
+                    onClick={(e) => toggleLike(e)}
+                >
+                    <img src={LikeBtn} alt=""/>
+                </button>
+            </div>
+            <div className="post-category">
+                {data.categoryName}
             </div>
             {/*<ul className="post-cats">*/}
             {/*    <li className='post-single-cat'></li>*/}
             {/*</ul>*/}
             {
                 props.isPostPage &&
-                <div className="post-content">
-                    {
-                        data.content
-                    }
-                </div>
+                <div className="post-content" dangerouslySetInnerHTML={{__html:  sanitazedContent}} />
             }
             <div className="post-footer">
                 <div className="post-author">
@@ -40,11 +76,23 @@ const SinglePost: React.FC<SinglePost> = (props) => {
                         url={''}
                         maxSize={40}
                     />
-                    <div className="author-name">
-                        {`${data?.profile?.firstName} ${data?.profile?.lastName}`}
+                    <div className="post-author-data">
+                        <div className="author-name">
+                            {`${data?.profile?.firstName} ${data?.profile?.lastName}`}
+                        </div>
+                        <div className="post-time">
+                            {getDateString(data.createdAt)}
+                        </div>
                     </div>
                 </div>
-                <div className="post-stats"></div>
+                <div className="post-stats">
+                    <div className="post-stats-count">
+                        {data.likesCount} likes
+                    </div>
+                    <div className="post-stats-count">
+                        {data.commentsCount} comments
+                    </div>
+                </div>
             </div>
         </SinglePostWrap>
     );

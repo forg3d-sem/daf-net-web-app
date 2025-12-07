@@ -9,7 +9,7 @@ const useGetPost = (id:string) => {
     const token = localStorage.getItem('token');
 
     return useQuery({
-        queryKey: ['single-post', id],
+        queryKey: ['post', id],
         queryFn: async () => {
             const response = await postApi.getPostGet(id, {headers: {"Authorization": `Bearer ${token}`}} );
             if (!response.data.success) {

@@ -29,6 +29,7 @@ docs/CommentResponseApiResponse.md
 docs/CreateCategoryRequest.md
 docs/CreateCommentRequest.md
 docs/CreatePostRequest.md
+docs/CreateSurveyRequest.md
 docs/DeletePostRequest.md
 docs/GroupApi.md
 docs/GroupCreateRequest.md
@@ -49,6 +50,7 @@ docs/GroupResponseApiResponse.md
 docs/GroupUpdateRequest.md
 docs/GroupUpdateResponse.md
 docs/GroupUpdateResponseApiResponse.md
+docs/LikeApi.md
 docs/ListCommentsResponse.md
 docs/ListCommentsResponseApiResponse.md
 docs/ListGroupMembersResponse.md
@@ -72,7 +74,6 @@ docs/PostListResponseApiResponse.md
 docs/PostProfileResponse.md
 docs/PostResponse.md
 docs/PostResponseApiResponse.md
-docs/PostResponseListApiResponse.md
 docs/ProfileApi.md
 docs/ProfileResponse.md
 docs/ProfileResponseApiResponse.md
@@ -83,8 +84,21 @@ docs/RegisterRequest.md
 docs/RegisterResponse.md
 docs/RegisterResponseApiResponse.md
 docs/StringApiResponse.md
+docs/SurveyApi.md
+docs/SurveyOptionResponse.md
+docs/SurveyOptionResultResponse.md
+docs/SurveyResultsResponse.md
+docs/SurveyResultsResponseApiResponse.md
+docs/SurveyStatusResponse.md
+docs/SurveyStatusResponseApiResponse.md
 docs/TestResponse.md
 docs/TestResponseApiResponse.md
+docs/ToggleLikeRequest.md
+docs/ToggleLikeResponse.md
+docs/ToggleLikeResponseApiResponse.md
 docs/UpdatePostRequest.md
+docs/VoteSurveyRequest.md
+docs/VoteSurveyResponse.md
+docs/VoteSurveyResponseApiResponse.md
 git_push.sh
 index.ts
