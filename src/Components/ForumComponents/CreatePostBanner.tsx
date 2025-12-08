@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Emoji from '../../assets/create-post-emoji.png';
 import {Dropdown, Modal, Spinner} from "react-bootstrap";
 import type {CategoryResponse} from "../../../APIs";
@@ -7,13 +7,26 @@ import {useQueryClient} from "@tanstack/react-query";
 import {useAppDispatch} from "../../store/storeHooks.ts";
 import {notificationActions} from "../../store/slices/NotificationSlice.ts";
 import Cross from "../../assets/close-modal-cross.svg";
+import RemoveOption from '../../assets/remove-survey-option.svg';
 import JoditEditor from "jodit-react";
 import DOMPurify from 'dompurify';
+import {nanoid} from "nanoid/non-secure";
 
 interface CreatePostBanner {
     categories: CategoryResponse[];
     refetch: () => void;
 }
+
+const attachmentTypes = [
+    {
+        type: 'none',
+        label: 'No attachment'
+    },
+    {
+        type: 'survey',
+        label: 'Survey'
+    }
+]
 
 const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
 
@@ -24,11 +37,25 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
     const [selectedCategory, setSelectedCategory] = useState<CategoryResponse | null>(null);
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
+    const [attachmentType, setAttachmentType] = useState('none');
+    const [surveyOptions, setSurveyOptions] = useState<string[]>([]);
+    const [showAddInput, setShowAddInput] = useState(false);
+    const [newSurveyOption, setNewSurveyOption] = useState('')
+
+    const deleteSurveyValue = (value: string) => {
+        setSurveyOptions(p => p.filter(o => o !== value))
+    }
+    const addSurveyValue = (value: string) => {
+        setSurveyOptions(p => [value, ...p]);
+    }
 
     const resetValues = () => {
         setTitle('');
         setText('');
         setSelectedCategory(null);
+        setShowAddInput(false);
+        setNewSurveyOption('');
+        setSurveyOptions([]);
     }
 
     const {mutate, isPending} = useCreatePost()
@@ -38,13 +65,14 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
     }
     const handleHideModal = () => {
         setShowModal(false)
+        resetValues()
     }
 
     const handleCreatePost = () => {
 
         const purified = DOMPurify.sanitize(text);
 
-        mutate({content: purified, title: title, categoryId: selectedCategory?.id}, {
+        mutate({content: purified, title: title, categoryId: selectedCategory?.id, survey: surveyOptions.length > 0 ? {question: '', options: surveyOptions} : undefined}, {
             onSuccess: () => {
                 handleHideModal();
                 queryClient.invalidateQueries({queryKey: ['posts', selectedCategory?.id]});
@@ -59,6 +87,12 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
             }
         })
     }
+
+    useEffect(() => {
+        setSurveyOptions([]);
+        setNewSurveyOption('');
+        setShowAddInput(false);
+    }, [attachmentType]);
 
     return (
         <>
@@ -133,6 +167,59 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
                             <button className='create-cat-btn' disabled>Create category</button>
                         </div>
                     </div>
+                    <div className="modal-input-group attachment-type">
+                        {
+                            attachmentTypes.map(type => <button
+                                className={type.type === attachmentType ? 'attachment-button selected' : 'attachment-button'}
+                                key={type.type} onClick={() => setAttachmentType(type.type)}>{type.label}</button>)
+                        }
+                    </div>
+                    {
+                        attachmentType === 'survey'
+                        &&
+                        <div className="modal-input-group survey-list">
+                            <label>Your survey</label>
+                            {
+                                surveyOptions.map(o =>
+                                    <div className='new-survey-option' key={nanoid()}>
+                                        <span>{o}</span>
+                                        <button onClick={() => deleteSurveyValue(o)}>
+                                            <img src={RemoveOption} alt=""/>
+                                        </button>
+                                    </div>
+                                )
+                            }
+                            {
+                                showAddInput
+                                    ?
+                                    <div className='new-option-wrapper'>
+                                        <input type="text" value={newSurveyOption}
+                                               onChange={e => {
+                                                   setNewSurveyOption(e.target.value)
+
+                                               }}/>
+                                        <button
+                                            className='add-new-option-btn'
+                                            onClick={() => {
+                                                addSurveyValue(newSurveyOption)
+                                                setNewSurveyOption('')
+                                                setShowAddInput(false)
+                                            }}>+
+                                        </button>
+                                    </div>
+                                    :
+                                    <button
+                                        className='add-survey-option-btn'
+                                        onClick={() => setShowAddInput(true)}
+                                    >
+                                        <div className='bordered-plus'>+</div>
+                                        <div>
+                                            add more options
+                                        </div>
+                                    </button>
+                            }
+                        </div>
+                    }
                     <div className="modal-input-group">
                         <label htmlFor="post-content">Text</label>
                         <JoditEditor
@@ -142,7 +229,7 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
                             config={{
                                 placeholder: "Write something",
                                 height: 300,
-                                buttons:['bold', 'italic', 'underline', 'strikethrough', 'ul', 'ol', 'link', 'unlink'],
+                                buttons: ['bold', 'italic', 'underline', 'strikethrough', 'ul', 'ol', 'link', 'unlink'],
                                 toolbarAdaptive: false,
                                 readonly: false
                             }}

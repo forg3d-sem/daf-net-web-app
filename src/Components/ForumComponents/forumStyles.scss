@@ -5,7 +5,7 @@
   overflow-y: scroll;
   padding: 32px 0 42px 0;
   margin: 0 100px;
-  
+
   @media (max-width: 991px) {
     padding: 20px 0;
     margin: 0 50px;
@@ -127,6 +127,7 @@
   display: inline-block;
   text-decoration: none;
 }
+
 .single-post {
   background-color: $light-green;
   padding: 20px;
@@ -230,8 +231,78 @@
           margin-right: 40px;
 
           @media (max-width: 575px) {
-           margin: 0;
+            margin: 0;
           }
+        }
+      }
+    }
+  }
+
+  .survey-list {
+    padding: 0;
+    margin: 0;
+
+    .option-item {
+      list-style: none;
+      padding: 10px 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      margin-bottom: 16px;
+
+      .option-item-button {
+        width: 100%;
+        background-color: #fff;
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+
+
+      .option-radio {
+
+        display: flex;
+        align-items: center;
+
+        .fake-radio {
+          margin-right: 12px;
+          border-color: $gray-color;
+          border-width: 2px;
+          border-style: solid;
+          height: 16px;
+          width: 16px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          &.selected-vote {
+            border-color: $orange-color;
+          }
+
+          .fake-radio-inner {
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+            background-color: $orange-color;
+          }
+        }
+
+        label {
+          color: $gray-color;
+
+          &.selected-label {
+            color: $blue-green;
+          }
+        }
+      }
+
+      .option-votes {
+        color: $gray-color;
+
+        &.selected-vote {
+          color: $orange-color;
         }
       }
     }
@@ -388,6 +459,90 @@
 
           &.selected {
             border-bottom: 2px solid $orange-color;
+          }
+        }
+
+        &.attachment-type {
+          flex-direction: row;
+          margin-bottom: 24px;
+
+          .attachment-button {
+            width: fit-content;
+            margin-right: 30px;
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid #fff;
+            font-size: 18px;
+            color: $blue-green;
+
+            &.selected {
+              border-bottom: 2px solid $orange-color;
+              font-weight: 500;
+            }
+          }
+        }
+
+        &.survey-list {
+          label {
+            margin-bottom: 10px;
+          }
+
+          .new-survey-option {
+            padding: 6px 20px;
+            color: $blue-green;
+            display: flex;
+            justify-content: space-between;
+            background-color: rgba(8, 57, 74, 0.1);
+            margin-bottom: 16px;
+            border-radius: 8px;
+
+            button {
+              background-color: transparent;
+              border: none;
+            }
+          }
+
+          .add-survey-option-btn {
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            color: #00A1FE;
+            border: none;
+            background-color: transparent;
+
+            .bordered-plus {
+              border: 1px solid #00A1FE;
+              height: 24px;
+              width: 24px;
+              display: flex;
+              padding: 0;
+              justify-content: center;
+              align-items: center;
+              margin-right: 8px;
+              border-radius: 50%;
+            }
+          }
+
+
+          .new-option-wrapper {
+            display: flex;
+            align-items: center;
+            input {
+              max-width: 400px;
+              border-color: $blue-green-40;
+              border-width: 1px;
+              border-radius: 8px;
+              margin-right: 10px;
+              padding: 16px;
+              font-size: 14px;
+            }
+            button {
+              width: fit-content;
+              border: none;
+              background-color: transparent;
+              color: #00A1FE;
+              font-weight: 700;
+            }
           }
         }
       }

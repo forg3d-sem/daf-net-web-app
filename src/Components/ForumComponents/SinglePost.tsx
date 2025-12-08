@@ -9,6 +9,7 @@ import {useQueryClient} from "@tanstack/react-query";
 import {useAppDispatch} from "../../store/storeHooks.ts";
 import {notificationActions} from "../../store/slices/NotificationSlice.ts";
 import DOMPurify from "dompurify";
+import Survey from "./ForumPostPage/Survey.tsx";
 
 interface SinglePost {
     data: PostResponse;
@@ -21,6 +22,7 @@ const SinglePost: React.FC<SinglePost> = (props) => {
     const dispatch = useAppDispatch();
 
     const data = props.data;
+    console.log(data)
 
     const sanitazedContent = useMemo(() => DOMPurify.sanitize(props.data.content ?? ''), [props.data.content])
 
@@ -67,6 +69,12 @@ const SinglePost: React.FC<SinglePost> = (props) => {
             {
                 props.isPostPage &&
                 <div className="post-content" dangerouslySetInnerHTML={{__html:  sanitazedContent}} />
+            }
+            {
+                data.surveyId &&
+                <Survey
+                    id={data.surveyId}
+                />
             }
             <div className="post-footer">
                 <div className="post-author">
