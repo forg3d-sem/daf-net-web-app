@@ -11,7 +11,7 @@ interface Profile {
 
 const Profile: React.FC<Profile> = (props) => {
 
-    const {firstName, lastName, username, about} = props.profileObj;
+    const {firstName, lastName, username, about, imageUrl} = props.profileObj;
 
     const discussionsCount = 0;
     const connectionsCount = 0;
@@ -21,7 +21,7 @@ const Profile: React.FC<Profile> = (props) => {
             <div className='profile-section top-section'>
                 <div className="profile-general">
                     <ProfileIconComponent
-                        url={''}
+                        url={imageUrl}
                         name={firstName as string}
                         lastName={lastName as string}
                         maxSize={90}

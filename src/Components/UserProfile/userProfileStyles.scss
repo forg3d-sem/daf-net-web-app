@@ -1,0 +1,73 @@
+@use '../../styles/variables' as *;
+
+.top-section {
+  margin-top: 20px;
+  margin-bottom: 46px;
+}
+
+
+.nav {
+  margin-bottom: 40px;
+}
+
+.nav-item {
+  width: 100%;
+  max-width: 180px;
+  text-align: center;
+
+  @media (max-width: 575px) {
+      max-width: 140px;
+  }
+}
+
+.nav-link {
+  width: 100%;
+  padding: 12px;
+  border-radius: 22px;
+  color: $blue-green!important;
+  font-weight: 700;
+
+  &.active {
+    background-color: rgba(75, 142, 201, 0.3);
+  }
+}
+
+.tab-content {
+  border-top: 1px solid #E5E5E5;
+  padding-top: 36px;
+}
+
+.tab-pane {
+  h2 {
+    font-size: 18px;
+    font-weight: 500;
+    color: $blue-green;
+    line-height: 120%;
+    margin-bottom: 8px;
+  }
+
+  p {
+    padding: 16px 18px;
+    font-size: 18px;
+    line-height: 120%;
+    border: 1px solid $blue-green-40;
+    border-radius: 8px;
+  }
+
+  .bio-empty {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    color: $blue-green;
+    font-weight: 500;
+    font-size: 18px;
+    border: 1px solid $blue-green-40;
+    border-radius: 8px;
+  }
+
+  .empty-section {
+    p {
+      border: none;
+    }
+  }
+}

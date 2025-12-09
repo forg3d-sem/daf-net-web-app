@@ -14,8 +14,6 @@ function RouteComponent() {
 
     const {data, isLoading, error, refetch} = useFetchAllPosts();
 
-    console.log(data);
-
     const refetchData = () => {
         refetch();
     }

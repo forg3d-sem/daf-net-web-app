@@ -6,6 +6,7 @@ All URIs are relative to *http://localhost*
 |------------- | ------------- | -------------|
 |[**getPostGet**](#getpostget) | **GET** /get-post | |
 |[**postAllGet**](#postallget) | **GET** /Post/all | |
+|[**postByUserGet**](#postbyuserget) | **GET** /Post/by-user | |
 |[**postDeletePost**](#postdeletepost) | **POST** /Post/delete | |
 |[**postGet**](#postget) | **GET** /Post | |
 |[**postPost**](#postpost) | **POST** /Post | |
@@ -62,7 +63,7 @@ const { status, data } = await apiInstance.getPostGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **postAllGet**
-> PostResponseListApiResponse postAllGet()
+> PostListResponseApiResponse postAllGet()
 
 
 ### Example
@@ -76,16 +77,82 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PostApi(configuration);
 
-const { status, data } = await apiInstance.postAllGet();
+let page: number; // (optional) (default to undefined)
+let pageSize: number; // (optional) (default to undefined)
+
+const { status, data } = await apiInstance.postAllGet(
+    page,
+    pageSize
+);
 ```
 
 ### Parameters
-This endpoint does not have any parameters.
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **page** | [**number**] |  | (optional) defaults to undefined|
+| **pageSize** | [**number**] |  | (optional) defaults to undefined|
 
 
 ### Return type
 
-**PostResponseListApiResponse**
+**PostListResponseApiResponse**
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **postByUserGet**
+> PostListResponseApiResponse postByUserGet()
+
+
+### Example
+
+```typescript
+import {
+    PostApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new PostApi(configuration);
+
+let page: number; // (optional) (default to undefined)
+let pageSize: number; // (optional) (default to undefined)
+let userId: string; // (optional) (default to undefined)
+
+const { status, data } = await apiInstance.postByUserGet(
+    page,
+    pageSize,
+    userId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **page** | [**number**] |  | (optional) defaults to undefined|
+| **pageSize** | [**number**] |  | (optional) defaults to undefined|
+| **userId** | [**string**] |  | (optional) defaults to undefined|
+
+
+### Return type
+
+**PostListResponseApiResponse**
 
 ### Authorization
 

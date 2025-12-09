@@ -6,16 +6,20 @@ import useFetchProfile from "../../Hooks/Profile/useFetchProfile.ts";
 import SettingsLoader from "../SettingsComponents/SettingsLoader.tsx";
 import usePostComment from "../../Hooks/Comments/usePostComment.ts";
 import {Spinner} from "react-bootstrap";
+import {useQueryClient} from "@tanstack/react-query";
 
 interface CommentsSection {
     id: string;
+    postCategory: string;
 }
 
 const CommentsSection:React.FC<CommentsSection> = (props) => {
 
     const [comment, setComment] = useState('');
 
-    const {data: commentsData, isFetching: isFethingComments, error: commentsError, refetch} = useFetchComments(props.id);
+    const queryClient = useQueryClient();
+
+    const {data: commentsData, isFetching: isFethingComments, error: commentsError} = useFetchComments(props.id);
     const id = useMemo(() => localStorage.getItem('id') ?? '', []);
     const {data} = useFetchProfile(id);
     const {mutate, isPending} = usePostComment()
@@ -23,7 +27,10 @@ const CommentsSection:React.FC<CommentsSection> = (props) => {
     const postComment = () => {
         mutate({postId: props.id, content: comment}, {
             onSuccess: () => {
-                refetch()
+                queryClient.invalidateQueries({queryKey: ['comments', props.id]});
+                queryClient.invalidateQueries({queryKey: ['post']});
+                queryClient.invalidateQueries({queryKey: ['allPosts']});
+                queryClient.invalidateQueries({queryKey: ['posts']})
                 setComment('');
             }
         })
@@ -37,7 +44,7 @@ const CommentsSection:React.FC<CommentsSection> = (props) => {
                     <ProfileIconComponent
                         name={data?.data?.data?.firstName ?? ''}
                         lastName={data?.data?.data?.lastName ?? ''}
-                        url={''}
+                        url={data?.data?.data?.imageUrl ?? ''}
                         maxSize={40}
                     />
                     <span className='write-author-name'>{`${data?.data?.data?.firstName} ${data?.data?.data?.lastName}`}</span>

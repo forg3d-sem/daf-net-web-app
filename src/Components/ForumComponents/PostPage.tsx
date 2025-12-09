@@ -39,6 +39,7 @@ const PostPage: React.FC<PostPage> = (props) => {
                         />
                         <CommentsSection
                             id={props.data.postId ?? ''}
+                            postCategory={props.data.categoryId ?? ''}
                         />
                     </>
                     }

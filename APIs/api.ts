@@ -965,6 +965,12 @@ export interface GroupResponse {
      * @memberof GroupResponse
      */
     'members'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GroupResponse
+     */
+    'canCreateCategories'?: boolean;
 }
 /**
  * 
@@ -1015,6 +1021,12 @@ export interface GroupUpdateRequest {
      * @memberof GroupUpdateRequest
      */
     'imageUrl'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GroupUpdateRequest
+     */
+    'usersCanCreateCategories'?: boolean | null;
 }
 /**
  * 
@@ -1046,6 +1058,12 @@ export interface GroupUpdateResponse {
      * @memberof GroupUpdateResponse
      */
     'imageUrl'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GroupUpdateResponse
+     */
+    'usersCanCreateCategories'?: boolean;
 }
 /**
  * 
@@ -1649,6 +1667,12 @@ export interface PostResponse {
      * @memberof PostResponse
      */
     'surveyId'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PostResponse
+     */
+    'isLiked'?: boolean;
 }
 /**
  * 
@@ -4534,6 +4558,54 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @param {number} [page] 
+         * @param {number} [pageSize] 
+         * @param {string} [userId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postByUserGet: async (page?: number, pageSize?: number, userId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/Post/by-user`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['Page'] = page;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['PageSize'] = pageSize;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['UserId'] = userId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {DeletePostRequest} [deletePostRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -4728,6 +4800,20 @@ export const PostApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} [page] 
+         * @param {number} [pageSize] 
+         * @param {string} [userId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postByUserGet(page?: number, pageSize?: number, userId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostListResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postByUserGet(page, pageSize, userId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PostApi.postByUserGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {DeletePostRequest} [deletePostRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -4807,6 +4893,17 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @param {number} [page] 
+         * @param {number} [pageSize] 
+         * @param {string} [userId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postByUserGet(page?: number, pageSize?: number, userId?: string, options?: RawAxiosRequestConfig): AxiosPromise<PostListResponseApiResponse> {
+            return localVarFp.postByUserGet(page, pageSize, userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {DeletePostRequest} [deletePostRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -4874,6 +4971,19 @@ export class PostApi extends BaseAPI {
      */
     public postAllGet(page?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
         return PostApiFp(this.configuration).postAllGet(page, pageSize, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [page] 
+     * @param {number} [pageSize] 
+     * @param {string} [userId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PostApi
+     */
+    public postByUserGet(page?: number, pageSize?: number, userId?: string, options?: RawAxiosRequestConfig) {
+        return PostApiFp(this.configuration).postByUserGet(page, pageSize, userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -18,6 +18,7 @@ const useFetchSurveyResults = (id: string) => {
             }
             return response
         },
+        enabled: false
     })
 }
 

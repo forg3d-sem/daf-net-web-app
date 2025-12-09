@@ -2,25 +2,23 @@ import {PostApi} from "../../../APIs";
 import {useMemo} from "react";
 import {useQuery} from "@tanstack/react-query";
 
-const useGetPost = (id:string) => {
+const useFetchPostsByUser = (page: number, userId:string) => {
 
     const postApi = useMemo(() => new PostApi(), []);
 
     const token = localStorage.getItem('token');
 
     return useQuery({
-        queryKey: ['post', id],
+        queryKey: ['user-posts', userId],
         queryFn: async () => {
-            const response = await postApi.getPostGet(id, {headers: {"Authorization": `Bearer ${token}`}} );
+            const response = await postApi.postByUserGet(page, 99, userId, {headers: {"Authorization": `Bearer ${token}`}} );
             if (!response.data.success) {
                 console.log(response.data.error);
                 throw new Error(response.data.error || 'Request failed');
             }
             return response
-        },
-        refetchOnMount: 'always',
-        staleTime: 0
+        }
     })
 }
 
-export default useGetPost;
+export default useFetchPostsByUser;

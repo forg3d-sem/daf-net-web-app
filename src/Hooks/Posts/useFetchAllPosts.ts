@@ -17,7 +17,8 @@ const useFetchPosts = () => {
                 throw new Error(response.data.error || 'Request failed');
             }
             return response
-        }
+        },
+        staleTime: 0
     })
 }
 

@@ -122,16 +122,14 @@
   }
 }
 
-.single-post-link {
-  width: 100%;
-  display: inline-block;
-  text-decoration: none;
-}
-
 .single-post {
   background-color: $light-green;
-  padding: 20px;
+  padding: 20px!important;
   border-radius: 16px;
+
+  .single-post-link-wrap {
+    text-decoration: none;
+  }
 
   .post-heading {
     display: flex;
@@ -159,6 +157,13 @@
     }
   }
 
+  .category-list {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
   .post-category {
     padding: 4px 10px;
     background-color: $blue-green;
@@ -167,8 +172,13 @@
     line-height: 22px;
     color: #fff;
     width: fit-content;
-    margin-bottom: 30px;
+    margin-right: 10px;
+    margin-bottom: 10px;
     text-transform: lowercase;
+
+    &.survey-category {
+      background-color: $green-primary;
+    }
   }
 
   .post-content {
@@ -190,6 +200,7 @@
       display: flex;
       align-items: flex-start;
       margin-bottom: 10px;
+      text-decoration: none;
 
       .profile-pic-placeholder {
         font-size: 16px;
@@ -244,18 +255,25 @@
 
     .option-item {
       list-style: none;
-      padding: 10px 20px;
       background-color: #fff;
       border-radius: 8px;
       margin-bottom: 16px;
+      border: 1px solid $blue-green-40;
+      max-width: 568px;
+
+      &.selected {
+        border-color: $orange-color;
+      }
 
       .option-item-button {
         width: 100%;
         background-color: #fff;
         border: none;
+        padding: 10px 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        border-radius: 8px;
       }
 
 
@@ -267,7 +285,7 @@
 
         .fake-radio {
           margin-right: 12px;
-          border-color: $gray-color;
+          border-color: $blue-green;
           border-width: 2px;
           border-style: solid;
           height: 16px;
@@ -290,16 +308,16 @@
         }
 
         label {
-          color: $gray-color;
+          color: $blue-green;
 
           &.selected-label {
-            color: $blue-green;
+            color: $orange-color;
           }
         }
       }
 
       .option-votes {
-        color: $gray-color;
+        color: $blue-green;
 
         &.selected-vote {
           color: $orange-color;

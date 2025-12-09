@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import useFetchSurveyStatus from "../../../Hooks/Surveys/useFetchSurveyStatus.ts";
 import {nanoid} from "nanoid/non-secure";
 import useVoteSurvey from "../../../Hooks/Surveys/useVoteSurvey.ts";
@@ -18,7 +18,7 @@ const Survey: React.FC<Survey> = ({id}) => {
     const {data: statusData} = useFetchSurveyStatus(id);
 
     //add loading handling, error
-    const {data: resultsData} = useFetchSurveyResults(id);
+    const {data: resultsData, refetch} = useFetchSurveyResults(id);
 
     //add loading handling
     const {mutate} = useVoteSurvey();
@@ -37,13 +37,21 @@ const Survey: React.FC<Survey> = ({id}) => {
 
         mutate({surveyId: surveyId, surveyOptionId: id}, {
             onSuccess: () => {
-                queryProvider.invalidateQueries({queryKey: ['survey', 'survey-results', 'allPosts', id]})
+                queryProvider.invalidateQueries({queryKey: ['survey', surveyId]});
+                queryProvider.invalidateQueries({queryKey: ['survey-results', surveyId]});
+                refetch();
             },
             onError: (e ) => {
                 dispatch(notificationActions.setNotification({type: "error", text: e.message}))
             }
         })
     }
+
+    useEffect(() => {
+        if (statusData?.data?.data?.hasVoted === true) {
+            refetch()
+        }
+    }, [statusData?.data?.data?.hasVoted, refetch]);
 
 
     if (statusData) return (

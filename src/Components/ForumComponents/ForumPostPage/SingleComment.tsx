@@ -2,6 +2,7 @@ import React from 'react';
 import ProfileIconComponent from "../../SettingsComponents/ProfileComponents/ProfileIconComponent.tsx";
 import type {CommentResponse} from "../../../../APIs";
 import '../../SettingsComponents/settingsStyles.scss';
+import {Link} from "@tanstack/react-router";
 
 interface SingleComment {
     data: CommentResponse
@@ -22,18 +23,18 @@ const SingleComment:React.FC<SingleComment> = (props) => {
     return (
         <li className='forum-comment'>
             <div className="comment-top">
-                <div className="comment-author">
+                <Link to='/user/$userId' params={{userId: profile?.userId ?? ''}} className="comment-author">
                     <ProfileIconComponent
                         name={profile?.firstName ?? ''}
                         lastName={profile?.lastName ?? ''}
-                        url={''}
+                        url={profile?.imageUrl ?? ''}
                         maxSize={40}
                     />
                     <div className="author-details">
                         <div className="author-name">{`${profile?.firstName} ${profile?.lastName}`}</div>
                         <div className="comment-time">{formattedDate}</div>
                     </div>
-                </div>
+                </Link>
                 {/*likes will be here*/}
             </div>
             <div className="comment-text">

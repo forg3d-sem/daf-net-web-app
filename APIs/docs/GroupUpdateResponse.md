@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **name** | **string** |  | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **imageUrl** | **string** |  | [optional] [default to undefined]
+**usersCanCreateCategories** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -20,6 +21,7 @@ const instance: GroupUpdateResponse = {
     name,
     description,
     imageUrl,
+    usersCanCreateCategories,
 };
 ```
 

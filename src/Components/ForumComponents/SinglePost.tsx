@@ -10,6 +10,8 @@ import {useAppDispatch} from "../../store/storeHooks.ts";
 import {notificationActions} from "../../store/slices/NotificationSlice.ts";
 import DOMPurify from "dompurify";
 import Survey from "./ForumPostPage/Survey.tsx";
+import {Link} from "@tanstack/react-router";
+import SinglePostLinkWrapper from "./ForumPostPage/SinglePostLinkWrapper.tsx";
 
 interface SinglePost {
     data: PostResponse;
@@ -22,7 +24,6 @@ const SinglePost: React.FC<SinglePost> = (props) => {
     const dispatch = useAppDispatch();
 
     const data = props.data;
-    console.log(data)
 
     const sanitazedContent = useMemo(() => DOMPurify.sanitize(props.data.content ?? ''), [props.data.content])
 
@@ -30,12 +31,13 @@ const SinglePost: React.FC<SinglePost> = (props) => {
 
     const queryClient = useQueryClient();
 
-    const toggleLike = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const toggleLike = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         e.stopPropagation();
         mutate(data.postId ?? '', {
             onSuccess: () => {
-                queryClient.invalidateQueries({queryKey: ['allPosts', 'post', data.postId]});
+                queryClient.invalidateQueries({queryKey: ['allPosts']});
+                queryClient.invalidateQueries({queryKey: ['post', data.postId]});
                 props.refetch();
             },
             onError: (error) => {
@@ -46,42 +48,61 @@ const SinglePost: React.FC<SinglePost> = (props) => {
 
     return (
         <SinglePostWrap
-            linkId={data?.postId ?? ''}
             isPostPage={props.isPostPage}
         >
-            <div className="post-heading">
-                <h5>{data.title}</h5>
-                {/*place for button*/}
-                <button
-                    className='post-like-btn'
-                    disabled={isPending}
-                    onClick={(e) => toggleLike(e)}
-                >
-                    <img src={LikeBtn} alt=""/>
-                </button>
-            </div>
-            <div className="post-category">
-                {data.categoryName}
-            </div>
+            <SinglePostLinkWrapper
+                isPostPage={props.isPostPage}
+                linkId={data?.postId ?? ''}
+            >
+                <div className="post-heading">
+                    <h5>{data.title}</h5>
+                    {/*place for button*/}
+                    <button
+                        className='post-like-btn'
+                        disabled={isPending}
+                        onClick={(e) => toggleLike(e)}
+                    >
+                        {data.isLiked
+                            ?
+                            <img src={LikeBtn} alt=""/>
+                            :
+                            <img src={LikeBtn} alt=""/>
+                        }
+                    </button>
+                </div>
+                <div className="category-list">
+                    {data.surveyId &&
+                        <div className="post-category survey-category">
+                            survey
+                        </div>
+                    }
+                    <div className="post-category">
+                        {data.categoryName}
+                    </div>
+                </div>
+            </SinglePostLinkWrapper>
             {/*<ul className="post-cats">*/}
             {/*    <li className='post-single-cat'></li>*/}
             {/*</ul>*/}
             {
                 props.isPostPage &&
-                <div className="post-content" dangerouslySetInnerHTML={{__html:  sanitazedContent}} />
+                <div className="post-content" dangerouslySetInnerHTML={{__html: sanitazedContent}}/>
             }
             {
-                data.surveyId &&
+                (props.isPostPage && data.surveyId) &&
                 <Survey
                     id={data.surveyId}
                 />
             }
             <div className="post-footer">
-                <div className="post-author">
+                <Link
+                    to={'/user/$userId'} params={{userId: data?.profile?.userId ?? ''}}
+                    className="post-author"
+                >
                     <ProfileIconComponent
                         name={data?.profile?.firstName ?? ''}
                         lastName={data?.profile?.lastName ?? ''}
-                        url={''}
+                        url={data?.profile?.imageUrl ?? ''}
                         maxSize={40}
                     />
                     <div className="post-author-data">
@@ -92,7 +113,7 @@ const SinglePost: React.FC<SinglePost> = (props) => {
                             {getDateString(data.createdAt)}
                         </div>
                     </div>
-                </div>
+                </Link>
                 <div className="post-stats">
                     <div className="post-stats-count">
                         {data.likesCount} likes

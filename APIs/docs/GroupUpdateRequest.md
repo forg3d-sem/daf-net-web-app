@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **groupId** | **string** |  | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **imageUrl** | **string** |  | [optional] [default to undefined]
+**usersCanCreateCategories** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -18,6 +19,7 @@ const instance: GroupUpdateRequest = {
     groupId,
     description,
     imageUrl,
+    usersCanCreateCategories,
 };
 ```
 

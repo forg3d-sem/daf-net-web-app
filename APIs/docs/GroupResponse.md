@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **description** | **string** |  | [optional] [default to undefined]
 **imageUrl** | **string** |  | [optional] [default to undefined]
 **members** | **number** |  | [optional] [default to undefined]
+**canCreateCategories** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -22,6 +23,7 @@ const instance: GroupResponse = {
     description,
     imageUrl,
     members,
+    canCreateCategories,
 };
 ```
 

@@ -19,7 +19,7 @@ const SurveyOption:React.FC<SurveyOption> = (props) => {
 
     return (
         <li
-            className='option-item'
+            className={isSelected ? "option-item selected" : "option-item"}
             key={nanoid()}
 
         >
