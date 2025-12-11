@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **attachmentId** | **string** |  | [optional] [default to undefined]
 **fileName** | **string** |  | [optional] [default to undefined]
 **url** | **string** |  | [optional] [default to undefined]
+**contentType** | **string** |  | [optional] [default to undefined]
 **createdAt** | **string** |  | [optional] [default to undefined]
 **userId** | **string** |  | [optional] [default to undefined]
 **uploaderName** | **string** |  | [optional] [default to undefined]
@@ -22,6 +23,7 @@ const instance: AttachmentItemResponse = {
     attachmentId,
     fileName,
     url,
+    contentType,
     createdAt,
     userId,
     uploaderName,

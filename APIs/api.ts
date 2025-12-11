@@ -96,6 +96,12 @@ export interface AttachmentItemResponse {
      * @type {string}
      * @memberof AttachmentItemResponse
      */
+    'contentType'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachmentItemResponse
+     */
     'createdAt'?: string;
     /**
      * 
@@ -202,6 +208,12 @@ export interface AttachmentResponse {
      * @memberof AttachmentResponse
      */
     'url'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachmentResponse
+     */
+    'contentType'?: string | null;
 }
 /**
  * 
@@ -565,6 +577,12 @@ export interface CreatePostRequest {
      * @memberof CreatePostRequest
      */
     'content'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreatePostRequest
+     */
+    'attachmentId'?: string | null;
     /**
      * 
      * @type {CreateSurveyRequest}
@@ -1673,6 +1691,18 @@ export interface PostResponse {
      * @memberof PostResponse
      */
     'isLiked'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof PostResponse
+     */
+    'imageUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PostResponse
+     */
+    'attachmentId'?: string | null;
 }
 /**
  * 
@@ -2289,6 +2319,12 @@ export interface UpdatePostRequest {
      * @memberof UpdatePostRequest
      */
     'content'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePostRequest
+     */
+    'attachmentId'?: string | null;
 }
 /**
  * 

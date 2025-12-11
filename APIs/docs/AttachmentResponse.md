@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **attachmentId** | **string** |  | [optional] [default to undefined]
 **fileName** | **string** |  | [optional] [default to undefined]
 **url** | **string** |  | [optional] [default to undefined]
+**contentType** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -18,6 +19,7 @@ const instance: AttachmentResponse = {
     attachmentId,
     fileName,
     url,
+    contentType,
 };
 ```
 

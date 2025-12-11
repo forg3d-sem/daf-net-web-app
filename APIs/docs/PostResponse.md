@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **likesCount** | **number** |  | [optional] [default to undefined]
 **surveyId** | **string** |  | [optional] [default to undefined]
 **isLiked** | **boolean** |  | [optional] [default to undefined]
+**imageUrl** | **string** |  | [optional] [default to undefined]
+**attachmentId** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -34,6 +36,8 @@ const instance: PostResponse = {
     likesCount,
     surveyId,
     isLiked,
+    imageUrl,
+    attachmentId,
 };
 ```
 

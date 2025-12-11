@@ -164,7 +164,7 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
                                     }
                                 </Dropdown.Menu>
                             </Dropdown>
-                            <button className='create-cat-btn' disabled>Create category</button>
+                            {/*<button className='create-cat-btn' disabled>Create category</button>*/}
                         </div>
                     </div>
                     <div className="modal-input-group attachment-type">

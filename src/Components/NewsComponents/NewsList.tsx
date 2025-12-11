@@ -9,7 +9,7 @@ interface NewsList {
 
 const NewsList:React.FC<NewsList> = (props) => {
     return (
-        <ul className='news-list'>
+        <ul className='news-list grid'>
             {
                 props.news.map(item => <NewsItem key={item.postId} data={item} categories={props.categories}/>)
             }

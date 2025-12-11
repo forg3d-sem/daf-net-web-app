@@ -12,7 +12,7 @@ interface NewsItem {
 
 const NewsItem: React.FC<NewsItem> = (props) => {
 
-    const {postId, title, createdAt, categoryId} = props.data;
+    const {postId, title, createdAt, categoryId, content, imageUrl} = props.data;
     const date = new Date(createdAt ?? '');
     const formattedDate = date.toLocaleDateString(undefined, {
         year: 'numeric',
@@ -28,11 +28,18 @@ const NewsItem: React.FC<NewsItem> = (props) => {
     }, [categoryId, props.categories]);
 
     return (
-        <li>
+        <li className='grid-item'>
             <Link to='/news-post/$newsId' params={{newsId: postId ?? ''}}>
                 <div className="news-content">
                     <div className="image-container">
-                        <img src={NewsIcon} alt="newspapper"/>
+                        {
+                            imageUrl
+                                ?
+                                <div style={{backgroundImage: `url(https://dafnet.tes.gd${imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100%', width: '100%'}}></div>
+                                :
+                                <img src={NewsIcon} alt="newspapper"/>
+                        }
+
                     </div>
                     <div className="news-data">
                         <div>
@@ -46,6 +53,9 @@ const NewsItem: React.FC<NewsItem> = (props) => {
                                 {title}
                             </h6>
                         </div>
+                        <p className='news-text'>
+                            {content}
+                        </p>
                         <div className="news-bottom-row">
                             <div className="created-at">
                                 <img src={Clock} alt=""/>

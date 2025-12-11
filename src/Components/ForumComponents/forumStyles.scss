@@ -2,9 +2,14 @@
 
 .category-selector {
   display: flex;
-  overflow-y: scroll;
+  overflow-x: scroll;
   padding: 32px 0 42px 0;
   margin: 0 100px;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
 
   @media (max-width: 991px) {
     padding: 20px 0;
@@ -561,6 +566,86 @@
               color: #00A1FE;
               font-weight: 700;
             }
+          }
+        }
+      }
+
+      .image-upload {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 16px;
+
+
+
+        label {
+          margin-bottom: 0;
+          background-color: #fff;
+          color: $blue-green;
+          border: 2px solid $blue-green;
+          border-radius: 8px;
+          padding: 15px 30px;
+          margin-right: 30px;
+          cursor: pointer;
+          width: 100%;
+          max-width: 180px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          &.label-with-file {
+            background-color: $blue-green;
+            color: #fff;
+          }
+
+          .spinner-border {
+            width: 24px;
+            height: 24px;
+          }
+        }
+
+        input {
+          width: 0;
+          height: 0;
+        }
+
+        input::file-selector-button {
+          background-color: #fff;
+          color: $blue-green;
+          border: 2px solid $blue-green;
+          border-radius: 8px;
+          padding: 15px 30px;
+        }
+
+        .file-data {
+          display: flex;
+          align-items: center;
+        }
+
+        .image-file-name {
+          color: $blue-green;
+          font-size: 16px;
+          margin-right: 10px;
+        }
+
+        .delete-image-button {
+          width: fit-content;
+          border: none;
+          background-color: transparent;
+
+          img {
+            width: 25px;
+            height: 25px;
+          }
+        }
+
+        @media (max-width: 575px) {
+          flex-direction: column;
+
+          label {
+            max-width: none;
+            margin-right: 0;
+            margin-bottom: 30px;
           }
         }
       }

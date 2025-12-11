@@ -80,7 +80,7 @@ const UserPage: React.FC<UserPage> = (props) => {
                                                 userData?.about?.length
                                                 ?
                                                     <p>
-                                                    userData.about
+                                                        {userData.about}
                                                     </p>
                                                     :
                                                     <div className='bio-empty'>

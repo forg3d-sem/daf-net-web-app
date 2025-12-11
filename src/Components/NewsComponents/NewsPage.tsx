@@ -17,19 +17,27 @@ const NewsPage:React.FC<NewsPage> = (props) => {
 
     return (
         <Container>
-            <Row>
-                <Col>
+            <Row className='justify-content-center'>
+                <Col lg={8}>
                     <a className='post-back-btn' onClick={() => history.back()}>
                         <img src={BackArrow} alt="Back"/>
                         <span>Back</span>
                     </a>
                 </Col>
             </Row>
-            <Row>
-                <Col className='news-post-content'>
+            <Row className='justify-content-center'>
+                <Col className='news-post-content' lg={8}>
                     {
                         (props.data && !props.isLoading) &&
                         <>
+                            {
+                                props.data.imageUrl &&
+                                <img
+                                    className='post-image'
+                                    src={props.data.imageUrl ? `https://dafnet.tes.gd${props.data.imageUrl}` : ''}
+                                    alt=""
+                                />
+                            }
                             <h1>
                                 {props.data.title}
                             </h1>

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **postId** | **string** |  | [optional] [default to undefined]
 **title** | **string** |  | [optional] [default to undefined]
 **content** | **string** |  | [optional] [default to undefined]
+**attachmentId** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -18,6 +19,7 @@ const instance: UpdatePostRequest = {
     postId,
     title,
     content,
+    attachmentId,
 };
 ```
 
