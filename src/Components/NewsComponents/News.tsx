@@ -48,7 +48,6 @@ const News: React.FC<News> = (props) => {
                     <CreateNews
                         showModal={showModal}
                         handleHideModal={() => setShowModal(false)}
-                        categories={cats?.data?.data?.categories ?? []}
                     />
                 </div>
 
