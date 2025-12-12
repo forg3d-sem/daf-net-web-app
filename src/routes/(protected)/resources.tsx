@@ -9,11 +9,7 @@ export const Route = createFileRoute('/(protected)/resources')({
 function RouteComponent() {
 
     const resId = "22222222-0000-0000-0000-000000000001";
-    const {data, isPending, error, refetch }= useFetchPosts(1, resId);
+    const {data, isPending, error}= useFetchPosts(1, resId);
 
-    const refetchData = () => {
-        refetch();
-    }
-
-  return <Resources data={data?.data?.data?.posts ?? []} isLoading={isPending} error={error?.message} refetch={refetchData} />
+  return <Resources data={data?.data?.data?.posts ?? []} isLoading={isPending} error={error?.message}/>
 }

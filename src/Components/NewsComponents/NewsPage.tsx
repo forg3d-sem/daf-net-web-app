@@ -6,6 +6,7 @@ import '../ForumComponents/forumStyles.scss'
 import '../ForumComponents/ForumPostPage/postStyles.scss';
 import SettingsLoader from "../SettingsComponents/SettingsLoader.tsx";
 import Clock from "../../assets/clock_icon.svg";
+import DOMPurify from "dompurify";
 
 interface NewsPage {
     data: PostResponse;
@@ -15,11 +16,16 @@ interface NewsPage {
 
 const NewsPage:React.FC<NewsPage> = (props) => {
 
+    const handleNavBack = (e:React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        history.back()
+    };
+
     return (
         <Container>
             <Row className='justify-content-center'>
                 <Col lg={8}>
-                    <a className='post-back-btn' onClick={() => history.back()}>
+                    <a className='post-back-btn' onClick={handleNavBack}>
                         <img src={BackArrow} alt="Back"/>
                         <span>Back</span>
                     </a>
@@ -51,9 +57,7 @@ const NewsPage:React.FC<NewsPage> = (props) => {
                                     minute: '2-digit'
                                 })}</span>
                             </div>
-                            <p>
-                                {props.data.content}
-                            </p>
+                            <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(props.data.content ?? '')}}/>
                         </>
                     }
                     {

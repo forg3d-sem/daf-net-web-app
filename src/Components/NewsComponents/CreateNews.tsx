@@ -7,8 +7,8 @@ import {notificationActions} from "../../store/slices/NotificationSlice.ts";
 import {useQueryClient} from "@tanstack/react-query";
 import {useAppDispatch} from "../../store/storeHooks.ts";
 import Cross from '../../assets/close-modal-cross.svg';
-import PhotoAttachmentComponent from "./PhotoAttachmentComponent.tsx";
 import JoditEditor from "jodit-react";
+import AddAttachmentComponent from "./AddAttachmentComponent.tsx";
 
 interface CreateNews {
     showModal: boolean;
@@ -128,8 +128,10 @@ const CreateNews:React.FC<CreateNews> = (props) => {
                     {
                         attachmentType === 'photo'
                         &&
-                        <PhotoAttachmentComponent
+                        <AddAttachmentComponent
                             handleAttachment={handleAttachmentIdChange}
+                            addBtnText={'Select Photo'}
+                            changeBtnText={'Change Photo'}
                         />
                     }
                     

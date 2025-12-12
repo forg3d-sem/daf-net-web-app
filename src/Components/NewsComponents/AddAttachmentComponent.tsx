@@ -5,11 +5,13 @@ import {useAppDispatch} from "../../store/storeHooks.ts";
 import {notificationActions} from "../../store/slices/NotificationSlice.ts";
 import {Spinner} from "react-bootstrap";
 
-interface PhotoAttachmentComponent {
+interface AddAttachmentComponent {
     handleAttachment: (id: string | null) => void;
+    addBtnText: string;
+    changeBtnText: string
 }
 
-const PhotoAttachmentComponent: React.FC<PhotoAttachmentComponent> = ({handleAttachment}) => {
+const AddAttachmentComponent: React.FC<AddAttachmentComponent> = ({handleAttachment, addBtnText, changeBtnText}) => {
 
     const dispatch = useAppDispatch();
 
@@ -75,9 +77,9 @@ const PhotoAttachmentComponent: React.FC<PhotoAttachmentComponent> = ({handleAtt
                         {
                             attachmentFile
                                 ?
-                                "Change Photo"
+                                changeBtnText
                                 :
-                                "Select Photo"
+                                addBtnText
                         }
                     </span>
                 }
@@ -109,4 +111,4 @@ const PhotoAttachmentComponent: React.FC<PhotoAttachmentComponent> = ({handleAtt
     );
 };
 
-export default PhotoAttachmentComponent;
+export default AddAttachmentComponent;

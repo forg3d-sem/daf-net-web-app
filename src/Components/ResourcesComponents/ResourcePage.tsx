@@ -1,11 +1,13 @@
 import React from 'react';
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row, Spinner} from "react-bootstrap";
 import BackArrow from "../../assets/back-arrow.svg";
 import Clock from "../../assets/clock_icon.svg";
 import SettingsLoader from "../SettingsComponents/SettingsLoader.tsx";
 import '../ForumComponents/forumStyles.scss'
 import '../ForumComponents/ForumPostPage/postStyles.scss';
 import type {PostResponse} from "../../../APIs";
+import DOMPurify from "dompurify";
+import useFetchAttachment from "../../Hooks/Attachments/useFetchAttachment.ts";
 
 interface ResourcePage {
     data: PostResponse;
@@ -14,6 +16,11 @@ interface ResourcePage {
 }
 
 const ResourcePage:React.FC<ResourcePage> = (props) => {
+
+    const attachmentId = props?.data?.attachmentId ?? '';
+
+    const {data:attachmentData, isLoading, error} = useFetchAttachment(attachmentId);
+
     return (
         <Container>
             <Row>
@@ -29,6 +36,14 @@ const ResourcePage:React.FC<ResourcePage> = (props) => {
                     {
                         (props.data && !props.isLoading) &&
                         <>
+                            {
+                                props.data.imageUrl &&
+                                <img
+                                    className='post-image'
+                                    src={props.data.imageUrl ? `https://dafnet.tes.gd${props.data.imageUrl}` : ''}
+                                    alt=""
+                                />
+                            }
                             <h1>
                                 {props.data.title}
                             </h1>
@@ -42,9 +57,20 @@ const ResourcePage:React.FC<ResourcePage> = (props) => {
                                     minute: '2-digit'
                                 })}</span>
                             </div>
-                            <p>
-                                {props.data.content}
-                            </p>
+                            <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(props.data.content ?? '')}}/>
+                            <h5>Resource attachment:</h5>
+                            {
+                                isLoading &&
+                                <Spinner animation='border'/>
+                            }
+                            {
+                                attachmentData &&
+                                <a href={attachmentData?.data?.data?.url ? `https://dafnet.tes.gd${attachmentData?.data?.data?.url}` : '#'}>{attachmentData?.data?.data?.fileName}</a>
+                            }
+                            {
+                                error &&
+                                <p>{error.message}</p>
+                            }
                         </>
                     }
                     {

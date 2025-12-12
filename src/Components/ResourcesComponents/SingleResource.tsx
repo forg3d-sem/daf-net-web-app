@@ -2,6 +2,7 @@ import React, {useMemo} from 'react';
 import {Link} from "@tanstack/react-router";
 import type {CategoryResponse, PostResponse} from "../../../APIs";
 import Clock from "../../assets/clock_icon.svg";
+import DOMPurify from "dompurify";
 
 interface SingleResource {
     data: PostResponse;
@@ -26,6 +27,8 @@ const SingleResource:React.FC<SingleResource> = (props) => {
         return category ? category.name : 'Uncategorized';
     }, [categoryId, props.categories]);
 
+    const sanitazedContent = useMemo(() => DOMPurify.sanitize(content ?? ''), [content])
+
     return (
         <li>
             <Link to={'/resource-post/$resourceId'} params={{resourceId: postId ?? ''}}>
@@ -45,9 +48,10 @@ const SingleResource:React.FC<SingleResource> = (props) => {
                     <h6>
                         {title}
                     </h6>
-                    <div className="content-preview">
-                        {content}
-                    </div>
+                    <p
+                        className='content-preview'
+                        dangerouslySetInnerHTML={{__html: sanitazedContent}}
+                    />
                 </div>
             </Link>
         </li>
