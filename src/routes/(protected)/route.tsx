@@ -57,6 +57,11 @@ function RouteComponent() {
                                             News
                                         </Link>
                                     </li>
+                                    <li className='nav-item'>
+                                        <Link to={'/organisations'}>
+                                            Organisations
+                                        </Link>
+                                    </li>
                                 </ul>
                             </nav>
                             <Link className='header-profile-link d-lg-block d-none' to={'/settings/profile'}>

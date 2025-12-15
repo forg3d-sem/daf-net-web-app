@@ -52,6 +52,9 @@ const BurgerMenu = () => {
                                 <Link onClick={() => setShowMenu(!showMenu)} to='/news'>News</Link>
                             </li>
                             <li>
+                                <Link onClick={() => setShowMenu(!showMenu)} to='/organisations'>Organizations</Link>
+                            </li>
+                            <li>
                                 <Link onClick={() => setShowMenu(!showMenu)} to='/settings/profile'>Profile</Link>
                             </li>
                             {/*<li>*/}

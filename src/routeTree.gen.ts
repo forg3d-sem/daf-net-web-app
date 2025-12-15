@@ -17,6 +17,7 @@ import { Route as protectedRouteRouteImport } from './routes/(protected)/route'
 import { Route as protectedIndexRouteImport } from './routes/(protected)/index'
 import { Route as protectedResourcesRouteImport } from './routes/(protected)/resources'
 import { Route as protectedProfileRouteImport } from './routes/(protected)/profile'
+import { Route as protectedOrganisationsRouteImport } from './routes/(protected)/organisations'
 import { Route as protectedNewsRouteImport } from './routes/(protected)/news'
 import { Route as protectedSettingsRouteRouteImport } from './routes/(protected)/settings/route'
 import { Route as protectedUserUserIdRouteImport } from './routes/(protected)/user/$userId'
@@ -67,6 +68,11 @@ const protectedResourcesRoute = protectedResourcesRouteImport.update({
 const protectedProfileRoute = protectedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
+const protectedOrganisationsRoute = protectedOrganisationsRouteImport.update({
+  id: '/organisations',
+  path: '/organisations',
   getParentRoute: () => protectedRouteRoute,
 } as any)
 const protectedNewsRoute = protectedNewsRouteImport.update({
@@ -143,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/verify-email': typeof VerifyEmailRoute
   '/settings': typeof protectedSettingsRouteRouteWithChildren
   '/news': typeof protectedNewsRoute
+  '/organisations': typeof protectedOrganisationsRoute
   '/profile': typeof protectedProfileRoute
   '/resources': typeof protectedResourcesRoute
   '/': typeof protectedIndexRoute
@@ -164,6 +171,7 @@ export interface FileRoutesByTo {
   '/verify-email': typeof VerifyEmailRoute
   '/settings': typeof protectedSettingsRouteRouteWithChildren
   '/news': typeof protectedNewsRoute
+  '/organisations': typeof protectedOrganisationsRoute
   '/profile': typeof protectedProfileRoute
   '/resources': typeof protectedResourcesRoute
   '/': typeof protectedIndexRoute
@@ -187,6 +195,7 @@ export interface FileRoutesById {
   '/verify-email': typeof VerifyEmailRoute
   '/(protected)/settings': typeof protectedSettingsRouteRouteWithChildren
   '/(protected)/news': typeof protectedNewsRoute
+  '/(protected)/organisations': typeof protectedOrganisationsRoute
   '/(protected)/profile': typeof protectedProfileRoute
   '/(protected)/resources': typeof protectedResourcesRoute
   '/(protected)/': typeof protectedIndexRoute
@@ -210,6 +219,7 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/settings'
     | '/news'
+    | '/organisations'
     | '/profile'
     | '/resources'
     | '/'
@@ -231,6 +241,7 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/settings'
     | '/news'
+    | '/organisations'
     | '/profile'
     | '/resources'
     | '/'
@@ -253,6 +264,7 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/(protected)/settings'
     | '/(protected)/news'
+    | '/(protected)/organisations'
     | '/(protected)/profile'
     | '/(protected)/resources'
     | '/(protected)/'
@@ -332,6 +344,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof protectedProfileRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
+    '/(protected)/organisations': {
+      id: '/(protected)/organisations'
+      path: '/organisations'
+      fullPath: '/organisations'
+      preLoaderRoute: typeof protectedOrganisationsRouteImport
       parentRoute: typeof protectedRouteRoute
     }
     '/(protected)/news': {
@@ -446,6 +465,7 @@ const protectedSettingsRouteRouteWithChildren =
 interface protectedRouteRouteChildren {
   protectedSettingsRouteRoute: typeof protectedSettingsRouteRouteWithChildren
   protectedNewsRoute: typeof protectedNewsRoute
+  protectedOrganisationsRoute: typeof protectedOrganisationsRoute
   protectedProfileRoute: typeof protectedProfileRoute
   protectedResourcesRoute: typeof protectedResourcesRoute
   protectedIndexRoute: typeof protectedIndexRoute
@@ -459,6 +479,7 @@ interface protectedRouteRouteChildren {
 const protectedRouteRouteChildren: protectedRouteRouteChildren = {
   protectedSettingsRouteRoute: protectedSettingsRouteRouteWithChildren,
   protectedNewsRoute: protectedNewsRoute,
+  protectedOrganisationsRoute: protectedOrganisationsRoute,
   protectedProfileRoute: protectedProfileRoute,
   protectedResourcesRoute: protectedResourcesRoute,
   protectedIndexRoute: protectedIndexRoute,
