@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Col, Container, Nav, Row, Spinner, Tab} from "react-bootstrap";
 import {type GroupResponse} from '../../../APIs';
 import BackArrow from "../../assets/back-arrow.svg";
@@ -12,7 +12,9 @@ import GroupMembersList from "./GroupMembersList.tsx";
 import useLeaveGroup from "../../Hooks/Group/useLeaveGroup.ts";
 import {useAppDispatch} from "../../store/storeHooks.ts";
 import {notificationActions} from "../../store/slices/NotificationSlice.ts";
-import {useNavigate} from "@tanstack/react-router";
+import {Link, useNavigate} from "@tanstack/react-router";
+import GroupPostCreate from "./GroupPostCreate.tsx";
+import useFetchCategories from "../../Hooks/Categories/useFetchCategories.ts";
 
 interface SingleGroupPage {
     data: GroupResponse
@@ -24,11 +26,22 @@ const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
 
     const dispatch = useAppDispatch();
 
+    const [showCreatePost, setShowCreatePost] = useState(false);
+
     const {name, description, imageUrl, members, id} = data;
+
+    console.log(data)
 
     const {data: allPosts, isLoading: loadingPosts, error: postsError} = useFetchAllPosts(id);
 
+    //error and loading state are ignored, keep in mind that they need to be handled
+    const {data: categories} = useFetchCategories(data.id ?? '', '', 1);
+
     const {mutate, isPending} = useLeaveGroup();
+
+    const toggleCreatePost = () => {
+        setShowCreatePost(p => !p)
+    }
 
     const handleLeaveGroup = () => {
         mutate(id ?? '', {
@@ -83,7 +96,6 @@ const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
                     </div>
                     <div className="group-side-info group-side-info--mobile  d-block d-lg-none">
                         <h2>
-                            Test
                             {name}
                         </h2>
                         <div className="group-side-info__count-wrap">
@@ -105,16 +117,29 @@ const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
                             </div>
                         </div>
                         <button
-                            onClick={handleLeaveGroup}
+                            className='create-post-btn'
+                            onClick={toggleCreatePost}
                         >
-                            {
-                                isPending
-                                    ?
-                                    <Spinner animation='border'/>
-                                    :
-                                    "Leave the group"
-                            }
+                            Create post
                         </button>
+                        {
+                            data.isOwner
+                            ?
+                                <Link className='manage-group-btn' to='/groups/my/$groupId' params={{groupId: id ?? ''}}>Manage group</Link>
+                                :
+                                <button
+                                    onClick={handleLeaveGroup}
+                                >
+                                    {
+                                        isPending
+                                            ?
+                                            <Spinner animation='border'/>
+                                            :
+                                            "Leave the group"
+                                    }
+                                </button>
+                        }
+
                     </div>
                     <Tab.Container
                         defaultActiveKey='posts'
@@ -165,7 +190,6 @@ const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
                 >
                     <div className="group-side-info">
                         <h2>
-                            Test
                             {name}
                         </h2>
                         <div className="group-side-info__count-wrap">
@@ -187,18 +211,36 @@ const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
                             </div>
                         </div>
                         <button
-                            onClick={handleLeaveGroup}
+                            className='create-post-btn'
+                            onClick={toggleCreatePost}
                         >
-                            {
-                                isPending
-                                    ?
-                                    <Spinner animation='border'/>
-                                    :
-                                    "Leave the group"
-                            }
+                            Create post
                         </button>
+                        {
+                            data.isOwner
+                                ?
+                                <Link className='manage-group-btn' to='/groups/my/$groupId' params={{groupId: id ?? ''}}>Manage group</Link>
+                                :
+                                <button
+                                    onClick={handleLeaveGroup}
+                                >
+                                    {
+                                        isPending
+                                            ?
+                                            <Spinner animation='border'/>
+                                            :
+                                            "Leave the group"
+                                    }
+                                </button>
+                        }
                     </div>
                 </Col>
+                <GroupPostCreate
+                    showModal={showCreatePost}
+                    toggleModal={toggleCreatePost}
+                    categories={categories?.data?.data?.categories ?? []}
+                    groupId={data.id ?? ''}
+                />
             </Row>
         </Container>
     );

@@ -31,6 +31,7 @@ import { Route as protectedNewsPostNewsIdRouteImport } from './routes/(protected
 import { Route as protectedGroupsCreateRouteImport } from './routes/(protected)/groups/create'
 import { Route as protectedGroupsGroupIdRouteImport } from './routes/(protected)/groups/$groupId'
 import { Route as protectedForumCategoryIdRouteImport } from './routes/(protected)/forum/$categoryId'
+import { Route as protectedCreateCategoryGroupIdRouteImport } from './routes/(protected)/create-category/$groupId'
 import { Route as protectedGroupsMyGroupIdRouteImport } from './routes/(protected)/groups/my/$groupId'
 import { Route as protectedGroupsEditGroupIdRouteImport } from './routes/(protected)/groups/edit/$groupId'
 
@@ -148,6 +149,12 @@ const protectedForumCategoryIdRoute =
     path: '/forum/$categoryId',
     getParentRoute: () => protectedRouteRoute,
   } as any)
+const protectedCreateCategoryGroupIdRoute =
+  protectedCreateCategoryGroupIdRouteImport.update({
+    id: '/create-category/$groupId',
+    path: '/create-category/$groupId',
+    getParentRoute: () => protectedRouteRoute,
+  } as any)
 const protectedGroupsMyGroupIdRoute =
   protectedGroupsMyGroupIdRouteImport.update({
     id: '/groups/my/$groupId',
@@ -172,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof protectedProfileRoute
   '/resources': typeof protectedResourcesRoute
   '/': typeof protectedIndexRoute
+  '/create-category/$groupId': typeof protectedCreateCategoryGroupIdRoute
   '/forum/$categoryId': typeof protectedForumCategoryIdRoute
   '/groups/$groupId': typeof protectedGroupsGroupIdRoute
   '/groups/create': typeof protectedGroupsCreateRoute
@@ -197,6 +205,7 @@ export interface FileRoutesByTo {
   '/profile': typeof protectedProfileRoute
   '/resources': typeof protectedResourcesRoute
   '/': typeof protectedIndexRoute
+  '/create-category/$groupId': typeof protectedCreateCategoryGroupIdRoute
   '/forum/$categoryId': typeof protectedForumCategoryIdRoute
   '/groups/$groupId': typeof protectedGroupsGroupIdRoute
   '/groups/create': typeof protectedGroupsCreateRoute
@@ -224,6 +233,7 @@ export interface FileRoutesById {
   '/(protected)/profile': typeof protectedProfileRoute
   '/(protected)/resources': typeof protectedResourcesRoute
   '/(protected)/': typeof protectedIndexRoute
+  '/(protected)/create-category/$groupId': typeof protectedCreateCategoryGroupIdRoute
   '/(protected)/forum/$categoryId': typeof protectedForumCategoryIdRoute
   '/(protected)/groups/$groupId': typeof protectedGroupsGroupIdRoute
   '/(protected)/groups/create': typeof protectedGroupsCreateRoute
@@ -251,6 +261,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/resources'
     | '/'
+    | '/create-category/$groupId'
     | '/forum/$categoryId'
     | '/groups/$groupId'
     | '/groups/create'
@@ -276,6 +287,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/resources'
     | '/'
+    | '/create-category/$groupId'
     | '/forum/$categoryId'
     | '/groups/$groupId'
     | '/groups/create'
@@ -302,6 +314,7 @@ export interface FileRouteTypes {
     | '/(protected)/profile'
     | '/(protected)/resources'
     | '/(protected)/'
+    | '/(protected)/create-category/$groupId'
     | '/(protected)/forum/$categoryId'
     | '/(protected)/groups/$groupId'
     | '/(protected)/groups/create'
@@ -481,6 +494,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof protectedForumCategoryIdRouteImport
       parentRoute: typeof protectedRouteRoute
     }
+    '/(protected)/create-category/$groupId': {
+      id: '/(protected)/create-category/$groupId'
+      path: '/create-category/$groupId'
+      fullPath: '/create-category/$groupId'
+      preLoaderRoute: typeof protectedCreateCategoryGroupIdRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
     '/(protected)/groups/my/$groupId': {
       id: '/(protected)/groups/my/$groupId'
       path: '/groups/my/$groupId'
@@ -523,6 +543,7 @@ interface protectedRouteRouteChildren {
   protectedProfileRoute: typeof protectedProfileRoute
   protectedResourcesRoute: typeof protectedResourcesRoute
   protectedIndexRoute: typeof protectedIndexRoute
+  protectedCreateCategoryGroupIdRoute: typeof protectedCreateCategoryGroupIdRoute
   protectedForumCategoryIdRoute: typeof protectedForumCategoryIdRoute
   protectedGroupsGroupIdRoute: typeof protectedGroupsGroupIdRoute
   protectedGroupsCreateRoute: typeof protectedGroupsCreateRoute
@@ -542,6 +563,7 @@ const protectedRouteRouteChildren: protectedRouteRouteChildren = {
   protectedProfileRoute: protectedProfileRoute,
   protectedResourcesRoute: protectedResourcesRoute,
   protectedIndexRoute: protectedIndexRoute,
+  protectedCreateCategoryGroupIdRoute: protectedCreateCategoryGroupIdRoute,
   protectedForumCategoryIdRoute: protectedForumCategoryIdRoute,
   protectedGroupsGroupIdRoute: protectedGroupsGroupIdRoute,
   protectedGroupsCreateRoute: protectedGroupsCreateRoute,

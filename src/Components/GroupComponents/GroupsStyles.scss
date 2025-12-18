@@ -83,6 +83,26 @@
     border-radius: 8px;
     border: 1px solid #93190A;
   }
+
+  .create-post-btn {
+    background-color: $blue-green;
+    border-color: $blue-green;
+    margin-bottom: 10px;
+  }
+
+  .manage-group-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 8px;
+    color: $blue-green;
+    text-align: center;
+    font-weight: 600;
+    line-height: 28px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 2px solid $blue-green;
+    text-decoration: none;
+  }
 }
 
 .group-list {
@@ -167,6 +187,10 @@
     padding: 8px;
     border: 2px solid $orange-color;
     height: fit-content;
+
+    @media (max-width: 575px) {
+      max-width: none;
+    }
   }
 
   &__top {
@@ -174,12 +198,20 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
+
+    @media (max-width: 575px) {
+      display: block;
+    }
   }
 
   &__photo-group {
     display: flex;
     align-items: center;
     width: 100%;
+
+    @media (max-width: 575px) {
+     margin-bottom: 30px;
+    }
 
     button {
       background-color: #fff;
@@ -454,4 +486,104 @@ table {
     border: none;
     border-radius: 8px;
   }
+}
+
+//TODO: move out later
+.create-cat-page {
+  .create-category {
+    border: 1px solid $blue-green;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 1px 2px 12px 0 $blue-green-40;
+
+    &__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+
+      @media (max-width: 575px) {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      h1 {
+        font-size: 28px;
+        font-weight: 700;
+
+        @media (max-width: 575px) {
+          margin-bottom: 30px;
+        }
+      }
+
+      button {
+        width: 100%;
+        max-width: 150px;
+        padding: 8px;
+        border-radius: 8px;
+        color: #fff;
+        background-color: $orange-color;
+        border: 1px solid $orange-color;
+
+        @media (max-width: 575px) {
+          max-width: none;
+          margin-bottom: 30px;
+        }
+      }
+    }
+
+    p {
+      margin-bottom: 30px;
+      color: $blue-green-70;
+      max-width: 600px;
+    }
+
+    &__input-group {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-bottom: 8px;
+        color: $blue-green;
+        font-weight: 500;
+      }
+
+      input {
+        width: 100%;
+        padding: 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        border: 1px solid $blue-green-40;
+
+        &:focus-visible {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .list-title {
+    width: 100%;
+    border-bottom: 1px solid $blue-green-40;
+    color: $blue-green-70;
+    font-size: 18px;
+    padding-bottom: 10px;
+  }
+}
+
+.cat-list {
+  color: $blue-green;
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding: 10px 0;
+    border-bottom: 1px solid $blue-green-40;
+  }
+}
+
+.message {
+  margin-top: 40px;
+  color: $blue-green;
 }

@@ -9,7 +9,7 @@ const  useFetchCategories = (groupId: string, search:string, page = 1,) => {
     const token = localStorage.getItem('token');
 
     return useQuery({
-        queryKey: ['categories'],
+        queryKey: ['categories', groupId],
         queryFn: async () => {
             const response = await catApi.categoryGet(groupId, page, 10, search, {headers: {"Authorization": `Bearer ${token}`}} );
             if (!response.data.success) {

@@ -12,7 +12,7 @@ const GroupListItem: React.FC<GroupListItem> = ({groupData}) => {
         <li className='group-item'>
             <Link
                 className='group-item__anchor'
-                to={groupData.isOwner ? '/groups/my/$groupId' : '/groups/$groupId'}
+                to={'/groups/$groupId'}
                 params={{groupId: groupData.id ?? ''}}
             >
                 <div className="group-item__wrapper">

@@ -62,7 +62,7 @@ const AddGroupImage:React.FC<AddGroupImage> = ({handleImageLink}) => {
     }, [attachmentFile, addAttachment, dispatch, handleImageLink]);
 
     return (
-        <div className="image-upload">
+        <div className="image-upload image-upload--group">
             <label htmlFor="image_upload" className={attachmentFile && "label-with-file"}>
                 {
                     isUploading

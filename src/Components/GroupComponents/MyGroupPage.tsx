@@ -7,6 +7,8 @@ import {Link, useNavigate} from "@tanstack/react-router";
 import './GroupsStyles.scss';
 import AddMembersModal from "./AddMembersModal.tsx";
 import '../SettingsComponents/ProfileComponents/profileStyles.scss';
+import GroupPostCreate from "./GroupPostCreate.tsx";
+import useFetchCategories from "../../Hooks/Categories/useFetchCategories.ts";
 
 
 interface MyGroupPage {
@@ -18,11 +20,19 @@ const MyGroupPage: React.FC<MyGroupPage> = ({data}) => {
     const {name, description, imageUrl, members, id} = data;
 
     const [showModal, setShowModal] = useState(false);
+    const [showCreateModal, setShowCreateModal] = useState(false);
 
     const navigate = useNavigate();
 
+    //error and loading state are ignored, keep in mind that they need to be handled
+    const {data: categories} = useFetchCategories(id ?? '', '', 1);
+
     const toggleModal = () => {
         setShowModal(p => !p);
+    }
+
+    const toggleCreateModal = () => {
+        setShowCreateModal(p => !p);
     }
 
     useEffect(() => {
@@ -87,6 +97,12 @@ const MyGroupPage: React.FC<MyGroupPage> = ({data}) => {
                         groupId={id ?? ''}
                         show={showModal}
                         toggleModal={toggleModal}
+                    />
+                    <GroupPostCreate
+                        showModal={showCreateModal}
+                        toggleModal={toggleCreateModal}
+                        categories={categories?.data?.data?.categories ?? []}
+                        groupId={id ?? ''}
                     />
                 </Col>
             </Row>
