@@ -100,8 +100,6 @@ const UserPage: React.FC<UserPage> = (props) => {
                                             <ForumPostsList
                                                 isUserPage={true}
                                                 posts={posts?.data?.data?.posts ?? []}
-                                                refetch={() => {
-                                                }}
                                             />
                                         }
                                         {

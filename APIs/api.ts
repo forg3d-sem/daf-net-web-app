@@ -989,6 +989,12 @@ export interface GroupResponse {
      * @memberof GroupResponse
      */
     'canCreateCategories'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GroupResponse
+     */
+    'isOwner'?: boolean;
 }
 /**
  * 
@@ -3577,6 +3583,44 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
     return {
         /**
          * 
+         * @param {string} [groupId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupByIdGet: async (groupId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/Group/by-id`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (groupId !== undefined) {
+                localVarQueryParameter['GroupId'] = groupId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {number} [page] 
          * @param {number} [pageSize] 
          * @param {string} [search] 
@@ -3873,6 +3917,18 @@ export const GroupApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {string} [groupId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async groupByIdGet(groupId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupByIdGet(groupId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupApi.groupByIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {number} [page] 
          * @param {number} [pageSize] 
          * @param {string} [search] 
@@ -3972,6 +4028,15 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
+         * @param {string} [groupId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        groupByIdGet(groupId?: string, options?: RawAxiosRequestConfig): AxiosPromise<GroupResponseApiResponse> {
+            return localVarFp.groupByIdGet(groupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {number} [page] 
          * @param {number} [pageSize] 
          * @param {string} [search] 
@@ -4048,6 +4113,17 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
  * @extends {BaseAPI}
  */
 export class GroupApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} [groupId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupApi
+     */
+    public groupByIdGet(groupId?: string, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).groupByIdGet(groupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {number} [page] 
@@ -4620,12 +4696,13 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @param {string} [groupId] 
          * @param {number} [page] 
          * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postAllGet: async (page?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postAllGet: async (groupId?: string, page?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/Post/all`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4641,6 +4718,10 @@ export const PostApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication Bearer required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (groupId !== undefined) {
+                localVarQueryParameter['GroupId'] = groupId;
+            }
 
             if (page !== undefined) {
                 localVarQueryParameter['Page'] = page;
@@ -4892,13 +4973,14 @@ export const PostApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} [groupId] 
          * @param {number} [page] 
          * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postAllGet(page?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostListResponseApiResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postAllGet(page, pageSize, options);
+        async postAllGet(groupId?: string, page?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostListResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postAllGet(groupId, page, pageSize, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PostApi.postAllGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4988,13 +5070,14 @@ export const PostApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @param {string} [groupId] 
          * @param {number} [page] 
          * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postAllGet(page?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<PostListResponseApiResponse> {
-            return localVarFp.postAllGet(page, pageSize, options).then((request) => request(axios, basePath));
+        postAllGet(groupId?: string, page?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<PostListResponseApiResponse> {
+            return localVarFp.postAllGet(groupId, page, pageSize, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5068,14 +5151,15 @@ export class PostApi extends BaseAPI {
 
     /**
      * 
+     * @param {string} [groupId] 
      * @param {number} [page] 
      * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PostApi
      */
-    public postAllGet(page?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
-        return PostApiFp(this.configuration).postAllGet(page, pageSize, options).then((request) => request(this.axios, this.basePath));
+    public postAllGet(groupId?: string, page?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+        return PostApiFp(this.configuration).postAllGet(groupId, page, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

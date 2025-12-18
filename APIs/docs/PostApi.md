@@ -77,10 +77,12 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PostApi(configuration);
 
+let groupId: string; // (optional) (default to undefined)
 let page: number; // (optional) (default to undefined)
 let pageSize: number; // (optional) (default to undefined)
 
 const { status, data } = await apiInstance.postAllGet(
+    groupId,
     page,
     pageSize
 );
@@ -90,6 +92,7 @@ const { status, data } = await apiInstance.postAllGet(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **groupId** | [**string**] |  | (optional) defaults to undefined|
 | **page** | [**number**] |  | (optional) defaults to undefined|
 | **pageSize** | [**number**] |  | (optional) defaults to undefined|
 

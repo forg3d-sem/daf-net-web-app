@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**groupByIdGet**](#groupbyidget) | **GET** /Group/by-id | |
 |[**groupGet**](#groupget) | **GET** /Group | |
 |[**groupInvitePost**](#groupinvitepost) | **POST** /Group/invite | |
 |[**groupKickPost**](#groupkickpost) | **POST** /Group/kick | |
@@ -11,6 +12,56 @@ All URIs are relative to *http://localhost*
 |[**groupMembersGet**](#groupmembersget) | **GET** /Group/members | |
 |[**groupPost**](#grouppost) | **POST** /Group | |
 |[**groupPut**](#groupput) | **PUT** /Group | |
+
+# **groupByIdGet**
+> GroupResponseApiResponse groupByIdGet()
+
+
+### Example
+
+```typescript
+import {
+    GroupApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new GroupApi(configuration);
+
+let groupId: string; // (optional) (default to undefined)
+
+const { status, data } = await apiInstance.groupByIdGet(
+    groupId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **groupId** | [**string**] |  | (optional) defaults to undefined|
+
+
+### Return type
+
+**GroupResponseApiResponse**
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **groupGet**
 > GroupListResponseApiResponse groupGet()

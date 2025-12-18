@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **imageUrl** | **string** |  | [optional] [default to undefined]
 **members** | **number** |  | [optional] [default to undefined]
 **canCreateCategories** | **boolean** |  | [optional] [default to undefined]
+**isOwner** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -24,6 +25,7 @@ const instance: GroupResponse = {
     imageUrl,
     members,
     canCreateCategories,
+    isOwner,
 };
 ```
 

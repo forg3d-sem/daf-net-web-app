@@ -52,17 +52,14 @@ const BurgerMenu = () => {
                                 <Link onClick={() => setShowMenu(!showMenu)} to='/news'>News</Link>
                             </li>
                             <li>
+                                <Link onClick={() => setShowMenu(!showMenu)} to='/groups'>Groups</Link>
+                            </li>
+                            <li>
                                 <Link onClick={() => setShowMenu(!showMenu)} to='/organisations'>Organizations</Link>
                             </li>
                             <li>
                                 <Link onClick={() => setShowMenu(!showMenu)} to='/settings/profile'>Profile</Link>
                             </li>
-                            {/*<li>*/}
-                            {/*    <Link onClick={() => setShowMenu(!showMenu)} to='/settings/organisations'>Organisations</Link>*/}
-                            {/*</li>*/}
-                            {/*<li>*/}
-                            {/*    <Link onClick={() => setShowMenu(!showMenu)} to='/settings/groups'>Groups</Link>*/}
-                            {/*</li>*/}
                             <li>
                                 <Link onClick={() => setShowMenu(!showMenu)} to='/settings/password-reset'>Password</Link>
                             </li>

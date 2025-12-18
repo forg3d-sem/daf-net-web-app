@@ -16,7 +16,6 @@ import SinglePostLinkWrapper from "./ForumPostPage/SinglePostLinkWrapper.tsx";
 interface SinglePost {
     data: PostResponse;
     isPostPage: boolean;
-    refetch: () => void;
 }
 
 const SinglePost: React.FC<SinglePost> = (props) => {
@@ -38,7 +37,6 @@ const SinglePost: React.FC<SinglePost> = (props) => {
             onSuccess: () => {
                 queryClient.invalidateQueries({queryKey: ['allPosts']});
                 queryClient.invalidateQueries({queryKey: ['post', data.postId]});
-                props.refetch();
             },
             onError: (error) => {
                 dispatch(notificationActions.setNotification({text: error.message, type: 'error'}));

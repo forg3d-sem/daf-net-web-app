@@ -12,11 +12,7 @@ function RouteComponent() {
 
     const {postId} = Route.useParams();
 
-    const {data, isFetching, error, refetch} = useGetPost(postId);
+    const {data, isFetching, error} = useGetPost(postId);
 
-    const refetchData = () => {
-        refetch();
-    }
-
-  return <PostPage data={data?.data?.data as PostResponse} isLoading={isFetching} error={error?.message ?? ''} refetch={refetchData}/>
+  return <PostPage data={data?.data?.data as PostResponse} isLoading={isFetching} error={error?.message ?? ''}/>
 }

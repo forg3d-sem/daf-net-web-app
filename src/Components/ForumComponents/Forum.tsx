@@ -38,7 +38,6 @@ const Forum: React.FC<Forum>= (props) => {
                         (!props.postsLoading && props.posts) &&
                         <ForumPostsList
                             posts={props.posts}
-                            refetch={props.refetch}
                         />
                     }
                     {
