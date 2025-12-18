@@ -59,7 +59,7 @@ const EditGroup:React.FC<EditGroup> = ({data, handleGroupData, isPending}) => {
                         </div>
                         <button
                             className='edit-group__save-btn'
-                            onClick={() => handleGroupData({name: name, description: description, imageUrl: imageUrl})}
+                            onClick={() => handleGroupData({name: name, description: description, imageUrl: imageUrl ?? ''})}
                             disabled={isPending}
                         >
                             {
