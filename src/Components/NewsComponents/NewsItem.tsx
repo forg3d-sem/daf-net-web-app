@@ -27,8 +27,6 @@ const NewsItem: React.FC<NewsItem> = (props) => {
         return category ? category.name : 'Uncategorized';
     }, [categoryId, props.categories]);
 
-    console.log(imageUrl)
-
     return (
         <li className='grid-item'>
             <Link to='/news-post/$newsId' params={{newsId: postId ?? ''}}>
