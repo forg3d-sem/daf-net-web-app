@@ -1,9 +1,9 @@
 import React, {useMemo} from 'react';
 import {Link} from "@tanstack/react-router";
-import type {PostResponse} from "../../../APIs";
+import type {PostResponse, CategoryResponse} from "../../../APIs";
 import NewsIcon from '../../assets/newspaper-folded.svg';
-import type {CategoryResponse} from "../../../APIs";
 import Clock from '../../assets/clock_icon.svg'
+import DOMPurify from "dompurify";
 
 interface NewsItem {
     data: PostResponse;
@@ -27,6 +27,8 @@ const NewsItem: React.FC<NewsItem> = (props) => {
         return category ? category.name : 'Uncategorized';
     }, [categoryId, props.categories]);
 
+    console.log(imageUrl)
+
     return (
         <li className='grid-item'>
             <Link to='/news-post/$newsId' params={{newsId: postId ?? ''}}>
@@ -35,7 +37,7 @@ const NewsItem: React.FC<NewsItem> = (props) => {
                         {
                             imageUrl
                                 ?
-                                <div style={{backgroundImage: `url(https://dafnet.tes.gd${imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100%', width: '100%'}}></div>
+                                <div style={{backgroundImage: `url("https://dafnet.tes.gd${imageUrl}")`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100%', width: '100%'}}></div>
                                 :
                                 <img src={NewsIcon} alt="newspapper"/>
                         }
@@ -53,8 +55,7 @@ const NewsItem: React.FC<NewsItem> = (props) => {
                                 {title}
                             </h6>
                         </div>
-                        <p className='news-text'>
-                            {content}
+                        <p className='news-text' dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(content ?? '')}}>
                         </p>
                         <div className="news-bottom-row">
                             <div className="created-at">
