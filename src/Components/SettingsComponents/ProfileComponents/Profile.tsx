@@ -11,10 +11,7 @@ interface Profile {
 
 const Profile: React.FC<Profile> = (props) => {
 
-    const {firstName, lastName, username, about, imageUrl} = props.profileObj;
-
-    const discussionsCount = 0;
-    const connectionsCount = 0;
+    const {firstName, lastName, username, about, imageUrl, postsAmount, groupsAmount} = props.profileObj;
 
     return (
         <>
@@ -48,13 +45,13 @@ const Profile: React.FC<Profile> = (props) => {
 
             <div className="profile-section content-bordered stats-section">
                 <div className="counter">
-                    {discussionsCount}
+                    {postsAmount}
                     <span className='counter__title'>Discussions</span>
                 </div>
                 <div className="divider"></div>
                 <div className="counter">
-                    {connectionsCount}
-                    <span className='counter__title'>Connections</span>
+                    {groupsAmount}
+                    <span className='counter__title'>Groups</span>
                 </div>
             </div>
 

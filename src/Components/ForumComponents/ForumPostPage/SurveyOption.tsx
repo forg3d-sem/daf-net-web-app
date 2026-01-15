@@ -7,19 +7,30 @@ interface SurveyOption {
     selectedOptionId: string | null | undefined;
     handleOptionSelect: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>,id: string) => void;
     allOptionsWithCount: SurveyOptionResultResponse[];
+    preselectedVal: string | null;
 }
 
 const SurveyOption:React.FC<SurveyOption> = (props) => {
 
-    const {option, selectedOptionId, handleOptionSelect} = props;
+    const {option, selectedOptionId, handleOptionSelect, preselectedVal} = props;
 
-    const isSelected = props.option.optionId === props.selectedOptionId;
+    const getOptionClass = () => {
+        if (selectedOptionId) {
+            return "option-item selected"
+        }
+        if (!selectedOptionId && preselectedVal === option.optionId) {
+            return "option-item pre-selected"
+        }
+        return "option-item"
+    }
+
+    const isSelected = option.optionId === selectedOptionId || preselectedVal === option.optionId;
 
     const percentVote = props.allOptionsWithCount.find(o => o.optionId as string === option.optionId)?.percentage ?? 0;
 
     return (
         <li
-            className={isSelected ? "option-item selected" : "option-item"}
+            className={getOptionClass()}
             key={nanoid()}
 
         >
@@ -43,11 +54,15 @@ const SurveyOption:React.FC<SurveyOption> = (props) => {
                         {option.text}
                     </label>
                 </div>
-                <div className={isSelected ? "option-votes selected-vote" : "option-votes"}>
-                    {
-                        `${percentVote}%`
-                    }
-                </div>
+                {
+                    selectedOptionId
+                    &&
+                    <div className={isSelected ? "option-votes selected-vote" : "option-votes"}>
+                        {
+                            `${percentVote}%`
+                        }
+                    </div>
+                }
             </button>
         </li>
     );

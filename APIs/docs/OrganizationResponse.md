@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **name** | **string** |  | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **imageUrl** | **string** |  | [optional] [default to undefined]
+**url** | **string** |  | [optional] [default to undefined]
+**isApproved** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -20,6 +22,8 @@ const instance: OrganizationResponse = {
     name,
     description,
     imageUrl,
+    url,
+    isApproved,
 };
 ```
 

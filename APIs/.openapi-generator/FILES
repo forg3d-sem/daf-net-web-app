@@ -31,6 +31,8 @@ docs/CreateCommentRequest.md
 docs/CreatePostRequest.md
 docs/CreateSurveyRequest.md
 docs/DeletePostRequest.md
+docs/DetailedProfileResponse.md
+docs/DetailedProfileResponseApiResponse.md
 docs/GroupApi.md
 docs/GroupCreateRequest.md
 docs/GroupInviteRequest.md

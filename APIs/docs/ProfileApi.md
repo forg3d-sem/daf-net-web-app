@@ -111,7 +111,7 @@ const { status, data } = await apiInstance.profileSearchPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **profileUserIdGet**
-> ProfileResponseApiResponse profileUserIdGet()
+> DetailedProfileResponseApiResponse profileUserIdGet()
 
 
 ### Example
@@ -141,7 +141,7 @@ const { status, data } = await apiInstance.profileUserIdGet(
 
 ### Return type
 
-**ProfileResponseApiResponse**
+**DetailedProfileResponseApiResponse**
 
 ### Authorization
 

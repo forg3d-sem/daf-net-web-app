@@ -285,6 +285,10 @@
         border-color: $orange-color;
       }
 
+      &.pre-selected {
+        border-color: $orange-color;
+      }
+
       .option-item-button {
         width: 100%;
         background-color: #fff;
@@ -330,9 +334,9 @@
         label {
           color: $blue-green;
 
-          &.selected-label {
-            color: $orange-color;
-          }
+          //&.selected-label {
+          //  color: $orange-color;
+          //}
         }
       }
 
@@ -342,6 +346,29 @@
         &.selected-vote {
           color: $orange-color;
         }
+      }
+    }
+  }
+
+  .survey-btn-wrap {
+    display: flex;
+    justify-content: end;
+    max-width: 568px;
+    margin-bottom: 32px;
+
+    button {
+      background-color: $blue-green;
+      border-radius: 8px;
+      color: #fff;
+      width: 100%;
+      max-width: 123px;
+      font-size: 16px;
+      line-height: 28px;
+      border: 1px solid $blue-green;
+
+      .spinner-border {
+        height: 16px;
+        width: 16px;
       }
     }
   }

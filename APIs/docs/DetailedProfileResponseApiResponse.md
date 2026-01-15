@@ -1,4 +1,4 @@
-# PostResponseListApiResponse
+# DetailedProfileResponseApiResponse
 
 
 ## Properties
@@ -6,15 +6,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **boolean** |  | [optional] [default to undefined]
-**data** | [**Array&lt;PostResponse&gt;**](PostResponse.md) |  | [optional] [default to undefined]
+**data** | [**DetailedProfileResponse**](DetailedProfileResponse.md) |  | [optional] [default to undefined]
 **error** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { PostResponseListApiResponse } from './api';
+import { DetailedProfileResponseApiResponse } from './api';
 
-const instance: PostResponseListApiResponse = {
+const instance: DetailedProfileResponseApiResponse = {
     success,
     data,
     error,

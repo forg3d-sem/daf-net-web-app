@@ -21,9 +21,7 @@ const Organizations: React.FC<Organizations> = ({data}) => {
                                 Our partner organizations
                             </h1>
                             <p className='organizations-page__text'>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut
-                                labore et dolore magna aliqua.
+                                Get to know our network by exploring the pioneering organisations that make up the DAF network, and feel free to enter your own organisation.
                             </p>
                             {
                                 data.length &&

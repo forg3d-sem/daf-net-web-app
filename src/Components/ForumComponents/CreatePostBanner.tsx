@@ -102,7 +102,7 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
                         <img src={Emoji} alt="create post emoji"/>
                     </div>
                     <span>
-                    Let’s share what’s going on your mind...
+                    Please share your news with the DAF-Community
                 </span>
                 </div>
                 <button

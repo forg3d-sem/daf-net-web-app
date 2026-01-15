@@ -3,7 +3,7 @@ import useGetPost from "../../../Hooks/Posts/useGetPost.ts";
 import ResourcePage from "../../../Components/ResourcesComponents/ResourcePage.tsx";
 import type {PostResponse} from "../../../../APIs";
 
-export const Route = createFileRoute('/(protected)/resource-post/$resourceId')({
+export const Route = createFileRoute('/(protected)/resources/$resourceId')({
   component: RouteComponent,
 })
 

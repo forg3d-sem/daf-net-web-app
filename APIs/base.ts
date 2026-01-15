@@ -31,7 +31,7 @@ globalAxios.interceptors.response.use(
     }
 )
 
-export const BASE_PATH = "https://dafnet.tes.gd".replace(/\/+$/, "");
+export const BASE_PATH = "https://dafnet-dev.tes.gd".replace(/\/+$/, "");
 
 /**
  *

@@ -29,7 +29,7 @@ const NewsItem: React.FC<NewsItem> = (props) => {
 
     return (
         <li className='grid-item'>
-            <Link to='/news-post/$newsId' params={{newsId: postId ?? ''}}>
+            <Link to='/news/$newsId' params={{newsId: postId ?? ''}}>
                 <div className="news-content">
                     <div className="image-container">
                         {

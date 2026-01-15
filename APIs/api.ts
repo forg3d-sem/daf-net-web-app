@@ -625,6 +625,98 @@ export interface DeletePostRequest {
 /**
  * 
  * @export
+ * @interface DetailedProfileResponse
+ */
+export interface DetailedProfileResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof DetailedProfileResponse
+     */
+    'userId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DetailedProfileResponse
+     */
+    'imageUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DetailedProfileResponse
+     */
+    'username'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DetailedProfileResponse
+     */
+    'email'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DetailedProfileResponse
+     */
+    'firstName'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DetailedProfileResponse
+     */
+    'lastName'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DetailedProfileResponse
+     */
+    'about'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof DetailedProfileResponse
+     */
+    'postsAmount'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DetailedProfileResponse
+     */
+    'commentsAmount'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DetailedProfileResponse
+     */
+    'groupsAmount'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface DetailedProfileResponseApiResponse
+ */
+export interface DetailedProfileResponseApiResponse {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DetailedProfileResponseApiResponse
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {DetailedProfileResponse}
+     * @memberof DetailedProfileResponseApiResponse
+     */
+    'data'?: DetailedProfileResponse;
+    /**
+     * 
+     * @type {string}
+     * @memberof DetailedProfileResponseApiResponse
+     */
+    'error'?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface GroupCreateRequest
  */
 export interface GroupCreateRequest {
@@ -1038,6 +1130,12 @@ export interface GroupUpdateRequest {
      * @type {string}
      * @memberof GroupUpdateRequest
      */
+    'name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupUpdateRequest
+     */
     'description'?: string | null;
     /**
      * 
@@ -1376,6 +1474,12 @@ export interface OrganizationCreateRequest {
      * @memberof OrganizationCreateRequest
      */
     'imageUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof OrganizationCreateRequest
+     */
+    'url'?: string | null;
 }
 /**
  * 
@@ -1469,6 +1573,18 @@ export interface OrganizationResponse {
      * @memberof OrganizationResponse
      */
     'imageUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof OrganizationResponse
+     */
+    'url'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof OrganizationResponse
+     */
+    'isApproved'?: boolean;
 }
 /**
  * 
@@ -1519,6 +1635,12 @@ export interface OrganizationUpdateRequest {
      * @memberof OrganizationUpdateRequest
      */
     'imageUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof OrganizationUpdateRequest
+     */
+    'url'?: string | null;
 }
 /**
  * 
@@ -4329,6 +4451,44 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        organizationByIdGet: async (organizationId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/Organization/ById`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (organizationId !== undefined) {
+                localVarQueryParameter['OrganizationId'] = organizationId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} [organizationId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         organizationDelete: async (organizationId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/Organization`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4499,6 +4659,18 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        async organizationByIdGet(organizationId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.organizationByIdGet(organizationId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.organizationByIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} [organizationId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         async organizationDelete(organizationId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringApiResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.organizationDelete(organizationId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
@@ -4559,6 +4731,15 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        organizationByIdGet(organizationId?: string, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationResponseApiResponse> {
+            return localVarFp.organizationByIdGet(organizationId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} [organizationId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         organizationDelete(organizationId?: string, options?: RawAxiosRequestConfig): AxiosPromise<StringApiResponse> {
             return localVarFp.organizationDelete(organizationId, options).then((request) => request(axios, basePath));
         },
@@ -4601,6 +4782,17 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
  * @extends {BaseAPI}
  */
 export class OrganizationApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} [organizationId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OrganizationApi
+     */
+    public organizationByIdGet(organizationId?: string, options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).organizationByIdGet(organizationId, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {string} [organizationId] 
@@ -5381,7 +5573,7 @@ export const ProfileApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async profileUserIdGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileResponseApiResponse>> {
+        async profileUserIdGet(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DetailedProfileResponseApiResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.profileUserIdGet(userId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProfileApi.profileUserIdGet']?.[localVarOperationServerIndex]?.url;
@@ -5421,7 +5613,7 @@ export const ProfileApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        profileUserIdGet(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<ProfileResponseApiResponse> {
+        profileUserIdGet(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<DetailedProfileResponseApiResponse> {
             return localVarFp.profileUserIdGet(userId, options).then((request) => request(axios, basePath));
         },
     };
