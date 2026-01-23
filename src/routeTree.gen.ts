@@ -19,6 +19,7 @@ import { Route as protectedProfileRouteImport } from './routes/(protected)/profi
 import { Route as protectedOrganisationsRouteImport } from './routes/(protected)/organisations'
 import { Route as protectedSettingsRouteRouteImport } from './routes/(protected)/settings/route'
 import { Route as protectedResourcesIndexRouteImport } from './routes/(protected)/resources/index'
+import { Route as protectedOrganizationsIndexRouteImport } from './routes/(protected)/organizations/index'
 import { Route as protectedNewsIndexRouteImport } from './routes/(protected)/news/index'
 import { Route as protectedGroupsIndexRouteImport } from './routes/(protected)/groups/index'
 import { Route as protectedUserUserIdRouteImport } from './routes/(protected)/user/$userId'
@@ -27,6 +28,7 @@ import { Route as protectedSettingsProfileRouteImport } from './routes/(protecte
 import { Route as protectedSettingsPasswordResetRouteImport } from './routes/(protected)/settings/password-reset'
 import { Route as protectedResourcesResourceIdRouteImport } from './routes/(protected)/resources/$resourceId'
 import { Route as protectedPostPostIdRouteImport } from './routes/(protected)/post/$postId'
+import { Route as protectedOrganizationsOrganizationIdRouteImport } from './routes/(protected)/organizations/$organizationId'
 import { Route as protectedNewsNewsIdRouteImport } from './routes/(protected)/news/$newsId'
 import { Route as protectedGroupsCreateRouteImport } from './routes/(protected)/groups/create'
 import { Route as protectedGroupsGroupIdRouteImport } from './routes/(protected)/groups/$groupId'
@@ -84,6 +86,12 @@ const protectedResourcesIndexRoute = protectedResourcesIndexRouteImport.update({
   path: '/resources/',
   getParentRoute: () => protectedRouteRoute,
 } as any)
+const protectedOrganizationsIndexRoute =
+  protectedOrganizationsIndexRouteImport.update({
+    id: '/organizations/',
+    path: '/organizations/',
+    getParentRoute: () => protectedRouteRoute,
+  } as any)
 const protectedNewsIndexRoute = protectedNewsIndexRouteImport.update({
   id: '/news/',
   path: '/news/',
@@ -128,6 +136,12 @@ const protectedPostPostIdRoute = protectedPostPostIdRouteImport.update({
   path: '/post/$postId',
   getParentRoute: () => protectedRouteRoute,
 } as any)
+const protectedOrganizationsOrganizationIdRoute =
+  protectedOrganizationsOrganizationIdRouteImport.update({
+    id: '/organizations/$organizationId',
+    path: '/organizations/$organizationId',
+    getParentRoute: () => protectedRouteRoute,
+  } as any)
 const protectedNewsNewsIdRoute = protectedNewsNewsIdRouteImport.update({
   id: '/news/$newsId',
   path: '/news/$newsId',
@@ -182,6 +196,7 @@ export interface FileRoutesByFullPath {
   '/groups/$groupId': typeof protectedGroupsGroupIdRoute
   '/groups/create': typeof protectedGroupsCreateRoute
   '/news/$newsId': typeof protectedNewsNewsIdRoute
+  '/organizations/$organizationId': typeof protectedOrganizationsOrganizationIdRoute
   '/post/$postId': typeof protectedPostPostIdRoute
   '/resources/$resourceId': typeof protectedResourcesResourceIdRoute
   '/settings/password-reset': typeof protectedSettingsPasswordResetRoute
@@ -190,6 +205,7 @@ export interface FileRoutesByFullPath {
   '/user/$userId': typeof protectedUserUserIdRoute
   '/groups': typeof protectedGroupsIndexRoute
   '/news': typeof protectedNewsIndexRoute
+  '/organizations': typeof protectedOrganizationsIndexRoute
   '/resources': typeof protectedResourcesIndexRoute
   '/groups/edit/$groupId': typeof protectedGroupsEditGroupIdRoute
   '/groups/my/$groupId': typeof protectedGroupsMyGroupIdRoute
@@ -208,6 +224,7 @@ export interface FileRoutesByTo {
   '/groups/$groupId': typeof protectedGroupsGroupIdRoute
   '/groups/create': typeof protectedGroupsCreateRoute
   '/news/$newsId': typeof protectedNewsNewsIdRoute
+  '/organizations/$organizationId': typeof protectedOrganizationsOrganizationIdRoute
   '/post/$postId': typeof protectedPostPostIdRoute
   '/resources/$resourceId': typeof protectedResourcesResourceIdRoute
   '/settings/password-reset': typeof protectedSettingsPasswordResetRoute
@@ -216,6 +233,7 @@ export interface FileRoutesByTo {
   '/user/$userId': typeof protectedUserUserIdRoute
   '/groups': typeof protectedGroupsIndexRoute
   '/news': typeof protectedNewsIndexRoute
+  '/organizations': typeof protectedOrganizationsIndexRoute
   '/resources': typeof protectedResourcesIndexRoute
   '/groups/edit/$groupId': typeof protectedGroupsEditGroupIdRoute
   '/groups/my/$groupId': typeof protectedGroupsMyGroupIdRoute
@@ -236,6 +254,7 @@ export interface FileRoutesById {
   '/(protected)/groups/$groupId': typeof protectedGroupsGroupIdRoute
   '/(protected)/groups/create': typeof protectedGroupsCreateRoute
   '/(protected)/news/$newsId': typeof protectedNewsNewsIdRoute
+  '/(protected)/organizations/$organizationId': typeof protectedOrganizationsOrganizationIdRoute
   '/(protected)/post/$postId': typeof protectedPostPostIdRoute
   '/(protected)/resources/$resourceId': typeof protectedResourcesResourceIdRoute
   '/(protected)/settings/password-reset': typeof protectedSettingsPasswordResetRoute
@@ -244,6 +263,7 @@ export interface FileRoutesById {
   '/(protected)/user/$userId': typeof protectedUserUserIdRoute
   '/(protected)/groups/': typeof protectedGroupsIndexRoute
   '/(protected)/news/': typeof protectedNewsIndexRoute
+  '/(protected)/organizations/': typeof protectedOrganizationsIndexRoute
   '/(protected)/resources/': typeof protectedResourcesIndexRoute
   '/(protected)/groups/edit/$groupId': typeof protectedGroupsEditGroupIdRoute
   '/(protected)/groups/my/$groupId': typeof protectedGroupsMyGroupIdRoute
@@ -264,6 +284,7 @@ export interface FileRouteTypes {
     | '/groups/$groupId'
     | '/groups/create'
     | '/news/$newsId'
+    | '/organizations/$organizationId'
     | '/post/$postId'
     | '/resources/$resourceId'
     | '/settings/password-reset'
@@ -272,6 +293,7 @@ export interface FileRouteTypes {
     | '/user/$userId'
     | '/groups'
     | '/news'
+    | '/organizations'
     | '/resources'
     | '/groups/edit/$groupId'
     | '/groups/my/$groupId'
@@ -290,6 +312,7 @@ export interface FileRouteTypes {
     | '/groups/$groupId'
     | '/groups/create'
     | '/news/$newsId'
+    | '/organizations/$organizationId'
     | '/post/$postId'
     | '/resources/$resourceId'
     | '/settings/password-reset'
@@ -298,6 +321,7 @@ export interface FileRouteTypes {
     | '/user/$userId'
     | '/groups'
     | '/news'
+    | '/organizations'
     | '/resources'
     | '/groups/edit/$groupId'
     | '/groups/my/$groupId'
@@ -317,6 +341,7 @@ export interface FileRouteTypes {
     | '/(protected)/groups/$groupId'
     | '/(protected)/groups/create'
     | '/(protected)/news/$newsId'
+    | '/(protected)/organizations/$organizationId'
     | '/(protected)/post/$postId'
     | '/(protected)/resources/$resourceId'
     | '/(protected)/settings/password-reset'
@@ -325,6 +350,7 @@ export interface FileRouteTypes {
     | '/(protected)/user/$userId'
     | '/(protected)/groups/'
     | '/(protected)/news/'
+    | '/(protected)/organizations/'
     | '/(protected)/resources/'
     | '/(protected)/groups/edit/$groupId'
     | '/(protected)/groups/my/$groupId'
@@ -410,6 +436,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof protectedResourcesIndexRouteImport
       parentRoute: typeof protectedRouteRoute
     }
+    '/(protected)/organizations/': {
+      id: '/(protected)/organizations/'
+      path: '/organizations'
+      fullPath: '/organizations'
+      preLoaderRoute: typeof protectedOrganizationsIndexRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
     '/(protected)/news/': {
       id: '/(protected)/news/'
       path: '/news'
@@ -464,6 +497,13 @@ declare module '@tanstack/react-router' {
       path: '/post/$postId'
       fullPath: '/post/$postId'
       preLoaderRoute: typeof protectedPostPostIdRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
+    '/(protected)/organizations/$organizationId': {
+      id: '/(protected)/organizations/$organizationId'
+      path: '/organizations/$organizationId'
+      fullPath: '/organizations/$organizationId'
+      preLoaderRoute: typeof protectedOrganizationsOrganizationIdRouteImport
       parentRoute: typeof protectedRouteRoute
     }
     '/(protected)/news/$newsId': {
@@ -546,11 +586,13 @@ interface protectedRouteRouteChildren {
   protectedGroupsGroupIdRoute: typeof protectedGroupsGroupIdRoute
   protectedGroupsCreateRoute: typeof protectedGroupsCreateRoute
   protectedNewsNewsIdRoute: typeof protectedNewsNewsIdRoute
+  protectedOrganizationsOrganizationIdRoute: typeof protectedOrganizationsOrganizationIdRoute
   protectedPostPostIdRoute: typeof protectedPostPostIdRoute
   protectedResourcesResourceIdRoute: typeof protectedResourcesResourceIdRoute
   protectedUserUserIdRoute: typeof protectedUserUserIdRoute
   protectedGroupsIndexRoute: typeof protectedGroupsIndexRoute
   protectedNewsIndexRoute: typeof protectedNewsIndexRoute
+  protectedOrganizationsIndexRoute: typeof protectedOrganizationsIndexRoute
   protectedResourcesIndexRoute: typeof protectedResourcesIndexRoute
   protectedGroupsEditGroupIdRoute: typeof protectedGroupsEditGroupIdRoute
   protectedGroupsMyGroupIdRoute: typeof protectedGroupsMyGroupIdRoute
@@ -566,11 +608,14 @@ const protectedRouteRouteChildren: protectedRouteRouteChildren = {
   protectedGroupsGroupIdRoute: protectedGroupsGroupIdRoute,
   protectedGroupsCreateRoute: protectedGroupsCreateRoute,
   protectedNewsNewsIdRoute: protectedNewsNewsIdRoute,
+  protectedOrganizationsOrganizationIdRoute:
+    protectedOrganizationsOrganizationIdRoute,
   protectedPostPostIdRoute: protectedPostPostIdRoute,
   protectedResourcesResourceIdRoute: protectedResourcesResourceIdRoute,
   protectedUserUserIdRoute: protectedUserUserIdRoute,
   protectedGroupsIndexRoute: protectedGroupsIndexRoute,
   protectedNewsIndexRoute: protectedNewsIndexRoute,
+  protectedOrganizationsIndexRoute: protectedOrganizationsIndexRoute,
   protectedResourcesIndexRoute: protectedResourcesIndexRoute,
   protectedGroupsEditGroupIdRoute: protectedGroupsEditGroupIdRoute,
   protectedGroupsMyGroupIdRoute: protectedGroupsMyGroupIdRoute,

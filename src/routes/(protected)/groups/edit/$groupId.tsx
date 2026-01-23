@@ -5,6 +5,8 @@ import ErrorComponent from "../../../../Components/ErrorComponent.tsx";
 import SettingsLoader from "../../../../Components/SettingsComponents/SettingsLoader.tsx";
 import useUpdateGroup from "../../../../Hooks/Group/useUpdateGroup.ts";
 import {notificationActions} from "../../../../store/slices/NotificationSlice.ts";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import type { GroupUpdateRequest } from "../../../../../APIs";
 import {useAppDispatch} from "../../../../store/storeHooks.ts";
 import {useQueryClient} from "@tanstack/react-query";

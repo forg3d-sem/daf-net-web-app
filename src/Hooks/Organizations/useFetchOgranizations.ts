@@ -1,6 +1,6 @@
 import {useMemo} from "react";
 import {useQuery} from "@tanstack/react-query";
-import {OrganizationApi} from "../../APIs";
+import {OrganizationApi} from "../../../APIs";
 
 const  useFetchOrganizations = () => {
 

@@ -243,6 +243,75 @@ export interface AttachmentResponseApiResponse {
 /**
  * 
  * @export
+ * @interface BanUserRequest
+ */
+export interface BanUserRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof BanUserRequest
+     */
+    'reason'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface BanUserResponse
+ */
+export interface BanUserResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof BanUserResponse
+     */
+    'userId'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BanUserResponse
+     */
+    'isBanned'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof BanUserResponse
+     */
+    'bannedAt'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BanUserResponse
+     */
+    'reason'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface BanUserResponseApiResponse
+ */
+export interface BanUserResponseApiResponse {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BanUserResponseApiResponse
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {BanUserResponse}
+     * @memberof BanUserResponseApiResponse
+     */
+    'data'?: BanUserResponse;
+    /**
+     * 
+     * @type {string}
+     * @memberof BanUserResponseApiResponse
+     */
+    'error'?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface BooleanApiResponse
  */
 export interface BooleanApiResponse {
@@ -589,6 +658,12 @@ export interface CreatePostRequest {
      * @memberof CreatePostRequest
      */
     'survey'?: CreateSurveyRequest;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreatePostRequest
+     */
+    'tags'?: Array<string> | null;
 }
 /**
  * 
@@ -670,6 +745,12 @@ export interface DetailedProfileResponse {
      * @memberof DetailedProfileResponse
      */
     'about'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DetailedProfileResponse
+     */
+    'isBanned'?: boolean;
     /**
      * 
      * @type {number}
@@ -1116,43 +1197,6 @@ export interface GroupResponseApiResponse {
 /**
  * 
  * @export
- * @interface GroupUpdateRequest
- */
-export interface GroupUpdateRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof GroupUpdateRequest
-     */
-    'groupId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GroupUpdateRequest
-     */
-    'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof GroupUpdateRequest
-     */
-    'description'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof GroupUpdateRequest
-     */
-    'imageUrl'?: string | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof GroupUpdateRequest
-     */
-    'usersCanCreateCategories'?: boolean | null;
-}
-/**
- * 
- * @export
  * @interface GroupUpdateResponse
  */
 export interface GroupUpdateResponse {
@@ -1209,6 +1253,50 @@ export interface GroupUpdateResponseApiResponse {
      * 
      * @type {string}
      * @memberof GroupUpdateResponseApiResponse
+     */
+    'error'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface KnownTagsResponse
+ */
+export interface KnownTagsResponse {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof KnownTagsResponse
+     */
+    'tags'?: Array<string> | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof KnownTagsResponse
+     */
+    'count'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface KnownTagsResponseApiResponse
+ */
+export interface KnownTagsResponseApiResponse {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof KnownTagsResponseApiResponse
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {KnownTagsResponse}
+     * @memberof KnownTagsResponseApiResponse
+     */
+    'data'?: KnownTagsResponse;
+    /**
+     * 
+     * @type {string}
+     * @memberof KnownTagsResponseApiResponse
      */
     'error'?: string | null;
 }
@@ -1453,6 +1541,19 @@ export interface MailConfirmationResponseApiResponse {
 /**
  * 
  * @export
+ * @interface OrganizationApproveRequest
+ */
+export interface OrganizationApproveRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof OrganizationApproveRequest
+     */
+    'organizationId'?: string;
+}
+/**
+ * 
+ * @export
  * @interface OrganizationCreateRequest
  */
 export interface OrganizationCreateRequest {
@@ -1610,6 +1711,19 @@ export interface OrganizationResponseApiResponse {
      * @memberof OrganizationResponseApiResponse
      */
     'error'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface OrganizationUnapproveRequest
+ */
+export interface OrganizationUnapproveRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof OrganizationUnapproveRequest
+     */
+    'organizationId'?: string;
 }
 /**
  * 
@@ -1831,6 +1945,12 @@ export interface PostResponse {
      * @memberof PostResponse
      */
     'attachmentId'?: string | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof PostResponse
+     */
+    'tags'?: Array<string> | null;
 }
 /**
  * 
@@ -1905,6 +2025,12 @@ export interface ProfileResponse {
      * @memberof ProfileResponse
      */
     'about'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ProfileResponse
+     */
+    'isBanned'?: boolean;
 }
 /**
  * 
@@ -2453,6 +2579,12 @@ export interface UpdatePostRequest {
      * @memberof UpdatePostRequest
      */
     'attachmentId'?: string | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdatePostRequest
+     */
+    'tags'?: Array<string> | null;
 }
 /**
  * 
@@ -3992,11 +4124,14 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {GroupUpdateRequest} [groupUpdateRequest] 
+         * @param {string} [groupId] 
+         * @param {string} [description] 
+         * @param {string} [imageUrl] 
+         * @param {boolean} [usersCanCreateCategories] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupPut: async (groupUpdateRequest?: GroupUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        groupPut: async (groupId?: string, description?: string, imageUrl?: string, usersCanCreateCategories?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/Group`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4013,14 +4148,27 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
+            if (groupId !== undefined) {
+                localVarQueryParameter['GroupId'] = groupId;
+            }
+
+            if (description !== undefined) {
+                localVarQueryParameter['Description'] = description;
+            }
+
+            if (imageUrl !== undefined) {
+                localVarQueryParameter['ImageUrl'] = imageUrl;
+            }
+
+            if (usersCanCreateCategories !== undefined) {
+                localVarQueryParameter['UsersCanCreateCategories'] = usersCanCreateCategories;
+            }
+
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(groupUpdateRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -4128,12 +4276,15 @@ export const GroupApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {GroupUpdateRequest} [groupUpdateRequest] 
+         * @param {string} [groupId] 
+         * @param {string} [description] 
+         * @param {string} [imageUrl] 
+         * @param {boolean} [usersCanCreateCategories] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async groupPut(groupUpdateRequest?: GroupUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupUpdateResponseApiResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.groupPut(groupUpdateRequest, options);
+        async groupPut(groupId?: string, description?: string, imageUrl?: string, usersCanCreateCategories?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupUpdateResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupPut(groupId, description, imageUrl, usersCanCreateCategories, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.groupPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4218,12 +4369,15 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {GroupUpdateRequest} [groupUpdateRequest] 
+         * @param {string} [groupId] 
+         * @param {string} [description] 
+         * @param {string} [imageUrl] 
+         * @param {boolean} [usersCanCreateCategories] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupPut(groupUpdateRequest?: GroupUpdateRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupUpdateResponseApiResponse> {
-            return localVarFp.groupPut(groupUpdateRequest, options).then((request) => request(axios, basePath));
+        groupPut(groupId?: string, description?: string, imageUrl?: string, usersCanCreateCategories?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<GroupUpdateResponseApiResponse> {
+            return localVarFp.groupPut(groupId, description, imageUrl, usersCanCreateCategories, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4319,13 +4473,16 @@ export class GroupApi extends BaseAPI {
 
     /**
      * 
-     * @param {GroupUpdateRequest} [groupUpdateRequest] 
+     * @param {string} [groupId] 
+     * @param {string} [description] 
+     * @param {string} [imageUrl] 
+     * @param {boolean} [usersCanCreateCategories] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public groupPut(groupUpdateRequest?: GroupUpdateRequest, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).groupPut(groupUpdateRequest, options).then((request) => request(this.axios, this.basePath));
+    public groupPut(groupId?: string, description?: string, imageUrl?: string, usersCanCreateCategories?: boolean, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).groupPut(groupId, description, imageUrl, usersCanCreateCategories, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -4445,6 +4602,43 @@ export class LikeApi extends BaseAPI {
  */
 export const OrganizationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @param {OrganizationApproveRequest} [organizationApproveRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        organizationApprovePost: async (organizationApproveRequest?: OrganizationApproveRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/Organization/Approve`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(organizationApproveRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @param {string} [organizationId] 
@@ -4643,6 +4837,43 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {OrganizationUnapproveRequest} [organizationUnapproveRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        organizationUnapprovePost: async (organizationUnapproveRequest?: OrganizationUnapproveRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/Organization/Unapprove`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(organizationUnapproveRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -4653,6 +4884,18 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
 export const OrganizationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OrganizationApiAxiosParamCreator(configuration)
     return {
+        /**
+         * 
+         * @param {OrganizationApproveRequest} [organizationApproveRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async organizationApprovePost(organizationApproveRequest?: OrganizationApproveRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.organizationApprovePost(organizationApproveRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.organizationApprovePost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
         /**
          * 
          * @param {string} [organizationId] 
@@ -4715,6 +4958,18 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['OrganizationApi.organizationPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {OrganizationUnapproveRequest} [organizationUnapproveRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async organizationUnapprovePost(organizationUnapproveRequest?: OrganizationUnapproveRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.organizationUnapprovePost(organizationUnapproveRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.organizationUnapprovePost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -4725,6 +4980,15 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
 export const OrganizationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = OrganizationApiFp(configuration)
     return {
+        /**
+         * 
+         * @param {OrganizationApproveRequest} [organizationApproveRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        organizationApprovePost(organizationApproveRequest?: OrganizationApproveRequest, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationResponseApiResponse> {
+            return localVarFp.organizationApprovePost(organizationApproveRequest, options).then((request) => request(axios, basePath));
+        },
         /**
          * 
          * @param {string} [organizationId] 
@@ -4772,6 +5036,15 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         organizationPut(organizationUpdateRequest?: OrganizationUpdateRequest, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationResponseApiResponse> {
             return localVarFp.organizationPut(organizationUpdateRequest, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {OrganizationUnapproveRequest} [organizationUnapproveRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        organizationUnapprovePost(organizationUnapproveRequest?: OrganizationUnapproveRequest, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationResponseApiResponse> {
+            return localVarFp.organizationUnapprovePost(organizationUnapproveRequest, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -4782,6 +5055,17 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
  * @extends {BaseAPI}
  */
 export class OrganizationApi extends BaseAPI {
+    /**
+     * 
+     * @param {OrganizationApproveRequest} [organizationApproveRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OrganizationApi
+     */
+    public organizationApprovePost(organizationApproveRequest?: OrganizationApproveRequest, options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).organizationApprovePost(organizationApproveRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {string} [organizationId] 
@@ -4837,6 +5121,17 @@ export class OrganizationApi extends BaseAPI {
      */
     public organizationPut(organizationUpdateRequest?: OrganizationUpdateRequest, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).organizationPut(organizationUpdateRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {OrganizationUnapproveRequest} [organizationUnapproveRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OrganizationApi
+     */
+    public organizationUnapprovePost(organizationUnapproveRequest?: OrganizationUnapproveRequest, options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).organizationUnapprovePost(organizationUnapproveRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -5499,6 +5794,47 @@ export const ProfileApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @param {string} userId 
+         * @param {BanUserRequest} [banUserRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profileUserIdBanPost: async (userId: string, banUserRequest?: BanUserRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('profileUserIdBanPost', 'userId', userId)
+            const localVarPath = `/Profile/{userId}/ban`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(banUserRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} userId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5515,6 +5851,43 @@ export const ProfileApiAxiosParamCreator = function (configuration?: Configurati
             }
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profileUserIdUnbanPost: async (userId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('profileUserIdUnbanPost', 'userId', userId)
+            const localVarPath = `/Profile/{userId}/unban`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -5570,6 +5943,19 @@ export const ProfileApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} userId 
+         * @param {BanUserRequest} [banUserRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async profileUserIdBanPost(userId: string, banUserRequest?: BanUserRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BanUserResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.profileUserIdBanPost(userId, banUserRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProfileApi.profileUserIdBanPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} userId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5577,6 +5963,18 @@ export const ProfileApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.profileUserIdGet(userId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProfileApi.profileUserIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async profileUserIdUnbanPost(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BanUserResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.profileUserIdUnbanPost(userId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProfileApi.profileUserIdUnbanPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -5610,11 +6008,30 @@ export const ProfileApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @param {string} userId 
+         * @param {BanUserRequest} [banUserRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profileUserIdBanPost(userId: string, banUserRequest?: BanUserRequest, options?: RawAxiosRequestConfig): AxiosPromise<BanUserResponseApiResponse> {
+            return localVarFp.profileUserIdBanPost(userId, banUserRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} userId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         profileUserIdGet(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<DetailedProfileResponseApiResponse> {
             return localVarFp.profileUserIdGet(userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profileUserIdUnbanPost(userId: string, options?: RawAxiosRequestConfig): AxiosPromise<BanUserResponseApiResponse> {
+            return localVarFp.profileUserIdUnbanPost(userId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5651,12 +6068,35 @@ export class ProfileApi extends BaseAPI {
     /**
      * 
      * @param {string} userId 
+     * @param {BanUserRequest} [banUserRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProfileApi
+     */
+    public profileUserIdBanPost(userId: string, banUserRequest?: BanUserRequest, options?: RawAxiosRequestConfig) {
+        return ProfileApiFp(this.configuration).profileUserIdBanPost(userId, banUserRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} userId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfileApi
      */
     public profileUserIdGet(userId: string, options?: RawAxiosRequestConfig) {
         return ProfileApiFp(this.configuration).profileUserIdGet(userId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} userId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProfileApi
+     */
+    public profileUserIdUnbanPost(userId: string, options?: RawAxiosRequestConfig) {
+        return ProfileApiFp(this.configuration).profileUserIdUnbanPost(userId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -5905,6 +6345,123 @@ export class SurveyApi extends BaseAPI {
      */
     public surveyVotePost(voteSurveyRequest?: VoteSurveyRequest, options?: RawAxiosRequestConfig) {
         return SurveyApiFp(this.configuration).surveyVotePost(voteSurveyRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * TagsApi - axios parameter creator
+ * @export
+ */
+export const TagsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} [search] 
+         * @param {number} [limit] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsKnownTagsGet: async (search?: string, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/Tags/known-tags`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TagsApi - functional programming interface
+ * @export
+ */
+export const TagsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TagsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} [search] 
+         * @param {number} [limit] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tagsKnownTagsGet(search?: string, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<KnownTagsResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tagsKnownTagsGet(search, limit, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TagsApi.tagsKnownTagsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * TagsApi - factory interface
+ * @export
+ */
+export const TagsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TagsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} [search] 
+         * @param {number} [limit] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tagsKnownTagsGet(search?: string, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<KnownTagsResponseApiResponse> {
+            return localVarFp.tagsKnownTagsGet(search, limit, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TagsApi - object-oriented interface
+ * @export
+ * @class TagsApi
+ * @extends {BaseAPI}
+ */
+export class TagsApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} [search] 
+     * @param {number} [limit] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TagsApi
+     */
+    public tagsKnownTagsGet(search?: string, limit?: number, options?: RawAxiosRequestConfig) {
+        return TagsApiFp(this.configuration).tagsKnownTagsGet(search, limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

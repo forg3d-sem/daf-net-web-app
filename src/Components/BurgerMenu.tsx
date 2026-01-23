@@ -55,7 +55,7 @@ const BurgerMenu = () => {
                                 <Link onClick={() => setShowMenu(!showMenu)} to='/groups'>Groups</Link>
                             </li>
                             <li>
-                                <Link onClick={() => setShowMenu(!showMenu)} to='/organisations'>Organizations</Link>
+                                <Link onClick={() => setShowMenu(!showMenu)} to='/organizations'>Organizations</Link>
                             </li>
                             <li>
                                 <Link onClick={() => setShowMenu(!showMenu)} to='/settings/profile'>Profile</Link>

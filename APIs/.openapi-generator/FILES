@@ -13,6 +13,9 @@ docs/AttachmentListResponseApiResponse.md
 docs/AttachmentResponse.md
 docs/AttachmentResponseApiResponse.md
 docs/AuthApi.md
+docs/BanUserRequest.md
+docs/BanUserResponse.md
+docs/BanUserResponseApiResponse.md
 docs/BooleanApiResponse.md
 docs/CategoryApi.md
 docs/CategoryListResponse.md
@@ -49,9 +52,10 @@ docs/GroupListResponseApiResponse.md
 docs/GroupMemberResponse.md
 docs/GroupResponse.md
 docs/GroupResponseApiResponse.md
-docs/GroupUpdateRequest.md
 docs/GroupUpdateResponse.md
 docs/GroupUpdateResponseApiResponse.md
+docs/KnownTagsResponse.md
+docs/KnownTagsResponseApiResponse.md
 docs/LikeApi.md
 docs/ListCommentsResponse.md
 docs/ListCommentsResponseApiResponse.md
@@ -64,11 +68,13 @@ docs/MailConfirmationRequest.md
 docs/MailConfirmationResponse.md
 docs/MailConfirmationResponseApiResponse.md
 docs/OrganizationApi.md
+docs/OrganizationApproveRequest.md
 docs/OrganizationCreateRequest.md
 docs/OrganizationListResponse.md
 docs/OrganizationListResponseApiResponse.md
 docs/OrganizationResponse.md
 docs/OrganizationResponseApiResponse.md
+docs/OrganizationUnapproveRequest.md
 docs/OrganizationUpdateRequest.md
 docs/PostApi.md
 docs/PostListResponse.md
@@ -93,6 +99,7 @@ docs/SurveyResultsResponse.md
 docs/SurveyResultsResponseApiResponse.md
 docs/SurveyStatusResponse.md
 docs/SurveyStatusResponseApiResponse.md
+docs/TagsApi.md
 docs/TestResponse.md
 docs/TestResponseApiResponse.md
 docs/ToggleLikeRequest.md

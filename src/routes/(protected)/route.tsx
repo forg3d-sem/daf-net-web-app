@@ -84,7 +84,7 @@ function RouteComponent() {
                                         </Link>
                                     </li>
                                     <li className='nav-item'>
-                                        <Link to={'/organisations'}>
+                                        <Link to={'/organizations'}>
                                             Organisations
                                         </Link>
                                     </li>

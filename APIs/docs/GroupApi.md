@@ -391,17 +391,22 @@ const { status, data } = await apiInstance.groupPost(
 ```typescript
 import {
     GroupApi,
-    Configuration,
-    GroupUpdateRequest
+    Configuration
 } from './api';
 
 const configuration = new Configuration();
 const apiInstance = new GroupApi(configuration);
 
-let groupUpdateRequest: GroupUpdateRequest; // (optional)
+let groupId: string; // (optional) (default to undefined)
+let description: string; // (optional) (default to undefined)
+let imageUrl: string; // (optional) (default to undefined)
+let usersCanCreateCategories: boolean; // (optional) (default to undefined)
 
 const { status, data } = await apiInstance.groupPut(
-    groupUpdateRequest
+    groupId,
+    description,
+    imageUrl,
+    usersCanCreateCategories
 );
 ```
 
@@ -409,7 +414,10 @@ const { status, data } = await apiInstance.groupPut(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **groupUpdateRequest** | **GroupUpdateRequest**|  | |
+| **groupId** | [**string**] |  | (optional) defaults to undefined|
+| **description** | [**string**] |  | (optional) defaults to undefined|
+| **imageUrl** | [**string**] |  | (optional) defaults to undefined|
+| **usersCanCreateCategories** | [**boolean**] |  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -422,7 +430,7 @@ const { status, data } = await apiInstance.groupPut(
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/*+json
+ - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
 

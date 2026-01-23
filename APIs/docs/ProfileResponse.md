@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **firstName** | **string** |  | [optional] [default to undefined]
 **lastName** | **string** |  | [optional] [default to undefined]
 **about** | **string** |  | [optional] [default to undefined]
+**isBanned** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -26,6 +27,7 @@ const instance: ProfileResponse = {
     firstName,
     lastName,
     about,
+    isBanned,
 };
 ```
 

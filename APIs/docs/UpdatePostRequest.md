@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **title** | **string** |  | [optional] [default to undefined]
 **content** | **string** |  | [optional] [default to undefined]
 **attachmentId** | **string** |  | [optional] [default to undefined]
+**tags** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -20,6 +21,7 @@ const instance: UpdatePostRequest = {
     title,
     content,
     attachmentId,
+    tags,
 };
 ```
 

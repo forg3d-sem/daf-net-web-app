@@ -400,6 +400,10 @@
       border: none;
       margin-bottom: 30px;
 
+      &.create-organization-header {
+        align-items: start;
+      }
+
       h4 {
         font-size: 28px;
         font-weight: 700;
@@ -430,15 +434,49 @@
         margin: 0;
         width: fit-content;
       }
+
+      .header-text  {
+        h4 {
+          margin-bottom: 10px;
+        }
+
+        p {
+          color: $blue-green-40;
+          max-width: 500px;
+        }
+      }
     }
+
 
     .modal-body {
       padding: 0;
+
+      .image-preview-empty {
+        background-color: $blue-green;
+        width: 90px;
+        height: 90px;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .image-preview {
+        width: 90px;
+        height: 90px;
+        border-radius: 50px;
+      }
 
       .modal-input-group {
         display: flex;
         flex-direction: column;
         margin-bottom: 30px;
+
+        &--photo {
+          margin-bottom: 30px;
+          flex-direction: row;
+          align-items: center;
+        }
 
         label {
           color: $blue-green;
@@ -709,6 +747,10 @@
   align-items: center;
   font-size: 16px;
 
+  &--photo {
+    margin-left: 18px;
+  }
+
   &--group {
     label {
       margin-bottom: 0!important;
@@ -788,6 +830,18 @@
       max-width: none;
       margin-right: 0;
       margin-bottom: 30px;
+    }
+
+    &--photo {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      label {
+        margin-bottom: 0;
+        margin-right: 10px;
+        padding: 10px 20px;
+      }
     }
   }
 }

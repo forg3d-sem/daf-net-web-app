@@ -4,11 +4,64 @@ All URIs are relative to *http://localhost*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**organizationApprovePost**](#organizationapprovepost) | **POST** /Organization/Approve | |
 |[**organizationByIdGet**](#organizationbyidget) | **GET** /Organization/ById | |
 |[**organizationDelete**](#organizationdelete) | **DELETE** /Organization | |
 |[**organizationGet**](#organizationget) | **GET** /Organization | |
 |[**organizationPost**](#organizationpost) | **POST** /Organization | |
 |[**organizationPut**](#organizationput) | **PUT** /Organization | |
+|[**organizationUnapprovePost**](#organizationunapprovepost) | **POST** /Organization/Unapprove | |
+
+# **organizationApprovePost**
+> OrganizationResponseApiResponse organizationApprovePost()
+
+
+### Example
+
+```typescript
+import {
+    OrganizationApi,
+    Configuration,
+    OrganizationApproveRequest
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new OrganizationApi(configuration);
+
+let organizationApproveRequest: OrganizationApproveRequest; // (optional)
+
+const { status, data } = await apiInstance.organizationApprovePost(
+    organizationApproveRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationApproveRequest** | **OrganizationApproveRequest**|  | |
+
+
+### Return type
+
+**OrganizationResponseApiResponse**
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **organizationByIdGet**
 > OrganizationResponseApiResponse organizationByIdGet()
@@ -245,6 +298,57 @@ const { status, data } = await apiInstance.organizationPut(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **organizationUpdateRequest** | **OrganizationUpdateRequest**|  | |
+
+
+### Return type
+
+**OrganizationResponseApiResponse**
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **organizationUnapprovePost**
+> OrganizationResponseApiResponse organizationUnapprovePost()
+
+
+### Example
+
+```typescript
+import {
+    OrganizationApi,
+    Configuration,
+    OrganizationUnapproveRequest
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new OrganizationApi(configuration);
+
+let organizationUnapproveRequest: OrganizationUnapproveRequest; // (optional)
+
+const { status, data } = await apiInstance.organizationUnapprovePost(
+    organizationUnapproveRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationUnapproveRequest** | **OrganizationUnapproveRequest**|  | |
 
 
 ### Return type

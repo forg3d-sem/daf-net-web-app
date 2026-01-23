@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **content** | **string** |  | [optional] [default to undefined]
 **attachmentId** | **string** |  | [optional] [default to undefined]
 **survey** | [**CreateSurveyRequest**](CreateSurveyRequest.md) |  | [optional] [default to undefined]
+**tags** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -22,6 +23,7 @@ const instance: CreatePostRequest = {
     content,
     attachmentId,
     survey,
+    tags,
 };
 ```
 

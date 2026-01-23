@@ -11,6 +11,8 @@ interface Profile {
 
 const Profile: React.FC<Profile> = (props) => {
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const {firstName, lastName, username, about, imageUrl, postsAmount, groupsAmount} = props.profileObj;
 
     return (

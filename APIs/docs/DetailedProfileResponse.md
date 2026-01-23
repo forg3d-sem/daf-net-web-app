@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **firstName** | **string** |  | [optional] [default to undefined]
 **lastName** | **string** |  | [optional] [default to undefined]
 **about** | **string** |  | [optional] [default to undefined]
+**isBanned** | **boolean** |  | [optional] [default to undefined]
 **postsAmount** | **number** |  | [optional] [default to undefined]
 **commentsAmount** | **number** |  | [optional] [default to undefined]
 **groupsAmount** | **number** |  | [optional] [default to undefined]
@@ -29,6 +30,7 @@ const instance: DetailedProfileResponse = {
     firstName,
     lastName,
     about,
+    isBanned,
     postsAmount,
     commentsAmount,
     groupsAmount,
