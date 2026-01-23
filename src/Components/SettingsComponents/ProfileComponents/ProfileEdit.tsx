@@ -68,7 +68,7 @@ const ProfileEdit: React.FC<ProfileEdit> = ({data}) => {
                     />
                 </div>
                 <button
-                    className='saveBtn d-none d-block'
+                    className='saveBtn d-none d-lg-block'
                     disabled={isPending}
                     onClick={handleUpdate}
                 >
