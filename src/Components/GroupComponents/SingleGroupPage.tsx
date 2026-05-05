@@ -1,17 +1,18 @@
-import React, {useState} from 'react';
-import {Col, Container, Nav, Row, Spinner, Tab} from "react-bootstrap";
+import React, {useEffect, useState} from 'react';
+import {Col, Container, Nav, Row, Tab} from "react-bootstrap";
 import {type GroupResponse} from '../../../APIs';
 import BackArrow from "../../assets/back-arrow.svg";
 import './GroupsStyles.scss';
 import GroupIcon from "../../assets/settings_group.svg";
-import ForumPostsList from "../ForumComponents/ForumPostsList.tsx";
 import '../ForumComponents/forumStyles.scss'
 import '../UserProfile/userProfileStyles.scss';
-import useFetchAllPosts from "../../Hooks/Posts/useFetchAllPosts.ts";
 import GroupMembersList from "./GroupMembersList.tsx";
 import GroupPostCreate from "./GroupPostCreate.tsx";
 import useFetchCategories from "../../Hooks/Categories/useFetchCategories.ts";
 import GroupLeaveButton from "./GroupLeaveButton.tsx";
+import {useAppSelector} from "../../store/storeHooks.ts";
+import GroupPosts from "./GroupPosts.tsx";
+import useFetchAllPosts from "../../Hooks/Posts/useFetchAllPosts.ts";
 
 interface SingleGroupPage {
     data: GroupResponse
@@ -19,19 +20,31 @@ interface SingleGroupPage {
 
 const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
 
+    const persistedData = useAppSelector(state => state.postPersistObj.obj);
+
     const [showCreatePost, setShowCreatePost] = useState(false);
 
     const {name, description, imageUrl, members, id} = data;
 
-
-    const {data: allPosts, isLoading: loadingPosts, error: postsError} = useFetchAllPosts(id);
+    const {data: allPosts} = useFetchAllPosts(id);
 
     //error and loading state are ignored, keep in mind that they need to be handled
     const {data: categories} = useFetchCategories(data.id ?? '', '', 1);
 
-    const toggleCreatePost = () => {
-        setShowCreatePost(p => !p)
+    const showModal = () => {
+        setShowCreatePost(true);
     }
+
+    const hideModal = () => {
+        setShowCreatePost(false);
+    }
+
+    useEffect(() => {
+        if (persistedData === null) {
+            return
+        }
+        setShowCreatePost(true)
+    }, []);
 
 
     return (
@@ -96,7 +109,7 @@ const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
                         </div>
                         <button
                             className='create-post-btn'
-                            onClick={toggleCreatePost}
+                            onClick={showModal}
                         >
                             Create post
                         </button>
@@ -118,28 +131,10 @@ const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
                         </Nav>
                         <Tab.Content>
                             <Tab.Pane eventKey='posts'>
-                                {
-                                    loadingPosts
-                                    &&
-                                    <div className='w-100 d-flex justify-content-center'>
-                                        <Spinner
-                                            animation='border'
-                                        />
-                                    </div>
-                                }
-                                {
-                                    (allPosts && !loadingPosts) &&
-                                    <ForumPostsList
-                                        posts={allPosts?.data?.data?.posts ?? []}
-                                    />
-                                }
-                                {
-                                    (postsError && !loadingPosts) &&
-                                    <div className='w-100 text-center'>
-                                        {postsError.message}
-                                    </div>
-                                }
-
+                                <GroupPosts
+                                    id={id ?? ''}
+                                    categories={categories?.data?.data?.categories ?? []}
+                                />
                             </Tab.Pane>
                             <Tab.Pane eventKey='members'>
                                 <GroupMembersList id={id ?? ''} allowAdding={false} allowDelete={false}/>
@@ -176,7 +171,7 @@ const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
                         </div>
                         <button
                             className='create-post-btn'
-                            onClick={toggleCreatePost}
+                            onClick={showModal}
                         >
                             Create post
                         </button>
@@ -188,7 +183,7 @@ const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
                 </Col>
                 <GroupPostCreate
                     showModal={showCreatePost}
-                    toggleModal={toggleCreatePost}
+                    hideModal={hideModal}
                     categories={categories?.data?.data?.categories ?? []}
                     groupId={data.id ?? ''}
                 />

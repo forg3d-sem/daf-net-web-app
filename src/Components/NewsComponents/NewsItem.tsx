@@ -12,6 +12,8 @@ interface NewsItem {
 
 const NewsItem: React.FC<NewsItem> = (props) => {
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const {postId, title, createdAt, categoryId, content, imageUrl} = props.data;
     const date = new Date(createdAt ?? '');
     const formattedDate = date.toLocaleDateString(undefined, {
@@ -35,7 +37,7 @@ const NewsItem: React.FC<NewsItem> = (props) => {
                         {
                             imageUrl
                                 ?
-                                <div style={{backgroundImage: `url("https://dafnet.tes.gd${imageUrl}")`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100%', width: '100%'}}></div>
+                                <div style={{backgroundImage: `url("${apiUrl}${imageUrl}")`, backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', height: '100%', width: '100%'}}></div>
                                 :
                                 <img src={NewsIcon} alt="newspapper"/>
                         }

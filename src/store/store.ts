@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import notificationReducer from './slices/NotificationSlice.ts';
+import postPersistReducer from './slices/PostPersistSlice.ts';
 // ...
 
 export const store = configureStore({
     reducer: {
-        notifications: notificationReducer
+        notifications: notificationReducer,
+        postPersistObj: postPersistReducer
     },
 })
 

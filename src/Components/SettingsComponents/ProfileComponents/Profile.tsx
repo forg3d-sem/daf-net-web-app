@@ -3,16 +3,14 @@ import ProfileIconComponent from "./ProfileIconComponent.tsx";
 import {Link} from "@tanstack/react-router";
 import './profileStyles.scss';
 import ProfileForums from "./ProfileForums.tsx";
-import type {ProfileResponse} from "../../../../APIs";
+import type {DetailedProfileResponse} from "../../../../APIs";
 
 interface Profile {
-    profileObj:ProfileResponse
+    profileObj:DetailedProfileResponse
 }
 
 const Profile: React.FC<Profile> = (props) => {
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const {firstName, lastName, username, about, imageUrl, postsAmount, groupsAmount} = props.profileObj;
 
     return (

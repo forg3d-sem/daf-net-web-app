@@ -14,6 +14,8 @@ interface UploadPhotoComponent {
 
 const UploadPhotoComponent:React.FC<UploadPhotoComponent> = ({handleAttachment, addBtnText, changeBtnText}) => {
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const dispatch = useAppDispatch();
 
     const [attachmentFile, setAttachmentFile] = useState<undefined | File>(undefined);
@@ -33,7 +35,7 @@ const UploadPhotoComponent:React.FC<UploadPhotoComponent> = ({handleAttachment, 
             addAttachment(files[0], {
                 onSuccess: (data) => {
 
-                    const url = data?.data?.data?.url ? `https://dafnet-dev.tes.gd${data?.data?.data?.url}` : '';
+                    const url = data?.data?.data?.url ? `${apiUrl}${data?.data?.data?.url}` : '';
 
                     handleAttachment(url)
 

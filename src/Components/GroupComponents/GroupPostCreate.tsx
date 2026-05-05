@@ -1,26 +1,27 @@
 import React, {useEffect, useState} from 'react';
-import {Dropdown, Modal, Spinner} from "react-bootstrap";
+import {Button, Dropdown, Modal, Spinner} from "react-bootstrap";
 import Cross from "../../assets/close-modal-cross.svg";
 import {nanoid} from "nanoid/non-secure";
 import RemoveOption from "../../assets/remove-survey-option.svg";
 import JoditEditor from "jodit-react";
 import {useQueryClient} from "@tanstack/react-query";
-import {useAppDispatch} from "../../store/storeHooks.ts";
+import {useAppDispatch, useAppSelector} from "../../store/storeHooks.ts";
 import useCreatePost from "../../Hooks/Posts/useCreatePost.ts";
 import DOMPurify from "dompurify";
 import {notificationActions} from "../../store/slices/NotificationSlice.ts";
-import type { CategoryResponse } from "../../../APIs";
+import type {CategoryResponse} from "../../../APIs";
 import '../ForumComponents/forumStyles.scss';
-import {Link} from "@tanstack/react-router";
+import {useNavigate} from "@tanstack/react-router";
+import {postPersistActions} from "../../store/slices/PostPersistSlice.ts";
 
 interface GroupPostCreate {
     categories: CategoryResponse[];
     showModal: boolean;
-    toggleModal: () => void;
+    hideModal: () => void;
     groupId: string;
 }
 
-const attachmentTypes = [
+const attachmentTypes:{type: 'none' | 'survey', label: string}[] = [
     {
         type: 'none',
         label: 'No attachment'
@@ -31,15 +32,19 @@ const attachmentTypes = [
     }
 ]
 
-const GroupPostCreate:React.FC<GroupPostCreate> = ({showModal, toggleModal, categories, groupId}) => {
+const GroupPostCreate: React.FC<GroupPostCreate> = ({showModal, hideModal, categories, groupId}) => {
 
     const queryClient = useQueryClient();
     const dispatch = useAppDispatch();
-    const [selectedCategory, setSelectedCategory] = useState<CategoryResponse | null>(null);
-    const [title, setTitle] = useState('');
-    const [text, setText] = useState('');
-    const [attachmentType, setAttachmentType] = useState('none');
-    const [surveyOptions, setSurveyOptions] = useState<string[]>([]);
+    const navigate = useNavigate();
+
+    const persistedData = useAppSelector(state => state.postPersistObj.obj);
+
+    const [selectedCategory, setSelectedCategory] = useState<CategoryResponse | null>(persistedData?.selectedCategory ?? null);
+    const [title, setTitle] = useState(persistedData?.title ?? '');
+    const [text, setText] = useState(persistedData?.text ?? '');
+    const [attachmentType, setAttachmentType] = useState(persistedData?.attachmentType ?? 'none');
+    const [surveyOptions, setSurveyOptions] = useState<string[]>(persistedData?.surveyOptions ?? []);
     const [showAddInput, setShowAddInput] = useState(false);
     const [newSurveyOption, setNewSurveyOption] = useState('');
 
@@ -57,22 +62,29 @@ const GroupPostCreate:React.FC<GroupPostCreate> = ({showModal, toggleModal, cate
         setShowAddInput(false);
         setNewSurveyOption('');
         setSurveyOptions([]);
+        setAttachmentType('none');
+        dispatch(postPersistActions.resetValues())
     }
 
     const {mutate, isPending} = useCreatePost()
 
     const handleHideModal = () => {
-        toggleModal()
         resetValues()
+        hideModal()
     }
 
     const handleCreatePost = () => {
 
         const purified = DOMPurify.sanitize(text);
 
-        mutate({content: purified, title: title, categoryId: selectedCategory?.id, survey: surveyOptions.length > 0 ? {question: '', options: surveyOptions} : undefined}, {
+        mutate({
+            content: purified,
+            title: title,
+            categoryId: selectedCategory?.id,
+            survey: surveyOptions.length > 0 ? {question: '', options: surveyOptions} : undefined
+        }, {
             onSuccess: () => {
-                handleHideModal();
+                hideModal();
                 queryClient.invalidateQueries({queryKey: ['posts', selectedCategory?.id]});
                 queryClient.invalidateQueries({queryKey: ['allPosts']});
                 dispatch(notificationActions.setNotification({text: "Post submitted successfully!", type: 'success'}));
@@ -86,10 +98,24 @@ const GroupPostCreate:React.FC<GroupPostCreate> = ({showModal, toggleModal, cate
         })
     }
 
+    const handleCreateCatNav = () => {
+        dispatch(postPersistActions.setValues({
+            title: title,
+            text: text,
+            tagsArray: [],
+            attachmentType: attachmentType,
+            surveyOptions: surveyOptions,
+            selectedCategory: selectedCategory
+        }));
+        navigate({to: `/create-category/${groupId}`})
+    }
+
     useEffect(() => {
-        setSurveyOptions([]);
-        setNewSurveyOption('');
-        setShowAddInput(false);
+        if (attachmentType !== 'survey') {
+            setSurveyOptions([]);
+            setNewSurveyOption('');
+            setShowAddInput(false);
+        }
     }, [attachmentType]);
 
     return (
@@ -149,7 +175,7 @@ const GroupPostCreate:React.FC<GroupPostCreate> = ({showModal, toggleModal, cate
                                 }
                             </Dropdown.Menu>
                         </Dropdown>
-                        <Link to='/create-category/$groupId' params={{groupId: groupId}} className='create-cat-btn'>Create category</Link>
+                        <Button className='create-cat-btn' onClick={handleCreateCatNav}>Create category</Button>
                     </div>
                 </div>
                 <div className="modal-input-group attachment-type">

@@ -31,7 +31,10 @@ globalAxios.interceptors.response.use(
     }
 )
 
-export const BASE_PATH = "https://dafnet-dev.tes.gd".replace(/\/+$/, "");
+const apiUrl:string = import.meta.env.VITE_API_URL;
+
+// export const BASE_PATH = "https://dafnet-dev.tes.gd".replace(/\/+$/, "");
+export const BASE_PATH = apiUrl.replace(/\/+$/, "");
 
 /**
  *
@@ -61,8 +64,7 @@ export interface RequestArgs {
  */
 export class BaseAPI {
     protected configuration: Configuration | undefined;
-
-    // @ts-ignore
+    // eslint-disable-next-line erasableSyntaxOnly
     constructor(configuration?: Configuration, protected basePath: string = BASE_PATH, protected axios: AxiosInstance = globalAxios) {
         if (configuration) {
             this.configuration = configuration;
@@ -78,7 +80,6 @@ export class BaseAPI {
  * @extends {Error}
  */
 export class RequiredError extends Error {
-    // @ts-ignore
     constructor(public field: string, msg?: string) {
         super(msg);
         this.name = "RequiredError"

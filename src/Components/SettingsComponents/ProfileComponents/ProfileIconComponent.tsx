@@ -16,7 +16,7 @@ const ProfileIconComponent:React.FC<ProfileIconComponent> = ({url, name, lastNam
     }, [name, lastName])
 
     if (url && url !== '') return (
-        <img src={url} alt={`${initials} profile`} style={{height: maxSize, width: maxSize, borderRadius:'50%'}}/>
+        <img src={url} alt={`${initials} profile`} style={{height: maxSize, width: maxSize, borderRadius:'50%', objectFit: 'cover', objectPosition: 'center'}}/>
     ); else return (
             <div className="profile-pic-placeholder" style={{height: maxSize, width: maxSize}}>
                 <span>
