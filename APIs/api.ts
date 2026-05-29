@@ -1197,6 +1197,43 @@ export interface GroupResponseApiResponse {
 /**
  * 
  * @export
+ * @interface GroupUpdateRequest
+ */
+export interface GroupUpdateRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupUpdateRequest
+     */
+    'groupId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupUpdateRequest
+     */
+    'name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupUpdateRequest
+     */
+    'description'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupUpdateRequest
+     */
+    'imageUrl'?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof GroupUpdateRequest
+     */
+    'usersCanCreateCategories'?: boolean | null;
+}
+/**
+ * 
+ * @export
  * @interface GroupUpdateResponse
  */
 export interface GroupUpdateResponse {
@@ -4124,14 +4161,11 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {string} [groupId] 
-         * @param {string} [description] 
-         * @param {string} [imageUrl] 
-         * @param {boolean} [usersCanCreateCategories] 
+         * @param {GroupUpdateRequest} [groupUpdateRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupPut: async (groupId?: string, description?: string, imageUrl?: string, usersCanCreateCategories?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        groupPut: async (groupUpdateRequest?: GroupUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/Group`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4148,27 +4182,14 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-            if (groupId !== undefined) {
-                localVarQueryParameter['GroupId'] = groupId;
-            }
-
-            if (description !== undefined) {
-                localVarQueryParameter['Description'] = description;
-            }
-
-            if (imageUrl !== undefined) {
-                localVarQueryParameter['ImageUrl'] = imageUrl;
-            }
-
-            if (usersCanCreateCategories !== undefined) {
-                localVarQueryParameter['UsersCanCreateCategories'] = usersCanCreateCategories;
-            }
-
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(groupUpdateRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -4276,15 +4297,12 @@ export const GroupApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} [groupId] 
-         * @param {string} [description] 
-         * @param {string} [imageUrl] 
-         * @param {boolean} [usersCanCreateCategories] 
+         * @param {GroupUpdateRequest} [groupUpdateRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async groupPut(groupId?: string, description?: string, imageUrl?: string, usersCanCreateCategories?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupUpdateResponseApiResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.groupPut(groupId, description, imageUrl, usersCanCreateCategories, options);
+        async groupPut(groupUpdateRequest?: GroupUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupUpdateResponseApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.groupPut(groupUpdateRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.groupPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4369,15 +4387,12 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {string} [groupId] 
-         * @param {string} [description] 
-         * @param {string} [imageUrl] 
-         * @param {boolean} [usersCanCreateCategories] 
+         * @param {GroupUpdateRequest} [groupUpdateRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        groupPut(groupId?: string, description?: string, imageUrl?: string, usersCanCreateCategories?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<GroupUpdateResponseApiResponse> {
-            return localVarFp.groupPut(groupId, description, imageUrl, usersCanCreateCategories, options).then((request) => request(axios, basePath));
+        groupPut(groupUpdateRequest?: GroupUpdateRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupUpdateResponseApiResponse> {
+            return localVarFp.groupPut(groupUpdateRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4473,16 +4488,13 @@ export class GroupApi extends BaseAPI {
 
     /**
      * 
-     * @param {string} [groupId] 
-     * @param {string} [description] 
-     * @param {string} [imageUrl] 
-     * @param {boolean} [usersCanCreateCategories] 
+     * @param {GroupUpdateRequest} [groupUpdateRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupApi
      */
-    public groupPut(groupId?: string, description?: string, imageUrl?: string, usersCanCreateCategories?: boolean, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).groupPut(groupId, description, imageUrl, usersCanCreateCategories, options).then((request) => request(this.axios, this.basePath));
+    public groupPut(groupUpdateRequest?: GroupUpdateRequest, options?: RawAxiosRequestConfig) {
+        return GroupApiFp(this.configuration).groupPut(groupUpdateRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

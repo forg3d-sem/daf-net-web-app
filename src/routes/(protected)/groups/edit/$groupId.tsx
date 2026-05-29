@@ -3,11 +3,10 @@ import EditGroup from "../../../../Components/GroupComponents/EditGroup.tsx";
 import useFetchGroupById from "../../../../Hooks/Group/useFetchGroupById.ts";
 import ErrorComponent from "../../../../Components/ErrorComponent.tsx";
 import SettingsLoader from "../../../../Components/SettingsComponents/SettingsLoader.tsx";
-import useUpdateGroup from "../../../../Hooks/Group/useUpdateGroup.ts";
+import useUpdateGroup, {type UpdateGroupData} from "../../../../Hooks/Group/useUpdateGroup.ts";
 import {notificationActions} from "../../../../store/slices/NotificationSlice.ts";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import type { GroupUpdateRequest } from "../../../../../APIs";
 import {useAppDispatch} from "../../../../store/storeHooks.ts";
 import {useQueryClient} from "@tanstack/react-query";
 
@@ -27,7 +26,7 @@ function RouteComponent() {
 
     const {mutate, isPending} = useUpdateGroup(groupId);
 
-    const handleGroupCreate = (data:GroupUpdateRequest) => {
+    const handleGroupEdit = (data:UpdateGroupData) => {
         mutate(data, {
             onSuccess: () => {
                 dispatch(notificationActions.setNotification({type: 'success', text: 'Group updated successfully'}));
@@ -40,7 +39,7 @@ function RouteComponent() {
         })
     }
 
-    if (data && !error && !isLoading) return <EditGroup data={data?.data?.data ?? {}} isPending={isPending} handleGroupData={handleGroupCreate}/>
+    if (data && !error && !isLoading) return <EditGroup data={data?.data?.data ?? {}} isPending={isPending} handleGroupData={handleGroupEdit}/>
     if (error !== null && !isLoading) return <ErrorComponent error={error}/>
     if (isLoading) return <SettingsLoader/>
 }

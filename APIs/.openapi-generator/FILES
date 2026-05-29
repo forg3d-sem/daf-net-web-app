@@ -52,6 +52,7 @@ docs/GroupListResponseApiResponse.md
 docs/GroupMemberResponse.md
 docs/GroupResponse.md
 docs/GroupResponseApiResponse.md
+docs/GroupUpdateRequest.md
 docs/GroupUpdateResponse.md
 docs/GroupUpdateResponseApiResponse.md
 docs/KnownTagsResponse.md

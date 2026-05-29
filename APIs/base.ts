@@ -64,7 +64,7 @@ export interface RequestArgs {
  */
 export class BaseAPI {
     protected configuration: Configuration | undefined;
-    // eslint-disable-next-line erasableSyntaxOnly
+
     constructor(configuration?: Configuration, protected basePath: string = BASE_PATH, protected axios: AxiosInstance = globalAxios) {
         if (configuration) {
             this.configuration = configuration;

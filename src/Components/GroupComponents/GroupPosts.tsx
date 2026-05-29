@@ -2,7 +2,7 @@ import {Spinner} from "react-bootstrap";
 import ForumPostsList from "../ForumComponents/ForumPostsList.tsx";
 import type { CategoryResponse } from "../../../APIs/api.ts";
 import useFetchAllPosts from "../../Hooks/Posts/useFetchAllPosts.ts";
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {nanoid} from "nanoid/non-secure";
 import "swiper/css";
@@ -14,22 +14,16 @@ const GroupPosts = ({id, categories}:{id:string, categories: CategoryResponse[]}
     const catsToShow = useMemo(() => [{id: '0', name: "All categories"}, ...categories], [categories]);
 
     const [selectedCategory, setSelectedCategory] = useState('0');
-    const [filteredCategories, setFilteredCategories] = useState(allPosts?.data?.data?.posts);
+    const [filteredPosts, setFilteredPosts] = useState(allPosts?.data?.data?.posts);
 
-    const handleCategorySelect = (categoryId: string) => {
-        let filteredCats;
-
-        if (categoryId === '0') {
-            filteredCats = allPosts?.data?.data?.posts;
-        } else {
-            filteredCats = allPosts?.data?.data?.posts?.filter((post) => post.categoryId === categoryId) ?? [];
+    useEffect(() => {
+        if (selectedCategory === '0') {
+            setFilteredPosts(allPosts?.data?.data?.posts);
+        }else {
+            const filteredPosts = allPosts?.data?.data?.posts?.filter((post) => post.categoryId === selectedCategory) ?? [];
+            setFilteredPosts(filteredPosts)
         }
-
-
-        setSelectedCategory(categoryId);
-
-        setFilteredCategories(filteredCats)
-    }
+    }, [selectedCategory, allPosts]);
 
     if (loadingPosts) {
         return(
@@ -61,7 +55,7 @@ const GroupPosts = ({id, categories}:{id:string, categories: CategoryResponse[]}
                         <button
                             className={`category-btn ${selectedCategory === cat.id ? 'active' : ''}`}
                             onClick={
-                                () => handleCategorySelect(cat.id ?? '0')
+                                () => setSelectedCategory(cat.id ?? '0')
                             }
                         >
                             {cat.name}
@@ -71,7 +65,7 @@ const GroupPosts = ({id, categories}:{id:string, categories: CategoryResponse[]}
                 }
             </Swiper>
             <ForumPostsList
-                posts={filteredCategories ?? []}
+                posts={filteredPosts ?? []}
             />
         </>
     );
