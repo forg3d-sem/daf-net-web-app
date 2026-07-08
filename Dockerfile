@@ -1,5 +1,10 @@
 FROM node:22-alpine AS build
 WORKDIR /src
+# Vite reads VITE_API_URL from the environment at build time and bakes it into
+# the bundle (env vars present at build override .env files). Passed via
+# docker-compose build.args.
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
@@ -14,9 +19,5 @@ RUN printf 'server {\n  listen 80;\n  root /usr/share/nginx/html;\n  location / 
 
 COPY --from=build /src/dist /usr/share/nginx/html
 
-# Write /env.js at startup so React can read runtime env via window._env_
-RUN printf '#!/bin/sh\nset -e\ncat > /usr/share/nginx/html/env.js <<EOF\nwindow._env_ = { API_BASE_URL: "${API_BASE_URL}" };\nEOF\nexec nginx -g "daemon off;"\n' \
-  > /docker-entrypoint.sh && chmod +x /docker-entrypoint.sh
-
 EXPOSE 80
-ENTRYPOINT ["/docker-entrypoint.sh"]
+# The nginx base image's default entrypoint/CMD serves the static build.

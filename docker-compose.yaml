@@ -3,16 +3,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        # Vite bakes import.meta.env.VITE_API_URL into the bundle at build
+        # time, so this must be a build arg (not a runtime env var). Falls
+        # back to the committed .env value if the host doesn't set it, so an
+        # unset var doesn't blank out the API URL.
+        VITE_API_URL: ${VITE_API_URL:-https://dafnet.tes.gd}
     expose:
       - "80"
     environment:
       # Coolify substitutes the assigned FQDN and generates Traefik labels.
       SERVICE_FQDN_WEB_80: /
-
-      # Runtime config for the React app. Because Vite/CRA bake env vars at
-      # build time, we expose these via /env.js (see Dockerfile entrypoint
-      # below) and read them as window._env_.API_BASE_URL in the app.
-      API_BASE_URL: ${API_BASE_URL}
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
       interval: 30s
