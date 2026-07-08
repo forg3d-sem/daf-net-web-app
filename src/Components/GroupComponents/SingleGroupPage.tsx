@@ -1,20 +1,18 @@
-import React, {useState} from 'react';
-import {Col, Container, Nav, Row, Spinner, Tab} from "react-bootstrap";
+import React, {useEffect, useState} from 'react';
+import {Col, Container, Nav, Row, Tab} from "react-bootstrap";
 import {type GroupResponse} from '../../../APIs';
 import BackArrow from "../../assets/back-arrow.svg";
 import './GroupsStyles.scss';
 import GroupIcon from "../../assets/settings_group.svg";
-import ForumPostsList from "../ForumComponents/ForumPostsList.tsx";
 import '../ForumComponents/forumStyles.scss'
 import '../UserProfile/userProfileStyles.scss';
-import useFetchAllPosts from "../../Hooks/Posts/useFetchAllPosts.ts";
 import GroupMembersList from "./GroupMembersList.tsx";
-import useLeaveGroup from "../../Hooks/Group/useLeaveGroup.ts";
-import {useAppDispatch} from "../../store/storeHooks.ts";
-import {notificationActions} from "../../store/slices/NotificationSlice.ts";
-import {Link, useNavigate} from "@tanstack/react-router";
 import GroupPostCreate from "./GroupPostCreate.tsx";
 import useFetchCategories from "../../Hooks/Categories/useFetchCategories.ts";
+import GroupLeaveButton from "./GroupLeaveButton.tsx";
+import {useAppSelector} from "../../store/storeHooks.ts";
+import GroupPosts from "./GroupPosts.tsx";
+import useFetchAllPosts from "../../Hooks/Posts/useFetchAllPosts.ts";
 
 interface SingleGroupPage {
     data: GroupResponse
@@ -22,38 +20,31 @@ interface SingleGroupPage {
 
 const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
 
-    const navigate = useNavigate();
-
-    const dispatch = useAppDispatch();
+    const persistedData = useAppSelector(state => state.postPersistObj.obj);
 
     const [showCreatePost, setShowCreatePost] = useState(false);
 
     const {name, description, imageUrl, members, id} = data;
 
-    console.log(data)
-
-    const {data: allPosts, isLoading: loadingPosts, error: postsError} = useFetchAllPosts(id);
+    const {data: allPosts} = useFetchAllPosts(id);
 
     //error and loading state are ignored, keep in mind that they need to be handled
     const {data: categories} = useFetchCategories(data.id ?? '', '', 1);
 
-    const {mutate, isPending} = useLeaveGroup();
-
-    const toggleCreatePost = () => {
-        setShowCreatePost(p => !p)
+    const showModal = () => {
+        setShowCreatePost(true);
     }
 
-    const handleLeaveGroup = () => {
-        mutate(id ?? '', {
-            onSuccess: () => {
-                dispatch(notificationActions.setNotification({type: 'success', text: 'Group left'}));
-                navigate({to: '/groups', replace: true})
-            },
-            onError: () => {
-                dispatch(notificationActions.setNotification({type: 'error', text: 'Failed to leave the group'}));
-            }
-        })
+    const hideModal = () => {
+        setShowCreatePost(false);
     }
+
+    useEffect(() => {
+        if (persistedData === null) {
+            return
+        }
+        setShowCreatePost(true)
+    }, []);
 
 
     return (
@@ -118,28 +109,14 @@ const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
                         </div>
                         <button
                             className='create-post-btn'
-                            onClick={toggleCreatePost}
+                            onClick={showModal}
                         >
                             Create post
                         </button>
-                        {
-                            data.isOwner
-                            ?
-                                <Link className='manage-group-btn' to='/groups/my/$groupId' params={{groupId: id ?? ''}}>Manage group</Link>
-                                :
-                                <button
-                                    onClick={handleLeaveGroup}
-                                >
-                                    {
-                                        isPending
-                                            ?
-                                            <Spinner animation='border'/>
-                                            :
-                                            "Leave the group"
-                                    }
-                                </button>
-                        }
-
+                        <GroupLeaveButton
+                            isOwner={!!data.isOwner}
+                            id={data.id}
+                        />
                     </div>
                     <Tab.Container
                         defaultActiveKey='posts'
@@ -154,28 +131,10 @@ const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
                         </Nav>
                         <Tab.Content>
                             <Tab.Pane eventKey='posts'>
-                                {
-                                    loadingPosts
-                                    &&
-                                    <div className='w-100 d-flex justify-content-center'>
-                                        <Spinner
-                                            animation='border'
-                                        />
-                                    </div>
-                                }
-                                {
-                                    (allPosts && !loadingPosts) &&
-                                    <ForumPostsList
-                                        posts={allPosts?.data?.data?.posts ?? []}
-                                    />
-                                }
-                                {
-                                    (postsError && !loadingPosts) &&
-                                    <div className='w-100 text-center'>
-                                        {postsError.message}
-                                    </div>
-                                }
-
+                                <GroupPosts
+                                    id={id ?? ''}
+                                    categories={categories?.data?.data?.categories ?? []}
+                                />
                             </Tab.Pane>
                             <Tab.Pane eventKey='members'>
                                 <GroupMembersList id={id ?? ''} allowAdding={false} allowDelete={false}/>
@@ -212,32 +171,19 @@ const SingleGroupPage: React.FC<SingleGroupPage> = ({data}) => {
                         </div>
                         <button
                             className='create-post-btn'
-                            onClick={toggleCreatePost}
+                            onClick={showModal}
                         >
                             Create post
                         </button>
-                        {
-                            data.isOwner
-                                ?
-                                <Link className='manage-group-btn' to='/groups/my/$groupId' params={{groupId: id ?? ''}}>Manage group</Link>
-                                :
-                                <button
-                                    onClick={handleLeaveGroup}
-                                >
-                                    {
-                                        isPending
-                                            ?
-                                            <Spinner animation='border'/>
-                                            :
-                                            "Leave the group"
-                                    }
-                                </button>
-                        }
+                        <GroupLeaveButton
+                            isOwner={!!data.isOwner}
+                            id={data.id}
+                        />
                     </div>
                 </Col>
                 <GroupPostCreate
                     showModal={showCreatePost}
-                    toggleModal={toggleCreatePost}
+                    hideModal={hideModal}
                     categories={categories?.data?.data?.categories ?? []}
                     groupId={data.id ?? ''}
                 />

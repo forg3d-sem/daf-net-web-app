@@ -3,6 +3,7 @@ import ProfileIconComponent from "../SettingsComponents/ProfileComponents/Profil
 import type {PostResponse} from "../../../APIs";
 import SinglePostWrap from "./SinglePostWrap.tsx";
 import LikeBtn from '../../assets/post-like-btn.svg';
+import LikeBtnFilled from '../../assets/post-like-btn-filled.svg';
 import {getDateString} from "../../functions/functions.ts";
 import useToggleLike from "../../Hooks/useToggleLike.ts";
 import {useQueryClient} from "@tanstack/react-query";
@@ -62,7 +63,7 @@ const SinglePost: React.FC<SinglePost> = (props) => {
                     >
                         {data.isLiked
                             ?
-                            <img src={LikeBtn} alt=""/>
+                            <img src={LikeBtnFilled} alt=""/>
                             :
                             <img src={LikeBtn} alt=""/>
                         }

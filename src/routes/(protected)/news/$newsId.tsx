@@ -3,7 +3,7 @@ import useGetPost from "../../../Hooks/Posts/useGetPost.ts";
 import NewsPage from "../../../Components/NewsComponents/NewsPage.tsx";
 import type {PostResponse} from "../../../../APIs";
 
-export const Route = createFileRoute('/(protected)/news-post/$newsId')({
+export const Route = createFileRoute('/(protected)/news/$newsId')({
   component: RouteComponent,
 })
 

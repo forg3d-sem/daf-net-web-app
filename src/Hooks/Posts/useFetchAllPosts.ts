@@ -9,7 +9,7 @@ const useFetchPosts = (groupId:string | undefined) => {
     const token = localStorage.getItem('token');
 
     return useQuery({
-        queryKey: ['allPosts'],
+        queryKey: ['allPosts', groupId],
         queryFn: async () => {
             const response = await postApi.postAllGet(groupId,1, 99, {headers: {"Authorization": `Bearer ${token}`}} );
             if (!response.data.success) {

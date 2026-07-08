@@ -1,5 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {Col, Container, Row, Spinner} from "react-bootstrap";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import {type GroupCreateRequest, type GroupResponse, type GroupUpdateRequest} from '../../../APIs';
 import Camera from '../../assets/camera.svg';
 import './GroupsStyles.scss';
@@ -25,7 +27,7 @@ const EditGroup:React.FC<EditGroup> = ({data, handleGroupData, isPending}) => {
             return
         }
 
-        const newImageLink = `https://dafnet.tes.gd${link}`
+        const newImageLink = `${import.meta.env.VITE_API_URL}${link}`
 
         setImageUrl(newImageLink);
     }, [])
@@ -59,7 +61,7 @@ const EditGroup:React.FC<EditGroup> = ({data, handleGroupData, isPending}) => {
                         </div>
                         <button
                             className='edit-group__save-btn'
-                            onClick={() => handleGroupData({name: name, description: description, imageUrl: imageUrl ?? ''})}
+                            onClick={() => handleGroupData({name: name, description: description, imageUrl: imageUrl ?? null, usersCanCreateCategories: data?.canCreateCategories ?? null})}
                             disabled={isPending}
                         >
                             {

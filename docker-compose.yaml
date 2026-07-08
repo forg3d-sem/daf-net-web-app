@@ -1,0 +1,22 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Vite bakes import.meta.env.VITE_API_URL into the bundle at build
+        # time, so this must be a build arg (not a runtime env var). Falls
+        # back to the committed .env value if the host doesn't set it, so an
+        # unset var doesn't blank out the API URL.
+        VITE_API_URL: ${VITE_API_URL:-https://dafnet.tes.gd}
+    expose:
+      - "80"
+    environment:
+      # Coolify substitutes the assigned FQDN and generates Traefik labels.
+      SERVICE_FQDN_WEB_80: /
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

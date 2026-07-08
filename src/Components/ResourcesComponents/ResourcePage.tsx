@@ -15,9 +15,14 @@ interface ResourcePage {
     error: string;
 }
 
+// https://dafnet.tes.gd -- prod link
+// https://dafnet-dev.tes.gd -- dev link
+
 const ResourcePage:React.FC<ResourcePage> = (props) => {
 
     const attachmentId = props?.data?.attachmentId ?? '';
+
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     const {data:attachmentData, isLoading, error} = useFetchAttachment(attachmentId);
 
@@ -40,7 +45,7 @@ const ResourcePage:React.FC<ResourcePage> = (props) => {
                                 props.data.imageUrl &&
                                 <img
                                     className='post-image'
-                                    src={props.data.imageUrl ? `https://dafnet.tes.gd${props.data.imageUrl}` : ''}
+                                    src={props.data.imageUrl ? `${apiUrl}${props.data.imageUrl}` : ''}
                                     alt=""
                                 />
                             }
@@ -65,7 +70,7 @@ const ResourcePage:React.FC<ResourcePage> = (props) => {
                             }
                             {
                                 attachmentData &&
-                                <a href={attachmentData?.data?.data?.url ? `https://dafnet.tes.gd${attachmentData?.data?.data?.url}` : '#'}>{attachmentData?.data?.data?.fileName}</a>
+                                <a href={attachmentData?.data?.data?.url ? `${apiUrl}${attachmentData?.data?.data?.url}` : '#'} target="_blank">{attachmentData?.data?.data?.fileName}</a>
                             }
                             {
                                 error &&

@@ -6,7 +6,9 @@ All URIs are relative to *http://localhost*
 |------------- | ------------- | -------------|
 |[**profilePost**](#profilepost) | **POST** /Profile | |
 |[**profileSearchPost**](#profilesearchpost) | **POST** /Profile/search | |
+|[**profileUserIdBanPost**](#profileuseridbanpost) | **POST** /Profile/{userId}/ban | |
 |[**profileUserIdGet**](#profileuseridget) | **GET** /Profile/{userId} | |
+|[**profileUserIdUnbanPost**](#profileuseridunbanpost) | **POST** /Profile/{userId}/unban | |
 
 # **profilePost**
 > ProfileResponseApiResponse profilePost()
@@ -110,8 +112,62 @@ const { status, data } = await apiInstance.profileSearchPost(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **profileUserIdBanPost**
+> BanUserResponseApiResponse profileUserIdBanPost()
+
+
+### Example
+
+```typescript
+import {
+    ProfileApi,
+    Configuration,
+    BanUserRequest
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new ProfileApi(configuration);
+
+let userId: string; // (default to undefined)
+let banUserRequest: BanUserRequest; // (optional)
+
+const { status, data } = await apiInstance.profileUserIdBanPost(
+    userId,
+    banUserRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **banUserRequest** | **BanUserRequest**|  | |
+| **userId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**BanUserResponseApiResponse**
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **profileUserIdGet**
-> ProfileResponseApiResponse profileUserIdGet()
+> DetailedProfileResponseApiResponse profileUserIdGet()
 
 
 ### Example
@@ -141,7 +197,57 @@ const { status, data } = await apiInstance.profileUserIdGet(
 
 ### Return type
 
-**ProfileResponseApiResponse**
+**DetailedProfileResponseApiResponse**
+
+### Authorization
+
+[Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **profileUserIdUnbanPost**
+> BanUserResponseApiResponse profileUserIdUnbanPost()
+
+
+### Example
+
+```typescript
+import {
+    ProfileApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new ProfileApi(configuration);
+
+let userId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.profileUserIdUnbanPost(
+    userId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**BanUserResponseApiResponse**
 
 ### Authorization
 

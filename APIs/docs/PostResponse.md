@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **isLiked** | **boolean** |  | [optional] [default to undefined]
 **imageUrl** | **string** |  | [optional] [default to undefined]
 **attachmentId** | **string** |  | [optional] [default to undefined]
+**tags** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -38,6 +39,7 @@ const instance: PostResponse = {
     isLiked,
     imageUrl,
     attachmentId,
+    tags,
 };
 ```
 

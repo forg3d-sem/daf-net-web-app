@@ -16,6 +16,7 @@
       line-height: 120%;
       margin-bottom: 8px;
     }
+
     p {
       color: $blue-green-70;
       margin: 0;
@@ -105,6 +106,27 @@
   }
 }
 
+.group-category-selector {
+  margin-bottom: 30px;
+
+  button {
+    font-size: 18px;
+    text-decoration: none;
+    color: $gray-color;
+    display: inline-block;
+    box-sizing: border-box;
+    white-space: nowrap;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+
+    &.active {
+      color: $blue-green;
+      font-weight: 700;
+    }
+  }
+}
+
 .group-list {
   margin: 0;
   padding: 0;
@@ -122,6 +144,7 @@
       width: 100%;
       text-decoration: none;
     }
+
     &__wrapper {
       background-color: $green-bg-color;
       border: 1px solid $blue-green-40;
@@ -210,7 +233,7 @@
     width: 100%;
 
     @media (max-width: 575px) {
-     margin-bottom: 30px;
+      margin-bottom: 30px;
     }
 
     button {
@@ -333,22 +356,22 @@ table {
       }
     }
 
-     a {
-       text-decoration: none;
-       color: #fff;
-       background-color: $orange-color;
-       border: none;
-       padding: 8px;
-       width: 100%;
-       max-width: 130px;
-       border-radius: 8px;
-       text-align: center;
+    a {
+      text-decoration: none;
+      color: #fff;
+      background-color: $orange-color;
+      border: none;
+      padding: 8px;
+      width: 100%;
+      max-width: 130px;
+      border-radius: 8px;
+      text-align: center;
 
-       @media (max-width: 767px) {
-         max-width: none;
-         margin-bottom: 30px;
-       }
-     }
+      @media (max-width: 767px) {
+        max-width: none;
+        margin-bottom: 30px;
+      }
+    }
   }
 
   &__info {
@@ -392,7 +415,7 @@ table {
     margin-right: 18px;
 
     img {
-      border-radius: 0!important;
+      border-radius: 0 !important;
       height: 50px;
       width: 50px;
     }
@@ -477,6 +500,7 @@ table {
     font-size: 18px;
     margin-bottom: 16px;
   }
+
   &__btn {
     color: #fff;
     background-color: $blue-green;

@@ -16,6 +16,8 @@ interface NewsPage {
 
 const NewsPage:React.FC<NewsPage> = (props) => {
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const handleNavBack = (e:React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         history.back()
@@ -40,7 +42,7 @@ const NewsPage:React.FC<NewsPage> = (props) => {
                                 props.data.imageUrl &&
                                 <img
                                     className='post-image'
-                                    src={props.data.imageUrl ? `https://dafnet.tes.gd${props.data.imageUrl}` : ''}
+                                    src={props.data.imageUrl ? `${apiUrl}${props.data.imageUrl}` : ''}
                                     alt=""
                                 />
                             }

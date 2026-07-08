@@ -1,4 +1,4 @@
-# PostResponseListApiResponse
+# KnownTagsResponseApiResponse
 
 
 ## Properties
@@ -6,15 +6,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **boolean** |  | [optional] [default to undefined]
-**data** | [**Array&lt;PostResponse&gt;**](PostResponse.md) |  | [optional] [default to undefined]
+**data** | [**KnownTagsResponse**](KnownTagsResponse.md) |  | [optional] [default to undefined]
 **error** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { PostResponseListApiResponse } from './api';
+import { KnownTagsResponseApiResponse } from './api';
 
-const instance: PostResponseListApiResponse = {
+const instance: KnownTagsResponseApiResponse = {
     success,
     data,
     error,

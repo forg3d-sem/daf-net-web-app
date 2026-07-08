@@ -1,6 +1,6 @@
 import {createFileRoute} from '@tanstack/react-router'
 import Organizations from "../../Components/Organizations/Organizations.tsx";
-import useFetchOrganizations from "../../Hooks/useFetchOgranizations.ts";
+import useFetchOrganizations from "../../Hooks/Organizations/useFetchOgranizations.ts";
 import ErrorComponent from "../../Components/ErrorComponent.tsx";
 import SettingsLoader from "../../Components/SettingsComponents/SettingsLoader.tsx";
 

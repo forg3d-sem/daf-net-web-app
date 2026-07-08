@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **organizationId** | **string** |  | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **imageUrl** | **string** |  | [optional] [default to undefined]
+**url** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -18,6 +19,7 @@ const instance: OrganizationUpdateRequest = {
     organizationId,
     description,
     imageUrl,
+    url,
 };
 ```
 

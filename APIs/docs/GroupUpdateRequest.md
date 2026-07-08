@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **groupId** | **string** |  | [optional] [default to undefined]
+**name** | **string** |  | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **imageUrl** | **string** |  | [optional] [default to undefined]
 **usersCanCreateCategories** | **boolean** |  | [optional] [default to undefined]
@@ -17,6 +18,7 @@ import { GroupUpdateRequest } from './api';
 
 const instance: GroupUpdateRequest = {
     groupId,
+    name,
     description,
     imageUrl,
     usersCanCreateCategories,

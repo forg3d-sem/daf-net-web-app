@@ -31,7 +31,7 @@ const SingleResource:React.FC<SingleResource> = (props) => {
 
     return (
         <li>
-            <Link to={'/resource-post/$resourceId'} params={{resourceId: postId ?? ''}}>
+            <Link to={'/resources/$resourceId'} params={{resourceId: postId ?? ''}}>
                 <div className='resource-wrapper'>
                     <div className="resource-top">
                         <div className="news-category">

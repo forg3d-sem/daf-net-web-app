@@ -43,19 +43,19 @@ const BurgerMenu = () => {
                     <nav>
                         <ul>
                             <li>
-                                <Link onClick={() => setShowMenu(!showMenu)} to='/'>Forum</Link>
-                            </li>
-                            <li>
-                                <Link onClick={() => setShowMenu(!showMenu)} to='/resources'>Resources</Link>
+                                <Link onClick={() => setShowMenu(!showMenu)} to='/'>Feed</Link>
                             </li>
                             <li>
                                 <Link onClick={() => setShowMenu(!showMenu)} to='/news'>News</Link>
                             </li>
                             <li>
+                                <Link onClick={() => setShowMenu(!showMenu)} to='/resources'>Resources</Link>
+                            </li>
+                            <li>
                                 <Link onClick={() => setShowMenu(!showMenu)} to='/groups'>Groups</Link>
                             </li>
                             <li>
-                                <Link onClick={() => setShowMenu(!showMenu)} to='/organisations'>Organizations</Link>
+                                <Link onClick={() => setShowMenu(!showMenu)} to='/organizations'>Organizations</Link>
                             </li>
                             <li>
                                 <Link onClick={() => setShowMenu(!showMenu)} to='/settings/profile'>Profile</Link>

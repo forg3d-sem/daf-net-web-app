@@ -73,7 +73,7 @@ const ResourcePublication:React.FC = () => {
             <div className="resource-publication-section">
                 <h4>Publication of a resource</h4>
                 <p>
-                    You can submit a resource to help us create agroforestry related knowledge base.
+                    Please submit your agroforestry-related resources to help us create a comprehensive knowledge base. Thank you very much!
                 </p>
                 <button onClick={() => setShowModal(true)}>
                     Create Resource

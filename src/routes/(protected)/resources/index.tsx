@@ -1,0 +1,16 @@
+import { createFileRoute } from '@tanstack/react-router'
+import useFetchPosts from "../../../Hooks/Posts/useFetchPosts.ts";
+import Resources from "../../../Components/ResourcesComponents/Resources.tsx";
+
+export const Route = createFileRoute('/(protected)/resources/')({
+  component: RouteComponent,
+})
+
+function RouteComponent() {
+
+    const resId = "22222222-0000-0000-0000-000000000001";
+    const {data, isPending, error}= useFetchPosts(1, resId);
+
+    return <Resources data={data?.data?.data?.posts ?? []} isLoading={isPending} error={error?.message}/>
+}
+

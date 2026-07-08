@@ -26,7 +26,7 @@ const GroupsPage:React.FC<GroupsPage> = ({data}) => {
                                             Groups
                                         </h1>
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                            Feel free to create groups to discuss and collaborate on specific topics
                                         </p>
                                     </div>
                                     <Link

@@ -11,6 +11,7 @@ import RemoveOption from '../../assets/remove-survey-option.svg';
 import JoditEditor from "jodit-react";
 import DOMPurify from 'dompurify';
 import {nanoid} from "nanoid/non-secure";
+// import TagsSection from "./TagsSection.tsx";
 
 interface CreatePostBanner {
     categories: CategoryResponse[];
@@ -41,6 +42,7 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
     const [surveyOptions, setSurveyOptions] = useState<string[]>([]);
     const [showAddInput, setShowAddInput] = useState(false);
     const [newSurveyOption, setNewSurveyOption] = useState('')
+    // const [tagsArray, setTagsArray] = useState<string[]>([]);
 
     const deleteSurveyValue = (value: string) => {
         setSurveyOptions(p => p.filter(o => o !== value))
@@ -102,7 +104,7 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
                         <img src={Emoji} alt="create post emoji"/>
                     </div>
                     <span>
-                    Let’s share what’s going on your mind...
+                    Please share your news with the DAF-Community
                 </span>
                 </div>
                 <button
@@ -167,6 +169,10 @@ const CreatePostBanner: React.FC<CreatePostBanner> = (props) => {
                             {/*<button className='create-cat-btn' disabled>Create category</button>*/}
                         </div>
                     </div>
+                    {/*<TagsSection*/}
+                    {/*    tags={tagsArray}*/}
+                    {/*    setTags={setTagsArray}*/}
+                    {/*/>*/}
                     <div className="modal-input-group attachment-type">
                         {
                             attachmentTypes.map(type => <button
