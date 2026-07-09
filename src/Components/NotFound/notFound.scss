@@ -1,0 +1,33 @@
+@use '../../styles/variables' as *;
+
+.not-found-body {
+  padding: 80px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+
+  h1 {
+    color: $blue-green;
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  p {
+    color: $blue-green;
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  &__link {
+    background-color: $orange-color;
+    padding: 8px 16px;
+    width: 100%;
+    max-width: 160px;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+}

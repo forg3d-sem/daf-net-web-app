@@ -19,7 +19,8 @@ const useGetPost = (id:string) => {
             return response
         },
         refetchOnMount: 'always',
-        staleTime: 0
+        staleTime: 0,
+        retry: 1
     })
 }
 
