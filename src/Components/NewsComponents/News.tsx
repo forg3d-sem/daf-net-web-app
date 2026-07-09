@@ -32,9 +32,6 @@ const News: React.FC<News> = (props) => {
                             <p>
                                 Be the first to publish news articles and keep everyone informed.
                             </p>
-                            <button disabled>
-                                Post news
-                            </button>
                         </div>
                     </Col>
                 }

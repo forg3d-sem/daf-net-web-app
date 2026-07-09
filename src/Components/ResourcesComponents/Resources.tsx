@@ -34,9 +34,6 @@ const Resources: React.FC<Resources> = (props) => {
                                 You can submit a request to create a personal learning resource, and our administrator
                                 will review and publish it.
                             </p>
-                            <button disabled>
-                                Create resource
-                            </button>
                         </div>
                     }
                     {
