@@ -25,7 +25,7 @@ function RouteComponent() {
         <Row>
             <Col className='d-none d-lg-block side-nav' lg={3}>
                 <h2>Settings</h2>
-                <ul>
+                <ul className='settings-nav'>
                     <li>
                         <Link
                             to='/settings/profile'

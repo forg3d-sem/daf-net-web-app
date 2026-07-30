@@ -1,20 +1,30 @@
 import React from 'react';
-import {nanoid} from "nanoid/non-secure";
+import useFetchPostsByUser from "../../../Hooks/Posts/useFetchPostsByUser.ts";
+import ForumPostsList from "../../ForumComponents/ForumPostsList.tsx";
+import '../../ForumComponents/forumStyles.scss';
 
-const ProfileForums:React.FC = () => {
+interface ProfileForumsProps {
+    id: string | undefined;
+}
 
-    const forums:string[] = [];
+const ProfileForums:React.FC<ProfileForumsProps> = ({id}) => {
 
-    if (forums?.length > 0) return (
-        <ul>
-            {
-                forums.map((item) =>
-                    <li key={nanoid()}>{item}</li>
-                )
-            }
-        </ul>
-    )
-    else return(
+    const {isLoading, data, error} = useFetchPostsByUser(1, id ?? '');
+
+    if (isLoading) return (
+        <div className='profile-forums-empty'>
+            <h4>Loading forums...</h4>
+        </div>
+    );
+
+    if (error) return (
+        <div className='profile-forums-empty'>
+            <h4>Error loading forums</h4>
+            <p>{error.message}</p>
+        </div>
+    );
+
+    if (data?.data?.data?.posts?.length === 0) return (
         <div className='profile-forums-empty'>
             <h4>No forums yet!</h4>
             <p>
@@ -22,6 +32,10 @@ const ProfileForums:React.FC = () => {
             </p>
         </div>
     );
+
+   return(
+           <ForumPostsList posts={data?.data?.data?.posts ?? []}/>
+   )
 };
 
 export default ProfileForums;

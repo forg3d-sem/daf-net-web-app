@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerifyEmailRouteImport } from './routes/verify-email'
+import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as RegistrationRouteImport } from './routes/registration'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as protectedRouteRouteImport } from './routes/(protected)/route'
@@ -42,9 +44,19 @@ const VerifyEmailRoute = VerifyEmailRouteImport.update({
   path: '/verify-email',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegistrationRoute = RegistrationRouteImport.update({
   id: '/registration',
   path: '/registration',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -185,7 +197,9 @@ const protectedGroupsEditGroupIdRoute =
 export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/registration': typeof RegistrationRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/verify-email': typeof VerifyEmailRoute
   '/settings': typeof protectedSettingsRouteRouteWithChildren
   '/organisations': typeof protectedOrganisationsRoute
@@ -213,7 +227,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/registration': typeof RegistrationRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/verify-email': typeof VerifyEmailRoute
   '/settings': typeof protectedSettingsRouteRouteWithChildren
   '/organisations': typeof protectedOrganisationsRoute
@@ -243,7 +259,9 @@ export interface FileRoutesById {
   '/(protected)': typeof protectedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/registration': typeof RegistrationRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/verify-email': typeof VerifyEmailRoute
   '/(protected)/settings': typeof protectedSettingsRouteRouteWithChildren
   '/(protected)/organisations': typeof protectedOrganisationsRoute
@@ -273,7 +291,9 @@ export interface FileRouteTypes {
   fullPaths:
     | '/about'
     | '/login'
+    | '/privacy-policy'
     | '/registration'
+    | '/terms-of-service'
     | '/verify-email'
     | '/settings'
     | '/organisations'
@@ -301,7 +321,9 @@ export interface FileRouteTypes {
   to:
     | '/about'
     | '/login'
+    | '/privacy-policy'
     | '/registration'
+    | '/terms-of-service'
     | '/verify-email'
     | '/settings'
     | '/organisations'
@@ -330,7 +352,9 @@ export interface FileRouteTypes {
     | '/(protected)'
     | '/about'
     | '/login'
+    | '/privacy-policy'
     | '/registration'
+    | '/terms-of-service'
     | '/verify-email'
     | '/(protected)/settings'
     | '/(protected)/organisations'
@@ -360,7 +384,9 @@ export interface RootRouteChildren {
   protectedRouteRoute: typeof protectedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   LoginRoute: typeof LoginRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RegistrationRoute: typeof RegistrationRoute
+  TermsOfServiceRoute: typeof TermsOfServiceRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
 }
 
@@ -373,11 +399,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms-of-service': {
+      id: '/terms-of-service'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service'
+      preLoaderRoute: typeof TermsOfServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/registration': {
       id: '/registration'
       path: '/registration'
       fullPath: '/registration'
       preLoaderRoute: typeof RegistrationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -629,7 +669,9 @@ const rootRouteChildren: RootRouteChildren = {
   protectedRouteRoute: protectedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   LoginRoute: LoginRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   RegistrationRoute: RegistrationRoute,
+  TermsOfServiceRoute: TermsOfServiceRoute,
   VerifyEmailRoute: VerifyEmailRoute,
 }
 export const routeTree = rootRouteImport

@@ -16,10 +16,14 @@ import {routeTree} from './routeTree.gen'
 import ToastProvider from "./Components/ToastComponents/ToastProvider.tsx";
 import {Provider} from "react-redux";
 import {store} from "./store/store.ts";
+import {NotFound} from "./Components/NotFound/NotFound.tsx";
 
 
 // Create a new router instance
-const router = createRouter({routeTree})
+const router = createRouter({
+    routeTree,
+    defaultNotFoundComponent: () => <NotFound/>
+})
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
