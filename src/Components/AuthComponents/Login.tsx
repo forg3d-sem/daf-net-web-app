@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import AuthTypeDisplay from "./AuthTypeDisplay";
-import {Link, useNavigate} from "@tanstack/react-router";
+import {
+    // Link,
+    useNavigate} from "@tanstack/react-router";
 import useLogin from "../../Hooks/Auth/useLogin.ts";
 import {useAppDispatch} from "../../store/storeHooks.ts";
 import {notificationActions} from "../../store/slices/NotificationSlice.ts";
@@ -61,11 +63,11 @@ const Login = () => {
                             value={password}
                             onChange={e => setPassword(e.target.value)}
                         />
-                    <Link
-                        to='/login'
-                    >
-                        Forgot Password?
-                    </Link>
+                    {/*<Link*/}
+                    {/*    to='/login'*/}
+                    {/*>*/}
+                    {/*    Forgot Password?*/}
+                    {/*</Link>*/}
                 </div>
                 <button
                     type='submit'

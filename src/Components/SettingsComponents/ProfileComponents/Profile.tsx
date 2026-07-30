@@ -11,7 +11,7 @@ interface Profile {
 
 const Profile: React.FC<Profile> = (props) => {
 
-    const {firstName, lastName, username, about, imageUrl, postsAmount, groupsAmount} = props.profileObj;
+    const {firstName, lastName, username, about, imageUrl, postsAmount, groupsAmount, userId} = props.profileObj;
 
     return (
         <>
@@ -75,11 +75,8 @@ const Profile: React.FC<Profile> = (props) => {
             <div className="profile-section">
                 <div className="forums-top">
                     <h3>Forums</h3>
-                    <Link to={'/'}>View more</Link>
                 </div>
-                <div className="content-bordered">
-                    <ProfileForums/>
-                </div>
+                <ProfileForums id={userId}/>
             </div>
         </>
     );

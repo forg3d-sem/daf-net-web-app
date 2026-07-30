@@ -105,6 +105,8 @@ const Registration:React.FC = () => {
                         onChange={e => setPassword(e.target.value)}
                     />
                 </div>
+                <p className='legal-terms'>
+                    By creating an account, you agree to our <a href="/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of Service</a> and <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</p>
                 <button
                     type='submit'
                     disabled={isPending}

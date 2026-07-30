@@ -60,6 +60,7 @@ const SinglePost: React.FC<SinglePost> = (props) => {
                         className='post-like-btn'
                         disabled={isPending}
                         onClick={(e) => toggleLike(e)}
+                        aria-label={data.isLiked ? 'Unlike' : 'Like'}
                     >
                         {data.isLiked
                             ?
